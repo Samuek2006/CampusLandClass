@@ -66,7 +66,7 @@ salarioTotal = float(0.0)
 if ( categoria == 'C'):
     bono = (salario*0.15)
     salarioTotal = bono + salario
-    
+
 elif ( categoria == 'B'):
     bono = (salario*0.15)
     salarioTotal = bono + salario
