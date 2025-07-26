@@ -8,7 +8,7 @@ years = int(0)
 bn1 = int(0)
 bnfinal = int(0)
 
-years = int(input("Ingrese la cantidad: "))
+years = int(input("Ingrese la cantidad de años trabajados en la empresa: "))
 if (years >= 1):
     bn1 = 100000
     bnfinal = (years*120000) + bn1

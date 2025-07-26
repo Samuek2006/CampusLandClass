@@ -6,7 +6,7 @@ Descripcion: Este Script realiza la simulación de un sistema de calificaciones 
 
 calificacion = float(input("Ingrese la calificación del estudiante: (0-100): "))
 
-if (calificacion >= 90) or (calificacion <=100):
+if (calificacion >= 90) and (calificacion <=100):
     print('El estudiante ha obtenido una calificación A')
 elif (calificacion >= 80) and (calificacion < 90):
     print('El estudiante ha obtenido una calificación B')
