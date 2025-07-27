@@ -12,3 +12,5 @@ elif sensoresActivos >= 3 and sensoresActivos <= 5 :
     print("Alarma de peligro: Nivel medio")
 elif sensoresActivos >= 6 :
     print("Alarma de peligro: Nivel alto")
+else:
+    print("No hay sensores activos, no se activa la alarma.")
