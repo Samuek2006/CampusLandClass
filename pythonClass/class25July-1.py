@@ -1,7 +1,7 @@
 """
-Autor:
-Fecha:
-Descripcion:
+Autor: Samuel Felipe Calderon Soto
+Fecha: 25 / 07 2025
+Descripcion: clase 25 de julio - Estructuras de control y condicionales
 """
 #Comentario en Linea
 """

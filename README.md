@@ -39,15 +39,15 @@
 ---
 
 <details>
-  <summary>🧠 <strong>Temas Cubiertos</strong></summary>
+    <summary>🧠 <strong>Temas Cubiertos</strong></summary>
 
-  - Fundamentos de **Python** 🐍
-  - **Estructuras de Datos** (Listas, Tuplas, Diccionarios, Conjuntos)
-  - **Control de Flujo** (condicionales, bucles)
-  - **Funciones y Módulos**
-  - **POO (Programación Orientada a Objetos)**
-  - **Control de versiones con Git y GitHub**
-  - Y más conforme avance el curso...
+    - Fundamentos de **Python** 🐍
+    - **Estructuras de Datos** (Listas, Tuplas, Diccionarios, Conjuntos)
+    - **Control de Flujo** (condicionales, bucles)
+    - **Funciones y Módulos**
+    - **POO (Programación Orientada a Objetos)**
+    - **Control de versiones con Git y GitHub**
+    - Y más conforme avance el curso...
 </details>
 
 ---
