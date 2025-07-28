@@ -4,7 +4,6 @@ Fecha: 25/07/2025
 Descripcion: Este Script calcula el bono final basado en la cantidad de años ingresada.
 """
 
-years = int(0)
 bn1 = int(0)
 bnfinal = int(0)
 
