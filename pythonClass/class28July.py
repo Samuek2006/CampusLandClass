@@ -1,7 +1,8 @@
 """
 Autor: Samuel Felipe Calderon Soto
-Fecha: 25 / 07 2025
-Descripcion:
+Fecha: 28 / 07 2025
+Descripcion: Clase 28 de Julio - Match, While y Excepciones en Python
+Tema: Estructuras de control match, while, manejo de excepciones y validaciones.
 """
 
 """
@@ -10,11 +11,12 @@ Funciones:
     - while: permite ejecutar un bloque de código mientras una condición sea verdadera.
     - try: permite manejar excepciones y errores en tiempo de ejecución.
     - except: captura excepciones específicas o generales.
+    - lower: convierte una cadena a minúsculas.
 
 Palabras reservadas:
     - pass: omitir condicion
     - break: interrumpe el ciclo actual.
-- ValueError: excepción que se lanza cuando una operación recibe un argumento con el tipo correcto pero un valor inapropiado.
+    - ValueError: excepción que se lanza cuando una operación recibe un argumento con el tipo correcto pero un valor inapropiado.
 """
 
 # Match - Estructura de control
@@ -89,7 +91,6 @@ while True:
     except ValueError:
         print("Por favor ingrese un numero valido.")
 
-"""
 edad = 0
 sumaEdades = 0
 contadorPersonas = 0
@@ -115,7 +116,6 @@ print(f"Promedio de edad: {promedioEdad:.2f}")
 print(f"Cantidad de mayores de edad: {mayoresEdad}")
 print(f"Cantidad de menores de edad: {menoresEdad}")
 print(f"Personas mayores al promedio: {sum(1 for _ in range(contadorPersonas) if edad > promedioEdad)}")
-"""
 
 #Ejercicio Muestras Edades
 cantEdades = 0

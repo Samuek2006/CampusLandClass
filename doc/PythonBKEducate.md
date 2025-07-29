@@ -2,11 +2,11 @@
 
 
 
-# Plan de Formación 
+# Plan de Formación
 
-El programa cuenta con 60 horas de formación distribuidas en actividades Asincrónicas y trabajo autónomo para el desarrollo de habilidades que permitirán la aproximación de los participantes en el mercado de la industria del desarrollo de software. 
+El programa cuenta con 60 horas de formación distribuidas en actividades Asincrónicas y trabajo autónomo para el desarrollo de habilidades que permitirán la aproximación de los participantes en el mercado de la industria del desarrollo de software.
 
-•    60 horas de sesiones Asincrónicas orientadas por un experto específico. 
+•    60 horas de sesiones Asincrónicas orientadas por un experto específico.
 
 
 
@@ -14,17 +14,17 @@ El programa cuenta con 60 horas de formación distribuidas en actividades Asincr
 
 ## Justificación
 
-En este ciclo se establecen los fundamentos que conforman los bloques de construcción, elementos y conceptos, de los programas informáticos, los cuales son de gran importancia para desarrollar el tipo de pensamiento abstracto necesario para todo futuro ingeniero dentro de la sociedad de la información. 
+En este ciclo se establecen los fundamentos que conforman los bloques de construcción, elementos y conceptos, de los programas informáticos, los cuales son de gran importancia para desarrollar el tipo de pensamiento abstracto necesario para todo futuro ingeniero dentro de la sociedad de la información.
 
-De igual manera se plantea como el espacio requerido para que el estudianteaprenda las diferentes estructuras de datos, operaciones, y mediciones de rendimiento presentes en todos los ámbitos del desarrollo de software en la actualidad. 
+De igual manera se plantea como el espacio requerido para que el estudianteaprenda las diferentes estructuras de datos, operaciones, y mediciones de rendimiento presentes en todos los ámbitos del desarrollo de software en la actualidad.
 
- 
 
-## Perfil de egreso: 
 
-El estudiante que haya culminado con éxito este ciclo estará en la capacidad de: 
+## Perfil de egreso:
 
-•    Desarrollar un programa monousuario para resolver los requerimientos planteados por un tercero 
+El estudiante que haya culminado con éxito este ciclo estará en la capacidad de:
+
+•    Desarrollar un programa monousuario para resolver los requerimientos planteados por un tercero
 
 •    Construir un programa trabajando de manera individual 
 
