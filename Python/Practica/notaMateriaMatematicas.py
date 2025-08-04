@@ -20,15 +20,7 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 #Variables
-student = [
-    ['Samuel', [85], [78], [90]],
-    ['Laura', [92], [88], [85]],
-    ['Andrés', [60], [55], [58]],
-    ['Camila', [70], [75], [72]],
-    ['David', [95], [98], [93]]
-]
-
-# student = []
+student = []
 
 #contadores
 NotaPerdida = 0
@@ -60,13 +52,13 @@ def promedioEstudiante(estudiante):
     promedioGeneral = (promedioProyecto * 0.6) + (promedioExamen * 0.25) + (promedioActividad * 0.15)
     return promedioGeneral
 
-def NotaPerdida(nota):
+def verificarNotaRango(nota):
+    global NotaPerdida, notaRegular
     if nota < 65:
         NotaPerdida += 1
-    elif nota >= 65 and nota <= 75:
+    elif 65 <= nota <= 75:
         notaRegular += 1
-    else:
-        print('Nota fuera de rango')
+
 
 #Ejecucion Principal
 while True:
@@ -92,6 +84,7 @@ while True:
 
                         match opcion:
                             case 1:
+                                LimpiarConsola()
                                 name = input(Fore.MAGENTA + 'Ingrese el nombre del estudiante: ')
                                 encontrado = False
                                 LimpiarConsola()
@@ -111,7 +104,7 @@ while True:
                                         estudiante[1].append(notaParcial)
                                         print(Fore.CYAN + f'Nota del parcial {notaParcial} agregada correctamente al estudiante: {name}')
                                         time.sleep(1)
-                                        NotaPerdida(notaParcial)
+                                        verificarNotaRango(notaParcial)
                                         encontrado = True
                                         LimpiarConsola()
                                         break
@@ -122,6 +115,7 @@ while True:
                                         LimpiarConsola()
 
                             case 2:
+                                LimpiarConsola()
                                 name = input(Fore.MAGENTA + 'Ingrese el nombre del estudiante: ')
                                 encontrado = False
                                 LimpiarConsola()
@@ -141,7 +135,7 @@ while True:
                                         estudiante[2].append(notaQuiz)
                                         print(Fore.CYAN + f'Nota del parcial {notaQuiz} agregada correctamente al estudiante: {name}')
                                         time.sleep(1)
-                                        NotaPerdida(notaQuiz)
+                                        verificarNotaRango(notaQuiz)
                                         encontrado = True
                                         LimpiarConsola()
                                         break
@@ -153,6 +147,7 @@ while True:
 
 
                             case 3:
+                                LimpiarConsola()
                                 name = input(Fore.MAGENTA + 'Ingrese el nombre del estudiante: ')
                                 encontrado = False
                                 LimpiarConsola()
@@ -172,7 +167,7 @@ while True:
                                         estudiante[3].append(notaTaller)
                                         print(Fore.CYAN + f'Nota del parcial {notaTaller} agregada correctamente al estudiante: {name}')
                                         time.sleep(1)
-                                        NotaPerdida(notaTaller)
+                                        verificarNotaRango(notaTaller)
                                         encontrado = True
                                         LimpiarConsola()
                                         break
@@ -198,6 +193,7 @@ while True:
                 print(Fore.CYAN + 'Estadisticas' )
                 while True:
                     try:
+                        LimpiarConsola()
                         opcion = int(input(Fore.YELLOW + '\n1. Promedio General del Grupo \n2. Total de Estudiantes que Aprovaron la Asignatura \n3. Total de Estudiantes que Reprovaron la Asignatura \n4. Total de Estudiantes que Obtuvieron una Nota entre 1 y 65 \n5. Total de Estudiantes que Obtuvieron una Nota entre 6 y 75 \n6. Nota mas Alta del Grupo \n7. Nota mas Baja del Grupo \n8. Total de Estudiantes que Obtuvieron una Nota Superior al Promedio \n0. Salir' + Fore.MAGENTA + '\nIngresa una Opcion: '))
 
                         match opcion:
@@ -242,10 +238,12 @@ while True:
                                 input(Fore.MAGENTA + 'Enter para Continuar...')
 
                             case 4:
+                                LimpiarConsola()
                                 print('Total de Estudiantes que Obtuvieron una Nota menor a 65')
                                 print(f'Total Estudiantes: {NotaPerdida}')
 
                             case 5:
+                                LimpiarConsola()
                                 print('Total de Estudiantes que Obtuvieron una Nota entre 65 y 75')
                                 print(f'Total Estudiantes: {notaRegular}')
 
