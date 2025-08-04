@@ -20,11 +20,17 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 #Variables
-student = []
+student = [
+    ['Samuel', [85], [78], [90]],
+    ['Laura', [92], [88], [85]],
+    ['Andrés', [60], [55], [58]],
+    ['Camila', [70], [75], [72]],
+    ['David', [95], [98], [93]]
+]
+
+# student = []
 
 #contadores
-aprobaron = 0
-reprobaron = 0
 NotaPerdida = 0
 notaRegular = 0
 
@@ -42,7 +48,7 @@ def addStudent(name : str):
 def FormatearNotas(lista):
     return ', '.join(map(str, lista)) if lista else 'No hay notas'
 
-def promedioEstudiante(student):
+def promedioEstudiante(estudiante):
     notasProyecto = estudiante[1]
     notasExamenes = estudiante[2]
     notasActividades = estudiante[3]
@@ -52,10 +58,6 @@ def promedioEstudiante(student):
     promedioActividad = sum(notasActividades) / len(notasActividades) if notasActividades else 0
 
     promedioGeneral = (promedioProyecto * 0.6) + (promedioExamen * 0.25) + (promedioActividad * 0.15)
-    if promedioGeneral >= 65:
-        aprobaron += 1
-    else:
-        reprobaron += 1
     return promedioGeneral
 
 def NotaPerdida(nota):
@@ -184,6 +186,7 @@ while True:
                                 LimpiarConsola()
                                 print(Fore.RED + 'Volviendo al menu principal...')
                                 time.sleep(0.5)
+                                break
 
                             case _:
                                 pass
@@ -193,49 +196,128 @@ while True:
 
             case 3:
                 print(Fore.CYAN + 'Estadisticas' )
-                opcion = int(input(Fore.YELLOW + '\n1. Promedio General del Grupo \n2. Total de Estudiantes que Aprovaron la Asignatura \n3. Total de Estudiantes que Reprovaron la Asignatura \n4. Total de Estudiantes que Obtuvieron una Nota entre 1 y 2.9 \n5. Total de Estudiantes que Obtuvieron una Nota entre 3 y 3.5 \n6. Nota mas Alta del Grupo \n7. Nota mas Baja del Grupo \n8. Total de Estudiantes que Obtuvieron una Nota Superior al Promedio \n0. Salir' + Fore.MAGENTA + '\nIngresa una Opcion: '))
+                while True:
+                    try:
+                        opcion = int(input(Fore.YELLOW + '\n1. Promedio General del Grupo \n2. Total de Estudiantes que Aprovaron la Asignatura \n3. Total de Estudiantes que Reprovaron la Asignatura \n4. Total de Estudiantes que Obtuvieron una Nota entre 1 y 65 \n5. Total de Estudiantes que Obtuvieron una Nota entre 6 y 75 \n6. Nota mas Alta del Grupo \n7. Nota mas Baja del Grupo \n8. Total de Estudiantes que Obtuvieron una Nota Superior al Promedio \n0. Salir' + Fore.MAGENTA + '\nIngresa una Opcion: '))
 
-                match opcion:
-                    case 1:
-                        LimpiarConsola()
-                        print('Promedio de Notas de los Estudiante del Grupo')
+                        match opcion:
+                            case 1:
+                                LimpiarConsola()
+                                print('Promedio de Notas de los Estudiante del Grupo')
 
-                        if not student:
-                            print('No hay estudiantes en el grupo')
-                        else:
-                            sumaPromedios = 0
-                            for estudiante in student:
-                                sumaPromedios += promedioEstudiante(estudiante)
-                            promedioGrupal = sumaPromedios / len(student)
+                                if not student:
+                                    print('No hay estudiantes en el grupo')
+                                else:
+                                    sumaPromedios = 0
+                                    for estudiante in student:
+                                        sumaPromedios += promedioEstudiante(estudiante)
+                                    promedioGrupal = sumaPromedios / len(student)
 
-                            print(Fore.CYAN + f'Promedio general del grupo: {promedioGrupal:.2f}')
-                            print(Fore.CYAN + 'Promedio individual por estudiante: ')
-                            for estudiante in student:
-                                nombre = estudiante[0]
-                                promedio = promedioEstudiante(estudiante)
-                                print(Fore.YELLOW + f'{nombre}: {promedio:.2f}')
-                        input(Fore.MAGENTA + 'Enter para Continuar...')
+                                    print(Fore.CYAN + f'Promedio general del grupo: {promedioGrupal:.2f}')
+                                    print(Fore.CYAN + 'Promedio individual por estudiante: ')
+                                    for estudiante in student:
+                                        nombre = estudiante[0]
+                                        promedio = promedioEstudiante(estudiante)
+                                        print(Fore.YELLOW + f'{nombre}: {promedio:.2f}')
+                                input(Fore.MAGENTA + 'Enter para Continuar...')
 
-                    case 2:
-                        LimpiarConsola()
-                        print('Total de Estudiantes que Aprovaron la Asignatura')
-                        print(f'Aprovados: {aprobaron}')
+                            case 2:
+                                LimpiarConsola()
+                                print('Total de Estudiantes que Aprobaron la Asignatura')
+                                total_aprobados = 0
+                                for estudiante in student:
+                                    if promedioEstudiante(estudiante) >= 65:
+                                        total_aprobados += 1
+                                print(f'Aprobados: {total_aprobados}')
+                                input(Fore.MAGENTA + 'Enter para Continuar...')
 
-                    case 3:
-                        LimpiarConsola()
-                        print('Total de Estudiantes que Reprovaron la Asignatura')
-                        print(f'Aprovados: {reprobaron}')
+                            case 3:
+                                LimpiarConsola()
+                                print('Total de Estudiantes que Reprobaron la Asignatura')
+                                total_reprobados = 0
+                                for estudiante in student:
+                                    if promedioEstudiante(estudiante) < 65:
+                                        total_reprobados += 1
+                                print(f'Reprobados: {total_reprobados}')
+                                input(Fore.MAGENTA + 'Enter para Continuar...')
 
-                    case 4:
-                        print('Total de Estudiantes que Obtuvieron una Nota menor a 65')
-                        print(f'Total Estudiantes: {NotaPerdida}')
+                            case 4:
+                                print('Total de Estudiantes que Obtuvieron una Nota menor a 65')
+                                print(f'Total Estudiantes: {NotaPerdida}')
 
-                    case 5:
-                        print('Total de Estudiantes que Obtuvieron una Nota entre 65 y 75')
-                        print(f'Total Estudiantes: {notaRegular}')
+                            case 5:
+                                print('Total de Estudiantes que Obtuvieron una Nota entre 65 y 75')
+                                print(f'Total Estudiantes: {notaRegular}')
+
+                            case 6:
+                                LimpiarConsola()
+                                print('Nota más alta del grupo')
+                                if not student:
+                                    print('No hay estudiantes en el grupo')
+                                else:
+                                    nota_mas_alta = 0
+                                    nombre_alto = ''
+                                    for estudiante in student:
+                                        promedio = promedioEstudiante(estudiante)
+                                        if promedio > nota_mas_alta:
+                                            nota_mas_alta = promedio
+                                            nombre_alto = estudiante[0]
+                                    print(Fore.YELLOW + f'La nota más alta del grupo es {nota_mas_alta:.2f} obtenida por {nombre_alto}')
+                                input(Fore.MAGENTA + 'Enter para Continuar...')
+
+                            case 7:
+                                LimpiarConsola()
+                                print('Nota más baja del grupo')
+                                if not student:
+                                    print('No hay estudiantes en el grupo')
+                                else:
+                                    nota_mas_baja = 100
+                                    nombre_bajo = ''
+                                    for estudiante in student:
+                                        promedio = promedioEstudiante(estudiante)
+                                        if promedio < nota_mas_baja:
+                                            nota_mas_baja = promedio
+                                            nombre_bajo = estudiante[0]
+                                    print(Fore.YELLOW + f'La nota más baja del grupo es {nota_mas_baja:.2f} obtenida por {nombre_bajo}')
+                                input(Fore.MAGENTA + 'Enter para Continuar...')
+
+                            case 8:
+                                LimpiarConsola()
+                                print('Estudiantes con nota superior al promedio general')
+                                if not student:
+                                    print('No hay estudiantes en el grupo')
+                                else:
+                                    suma_promedios = 0
+                                    for estudiante in student:
+                                        suma_promedios += promedioEstudiante(estudiante)
+                                    promedio_grupal = suma_promedios / len(student)
+
+                                    print(Fore.CYAN + f'Promedio general del grupo: {promedio_grupal:.2f}')
+                                    print(Fore.YELLOW + 'Estudiantes con nota superior al promedio:')
+                                    contador_superior = 0
+                                    for estudiante in student:
+                                        promedio = promedioEstudiante(estudiante)
+                                        if promedio > promedio_grupal:
+                                            print(f"- {estudiante[0]}: {promedio:.2f}")
+                                            contador_superior += 1
+                                    print(Fore.CYAN + f'Total de estudiantes con nota superior al promedio: {contador_superior}')
+                                input(Fore.MAGENTA + 'Enter para Continuar...')
+
+                            case 0:
+                                LimpiarConsola()
+                                print(Fore.RED + 'Volviendo al menu principal...')
+                                time.sleep(0.5)
+                                break
+
+
+                    except (ValueError, KeyboardInterrupt, TypeError, IndexError, UnboundLocalError, NameError) as e:
+                        print(f'Error: {e}')
 
             case 0:
-                pass
+                LimpiarConsola()
+                print(Fore.RED + 'Volviendo al menu principal...')
+                time.sleep(0.5)
+                break
 
             case _:
                 print('Opcion Invalida Intentelo Nuevamente...')
