@@ -1,4 +1,3 @@
-import os
 import os, time
 from colorama import Fore, Style, init
 init(autoreset=True)
