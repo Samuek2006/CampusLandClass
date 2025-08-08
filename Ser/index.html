@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Mini Manual de Gestión Emocional - Completo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Simplicidad: show/hide con display */
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+
+        /* Ajustes visuales para contenido largo */
+        .slides-box {
+            min-height: 320px;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-100 to-purple-100 min-h-screen flex items-center justify-center px-4 py-8">
+
+    <div class="max-w-3xl w-full bg-white shadow-2xl rounded-2xl p-6 md:p-10 space-y-6 text-gray-800 relative">
+
+        <div class="flex items-center justify-between gap-4">
+            <div class="w-full mr-4">
+                <div aria-hidden class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="progress" class="h-2 bg-purple-600 rounded-full w-0 transition-all"></div>
+                </div>
+            </div>
+            <div class="text-sm text-gray-500 no-select" id="slideCounter">Slide 1 / 1</div>
+        </div>
+
+        <div class="slides-box bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 md:p-8">
+            <!-- Slide 1 - Portada con Integrantes -->
+            <section id="slide1" class="slide active">
+                <h1 class="text-3xl md:text-4xl font-bold mb-2">🧠 Mini Manual de Gestión Emocional</h1>
+                <p class="text-lg text-gray-600">5 estrategias prácticas para enfrentar situaciones difíciles con
+                    inteligencia emocional.</p>
+                <div class="mt-4 text-sm text-gray-500">
+                    Usa las flechas, haz click en los puntos o desliza para navegar. Cada diapositiva muestra la
+                    estrategia y un ejemplo real para entenderla mejor.
+                </div>
+
+                <!-- Bloque Integrantes -->
+                <div class="mt-6 p-4 bg-purple-50 border border-purple-100 rounded-lg">
+                    <h3 class="text-lg font-semibold text-purple-700">Integrantes</h3>
+                    <ul class="mt-2 list-disc pl-6 text-gray-700">
+                        <li>Sara Brigete Carlier Mendez</li>
+                        <li>Samuel Felipe Calderon soto</li>
+                        <li>Juan Carlos Arregoces Torres</li>
+                        <li>Sergio Andres Serrano Rivero</li>
+                        <li>Santiago</li>
+                    </ul>
+                    <p class="mt-2 text-xs text-gray-500">Reemplaza los nombres por los reales cuando quieras.</p>
+                </div>
+            </section>
+
+            <!-- Slide 2 - Escribir lo que sientes -->
+            <section id="slide2" class="slide">
+                <h2 class="text-2xl font-semibold">✅ 1. Escribir lo que sientes</h2>
+                <p class="mt-3">✍️ <strong>"Libera y ordena tu mente"</strong></p>
+
+                <ul class="list-disc pl-6 mt-3 space-y-1 text-gray-700">
+                    <li>Ayuda a liberar tensiones y ordenar pensamientos.</li>
+                    <li>Permite identificar patrones emocionales y desencadenantes.</li>
+                    <li>Favorece la reflexión antes de actuar.</li>
+                </ul>
+
+                <p class="mt-4 text-gray-800 leading-relaxed">
+                    Formaba parte de un proyecto grupal en el que sentía que siempre debía explicar todo y corregir
+                    errores de los demás. Me invadía una mezcla de cansancio y resentimiento, pero en lugar de explotar
+                    lo empecé a anotar cada noche: qué pasó, qué sentí y por qué reaccioné así. Escribir me permitió ver
+                    que mi frustración venía más del miedo a fallar que de los demás; con eso definí límites y hablé con
+                    el equipo. Al ponerlo en palabras dejé de sentirme abrumado y pude proponer cambios concretos sin
+                    que la emoción me dominara.
+                </p>
+            </section>
+
+            <!-- Slide 3 - Cambiar el foco -->
+            <section id="slide3" class="slide">
+                <h2 class="text-2xl font-semibold">✅ 2. Cambiar el foco de atención</h2>
+                <p class="mt-3">🔄 <strong>"Desengancha tu mente del problema"</strong></p>
+
+                <ul class="list-disc pl-6 mt-3 space-y-1 text-gray-700">
+                    <li>Realiza una actividad corta que te guste (ej.: caminar, música, hobby).</li>
+                    <li>Permite que la mente se distancie y reduzca la carga emocional.</li>
+                    <li>Facilita volver con perspectiva y mayor control.</li>
+                </ul>
+
+                <p class="mt-4 text-gray-800 leading-relaxed">
+                    Después de una discusión con un amigo me quedé rumiando y no podía concentrarme en la universidad.
+                    En vez de seguir dándole vueltas decidí salir a correr y luego dedicar una hora a tocar guitarra,
+                    cosas que me relajan. Esa pausa me ayudó a bajar la tensión y a ver el problema con menos carga
+                    emocional; al volver pude llamar a mi amigo con calma y explicar cómo me sentía. Al desplazar el
+                    foco recuperé claridad y control sobre mi reacción.
+                </p>
+            </section>
+
+            <!-- Slide 4 - Aceptar la emoción -->
+            <section id="slide4" class="slide">
+                <h2 class="text-2xl font-semibold">✅ 3. Aceptar la emoción sin juzgarla</h2>
+                <p class="mt-3">🫂 <strong>"Lo que resistes, persiste"</strong></p>
+
+                <ul class="list-disc pl-6 mt-3 space-y-1 text-gray-700">
+                    <li>Nombrar la emoción reduce la lucha interna.</li>
+                    <li>La aceptación permite observar sin auto-reproche.</li>
+                    <li>Ayuda a recuperar la concentración y actuar con intención.</li>
+                </ul>
+
+                <p class="mt-4 text-gray-800 leading-relaxed">
+                    Antes de una presentación final sentí mucha ansiedad y me decía “no debería estar así”. En vez de
+                    negarla, me detuve, la nombré (“esto es ansiedad”), y me permití sentirla un rato sin criticarme. Le
+                    di espacio y respiré, recordando que es normal sentir nervios en situaciones importantes. Aceptarla
+                    me quitó la culpa, mejoré mi concentración y la presentación salió mejor de lo que esperaba.
+                </p>
+            </section>
+
+            <!-- Slide 5 - Actividad de autorregulación -->
+            <section id="slide5" class="slide">
+                <h2 class="text-2xl font-semibold">✅ 4. Actividad de autorregulación</h2>
+                <p class="mt-3">🎨🎶🏃 <strong>"Canaliza la emoción"</strong></p>
+
+                <ul class="list-disc pl-6 mt-3 space-y-1 text-gray-700">
+                    <li>Elige actividades que reduzcan la activación física (ej.: ejercicio, arte, cocina).</li>
+                    <li>Pequeñas rutinas recuperan el equilibrio emocional rápidamente.</li>
+                    <li>Son útiles para procesar emociones y retomar decisiones desde la calma.</li>
+                </ul>
+
+                <p class="mt-4 text-gray-800 leading-relaxed">
+                    Tuve una semana con exámenes y recibí una crítica fuerte de un compañero; la frustración me subió de
+                    inmediato. Para canalizarla salí a cocinar una receta que me gusta y luego pinté durante 30 minutos.
+                    Esas actividades me permitieron bajar la activación física y cambiar el tono de mis pensamientos. Al
+                    final me sentí más sereno y con energía para abordar la conversación pendiente con esa persona sin
+                    reaccionar a la defensiva.
+                </p>
+            </section>
+
+            <!-- Slide 6 - Recordar situación similar -->
+            <section id="slide6" class="slide">
+                <h2 class="text-2xl font-semibold">✅ 5. Recordar una situación similar que superaste</h2>
+                <p class="mt-3">🔁 <strong>"Ya lo hiciste antes, puedes hacerlo otra vez"</strong></p>
+
+                <ul class="list-disc pl-6 mt-3 space-y-1 text-gray-700">
+                    <li>Recuerda momentos en que superaste una dificultad parecida.</li>
+                    <li>Identifica qué apoyos y estrategias te ayudaron antes.</li>
+                    <li>Usa esa evidencia personal para recuperar confianza y motivación.</li>
+                </ul>
+
+                <p class="mt-4 text-gray-800 leading-relaxed">
+                    Formaba parte de un grupo escolar con el que al principio me llevaba bien y compartíamos tareas por
+                    WhatsApp. Con el tiempo me fueron cargando toda la responsabilidad, lo que me generó estrés y
+                    frustración; finalmente me aislaron y eso afectó mis emociones y mi rendimiento académico. Sin
+                    embargo, recibí el apoyo de mis profesores, que me orientaron y animaron, y de algunos compañeros
+                    solidarios; gracias a ese respaldo logré recuperar mi bienestar emocional y retomar mis actividades
+                    académicas con éxito.
+                </p>
+            </section>
+
+            <!-- Slide 7 - Cierre -->
+            <section id="slide7" class="slide">
+                <h2 class="text-2xl font-bold">🎯 Cierre</h2>
+                <p class="mt-3 text-gray-700">No se trata de evitar sentir, sino de <strong>gestionar</strong> lo que
+                    sientes. La inteligencia emocional se entrena con hábitos.</p>
+                <p class="italic mt-4 text-purple-700">✨ “Tus emociones no te definen, pero sí te guían si las escuchas
+                    con atención.”</p>
+            </section>
+        </div>
+
+        <div class="flex items-center justify-between pt-6 border-t">
+            <div class="flex items-center gap-2">
+                <button id="prevBtn" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded text-gray-800">⬅
+                    Anterior</button>
+                <button id="nextBtn" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">Siguiente
+                    ➡</button>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <div id="dots" class="flex gap-2 items-center" aria-hidden></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Inicializando slides...');
+            const slides = Array.from(document.querySelectorAll('.slide'));
+            if (!slides.length) {
+                console.error('No se encontraron slides (.slide). Revisa el HTML.');
+                return;
+            }
+
+            let current = 0; // índice 0-based
+            const total = slides.length;
+            const progressEl = document.getElementById('progress');
+            const slideCounter = document.getElementById('slideCounter');
+            const dotsContainer = document.getElementById('dots');
+
+            // Crear dots dinámicamente
+            for (let i = 0; i < total; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'dot bg-gray-300';
+                btn.setAttribute('aria-label', `Ir a slide ${i + 1}`);
+                btn.dataset.index = i;
+                btn.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(btn);
+            }
+
+            function updateUI() {
+                // show/hide
+                slides.forEach((s, i) => {
+                    if (i === current) {
+                        s.classList.add('active');
+                        s.setAttribute('aria-hidden', 'false');
+                    } else {
+                        s.classList.remove('active');
+                        s.setAttribute('aria-hidden', 'true');
+                    }
+                });
+
+                // progress (uso (current+1)/total para que el progreso muestre hasta 100%)
+                const pct = Math.round(((current + 1) / total) * 100);
+                progressEl.style.width = pct + '%';
+
+                // counter
+                slideCounter.textContent = `Slide ${current + 1} / ${total}`;
+
+                // dots
+                Array.from(dotsContainer.children).forEach((d, i) => {
+                    d.classList.toggle('bg-purple-600', i === current);
+                    d.classList.toggle('bg-gray-300', i !== current);
+                });
+            }
+
+            function prev() { goTo(Math.max(0, current - 1)); }
+            function next() { goTo(Math.min(total - 1, current + 1)); }
+            function goTo(index) {
+                current = Math.min(Math.max(0, index), total - 1);
+                updateUI();
+                // after changing slide, scroll top of slides-box so user sees start
+                const container = document.querySelector('.slides-box');
+                if (container) container.scrollTop = 0;
+            }
+
+            // event listeners
+            document.getElementById('prevBtn').addEventListener('click', prev);
+            document.getElementById('nextBtn').addEventListener('click', next);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prev();
+                if (e.key === 'ArrowRight') next();
+            });
+
+            // touch swipe
+            let startX = 0;
+            const container = document.querySelector('.slides-box');
+            if (container) {
+                container.addEventListener('touchstart', e => startX = e.changedTouches[0].clientX);
+                container.addEventListener('touchend', e => {
+                    const diff = e.changedTouches[0].clientX - startX;
+                    if (diff > 40) prev();
+                    else if (diff < -40) next();
+                });
+            }
+
+            // Inicializar UI
+            goTo(0);
+            console.log('Slides listos. Total:', total);
+        });
+    </script>
+
+</body>
+
+</html>
