@@ -33,7 +33,7 @@
 <details>
 <summary>🎯 <strong>Objetivo del Repositorio</strong></summary>
 
-- Centralizar **todos los archivos y documentos** relacionados con el curso.
+- Centralizar **todos los archivos y documentos** relacionados con el curso. 
 - Mantener un **historial de código comentado y ordenado** para facilitar el aprendizaje.
 - Contar con una **base de ejemplos y tareas** para futuras consultas.
 </details>
