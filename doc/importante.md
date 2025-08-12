@@ -14,3 +14,7 @@
 
 
 # LIBRERIAS EXTERNAS
+
+# ARCHIVO
+**Agregar o Invitar al trainer al repositorio**
+*trainingLeader*
