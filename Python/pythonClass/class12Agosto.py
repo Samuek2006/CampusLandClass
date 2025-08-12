@@ -66,3 +66,15 @@ print(agenda)
 agenda.get(2).setdefault('email', email)
 print(agenda)
 print(email)
+
+#Manejo de NONE en el diccionario
+persona = agenda.get(3,{})
+if len(persona) > 0:
+    print(persona)
+else:
+    print('Lo siento no lo encontre')
+
+if isinstance(persona, str):
+    print(persona)
+else:
+    print('no es string')

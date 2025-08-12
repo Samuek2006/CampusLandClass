@@ -45,6 +45,7 @@ ProductoClient
         - id
         - fechaMovimiento
         - Valor
+        - Tipo Movimiento
 """
 import os
 
@@ -54,16 +55,32 @@ def LimpiarConsola():
     limpiar = os.system("cls" if os.name == "nt" else "clear")
     return limpiar
 
-def addCuenta(numeroCuenta, titular, saldoInicial):
+def addCuenta(numeroCuenta, titular, cc, correo, edad, movil, fijo, pais, dep, ciudad, direccion):
     if numeroCuenta in cuentasBancarias:
         print("La cuenta ya existe.")
     else:
         cuentasBancarias[numeroCuenta] = {
+            "CC": cc,
             "titular": titular,
-            "saldo": saldoInicial
+            "Correo": correo,
+            "Edad": edad,
+            "Contacto": {
+                "Movil": movil,
+                "Fijo": fijo
+            },
+            "Ubicacion": {
+                "Pais": pais,
+                "Departamento": dep,
+                "Ciudad": ciudad,
+                "Direccion": direccion
+            },
+            "Productos": {},
+            "Historia": {}
         }
     print("Cuenta creada exitosamente.")
 
+def addProducto():
+    pass
 #Variables
 numeroCuenta = 4000
 
@@ -76,9 +93,9 @@ while True:
                 numeroCuenta += 499
                 print(f'Número de cuenta: {numeroCuenta}')
                 titular = input("Ingrese el nombre del titular: ")
-                saldoInicial = 0
-                addCuenta(numeroCuenta, titular, saldoInicial)
+                addCuenta(numeroCuenta, titular)
 
+                print(cuentasBancarias)
                 input("Presione Enter para continuar...")
 
             case 2:
