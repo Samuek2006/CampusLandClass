@@ -104,7 +104,7 @@ def menuCreditos():
 
 #Funcion Menu Portafolio
 def menuPortafolio():
-    print('1. Cta Ahorros \n2. Cta Corriente \n3. CDT \n4. Credito Libre Inversion \n5. Credito Vivienda \n6. Credito Compra AutoMovil \n0. Salir')
+    print('1. Cta Ahorros \n2. Cta Corriente \n3. CDT \n0. Salir')
 
 #Manejo del Historial
 def agregarHistorial(numeroCuenta, idProducto, valor, tipoMovimiento):
@@ -185,33 +185,6 @@ while True:
                                     "plazo": plazo_dias,
                                     "tasa": tasa_interes
                                 }
-                                break
-
-                            case "4":
-                                producto = 'Credito Libre Inversion'
-                                while e:
-                                    idProducto = random.randint(80000, creditoLibreInv)
-                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                    if not existe:
-                                        e = False
-                                break
-
-                            case "5":
-                                producto = 'Credito Vivienda'
-                                while e:
-                                    idProducto = random.randint(400000, creditoVivienda)
-                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                    if not existe:
-                                        e = False
-                                break
-
-                            case "6":
-                                producto = 'Credito Compra AutoMovil'
-                                while e:
-                                    idProducto = random.randint(100000, creditoCompraAuto)
-                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                    if not existe:
-                                        e = False
                                 break
 
                             case "0":
@@ -368,6 +341,7 @@ while True:
                     # Registrar el crédito en la cuenta
                     cuentasBancarias[numeroCuenta]["Productos"][idProducto] = {
                         "NombreProducto": producto,
+                        "TipoProducto": "credito",
                         "Saldo": montoSolicitado,
                         "Estado": "Activo",
                         "Historial": {
@@ -404,7 +378,7 @@ while True:
                         monto = float(input("Ingrese el monto a Retirar: "))
 
                         #Revisa que el saldo de la cuenta, es mayor al monto que desea retirar el cliente
-                        if cuentasBancarias[numeroCuenta]["Productos"][idProducto]['Saldo'] > monto:
+                        if cuentasBancarias[numeroCuenta]["Productos"][idProducto]['Saldo'] >= monto:
                             cuentasBancarias[numeroCuenta]["Productos"][idProducto]['Saldo'] -= monto
                             agregarHistorial(numeroCuenta, idProducto, -monto, "Retiro")
 
@@ -432,14 +406,14 @@ while True:
                     # Mostrar productos disponibles
                     print("Productos de la cuenta:")
                     for idProd, datosProd in cuentasBancarias[numeroCuenta]["Productos"].items():
-                        print(f"ID: {idProd} - {datosProd['Nombre']} - Saldo: {datosProd['Saldo']} - Estado: {datosProd['Estado']}")
+                        print(f"ID: {idProd} - {datosProd['NombreProducto']} - Saldo: {datosProd['Saldo']} - Estado: {datosProd['Estado']}")
 
                     idProducto = int(input("Ingrese el ID del producto (crédito) a pagar: "))
 
                     if idProducto in cuentasBancarias[numeroCuenta]["Productos"]:
                         producto = cuentasBancarias[numeroCuenta]["Productos"][idProducto]
 
-                        if "Credito" in producto["Nombre"]:
+                        if producto["TipoProducto"] == "credito":
                             monto = float(input("Ingrese el monto a pagar: "))
 
                             if monto > 0:
