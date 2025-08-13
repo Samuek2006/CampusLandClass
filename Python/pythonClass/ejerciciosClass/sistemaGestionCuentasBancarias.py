@@ -47,7 +47,10 @@ ProductoClient
         - Valor
         - Tipo Movimiento
 """
+#Importacion Librerias
 import os, random, time
+from colorama import Fore, Style, init
+init(autoreset=True)
 
 cuentasBancarias = {}
 
@@ -87,9 +90,6 @@ def addCuenta(numeroCuenta, titular, cc, correo, edad, movil, fijo, pais, dep, c
         }
     print("Cuenta creada exitosamente.")
 
-def addProducto():
-    pass
-
 #Funcion Menu Clientes
 def menuClientes():
     print('1. Datos Cliente \n2. Saldos \n3. Creditos \n4. Inversiones \n0.Salir')
@@ -106,7 +106,22 @@ def menuCreditos():
 def menuPortafolio():
     print('1. Cta Ahorros \n2. Cta Corriente \n3. CDT \n4. Credito Libre Inversion \n5. Credito Vivienda \n6. Credito Compra AutoMovil \n0. Salir')
 
-#Variables
+#Manejo del Historial
+def agregarHistorial(numeroCuenta, idProducto, valor, tipoMovimiento):
+    """Registra un movimiento en el historial de un producto."""
+    if numeroCuenta in cuentasBancarias and idProducto in cuentasBancarias[numeroCuenta]["Productos"]:
+        historial = cuentasBancarias[numeroCuenta]["Productos"][idProducto]["Historial"]
+
+        nuevo_id = len(historial) + 1  # ID incremental
+        historial[nuevo_id] = {
+            "FechaMovimiento": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "Valor": valor,
+            "TipoMovimiento": tipoMovimiento
+        }
+    else:
+        print("No se pudo registrar el historial: cuenta o producto no encontrado.")
+
+#Id Aleatorias en los productos
 numeroCuenta = 4000
 ctaCorriente = 10000
 ctaAhorros = 80000
@@ -126,73 +141,88 @@ while True:
 
                 #Generacion Producto y eleccion de producto a solicitar
                 while True:
-                    menuPortafolio()
-                    opcion = input('\nIngresa una opcion valida: ')
-                    e = True
-                    idProducto = None  # <- inicializamos por defecto
+                    try:
+                        menuPortafolio()
+                        opcion = input('\nIngresa una opcion valida: ')
+                        e = True
+                        idProducto = None  # <- inicializamos por defecto
 
-                    match opcion:
-                        case "1":
-                            producto = 'Cuenta Ahorros'
-                            while e:
-                                idProducto = random.randint(10000, ctaAhorros)
-                                existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                if not existe:
-                                    e = False
-                            break
+                        match opcion:
+                            case "1":
+                                producto = 'Cuenta Ahorros'
+                                while e:
+                                    idProducto = random.randint(10000, ctaAhorros)
+                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
+                                    if not existe:
+                                        e = False
+                                break
 
-                        case "2":
-                            producto = 'Cta Corriente'
-                            while e:
-                                idProducto = random.randint(4000, ctaCorriente)
-                                existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                if not existe:
-                                    e = False
-                            break
+                            case "2":
+                                producto = 'Cta Corriente'
+                                while e:
+                                    idProducto = random.randint(4000, ctaCorriente)
+                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
+                                    if not existe:
+                                        e = False
+                                break
 
-                        case "3":
-                            producto = 'CDT'
-                            while e:
-                                idProducto = random.randint(500000, cdt)
-                                existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                if not existe:
-                                    e = False
-                            break
+                            case "3":
+                                producto = 'CDT'
+                                while e:
+                                    idProducto = random.randint(500000, cdt)
+                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
+                                    if not existe:
+                                        e = False
 
-                        case "4":
-                            producto = 'Credito Libre Inversion'
-                            while e:
-                                idProducto = random.randint(80000, creditoLibreInv)
-                                existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                if not existe:
-                                    e = False
-                            break
+                                # Solicitar datos del CDT
+                                monto_inversion = float(input("Ingrese el monto a invertir en el CDT: "))
+                                plazo_dias = int(input("Ingrese el plazo del CDT (en días): "))
+                                tasa_interes = 0.05  # 5% anual fijo
 
-                        case "5":
-                            producto = 'Credito Vivienda'
-                            while e:
-                                idProducto = random.randint(400000, creditoVivienda)
-                                existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                if not existe:
-                                    e = False
-                            break
+                                # Guardar temporalmente estos datos para añadirlos tras crear la cuenta
+                                datos_cdt = {
+                                    "monto": monto_inversion,
+                                    "plazo": plazo_dias,
+                                    "tasa": tasa_interes
+                                }
+                                break
 
-                        case "6":
-                            producto = 'Credito Compra AutoMovil'
-                            while e:
-                                idProducto = random.randint(100000, creditoCompraAuto)
-                                existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
-                                if not existe:
-                                    e = False
-                            break
+                            case "4":
+                                producto = 'Credito Libre Inversion'
+                                while e:
+                                    idProducto = random.randint(80000, creditoLibreInv)
+                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
+                                    if not existe:
+                                        e = False
+                                break
 
-                        case "0":
-                            print("Cancelando creación de cuenta...")
-                            break
+                            case "5":
+                                producto = 'Credito Vivienda'
+                                while e:
+                                    idProducto = random.randint(400000, creditoVivienda)
+                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
+                                    if not existe:
+                                        e = False
+                                break
 
-                        case _:
-                            print('Ingresa una Opcion valida')
-                            continue  # <- evitamos seguir si no es válido
+                            case "6":
+                                producto = 'Credito Compra AutoMovil'
+                                while e:
+                                    idProducto = random.randint(100000, creditoCompraAuto)
+                                    existe = any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values())
+                                    if not existe:
+                                        e = False
+                                break
+
+                            case "0":
+                                print("Cancelando creación de cuenta...")
+                                break
+
+                            case _:
+                                print('Ingresa una Opcion valida')
+                                continue  # <- evitamos seguir si no es válido
+                    except (ValueError,KeyboardInterrupt,TypeError) as e:
+                        print(f'Error: {e}')
 
                 # Si no se generó idProducto, no seguimos
                 if idProducto is None:
@@ -224,7 +254,12 @@ while True:
                 estado = "Activo"
                 addCuenta(numeroCuenta, titular, cc, email, edad, movil, fijo, pais, dep, ciudad, direccion,idProducto, producto, estado)
 
-                print(cuentasBancarias)
+                if producto == "CDT":
+                    cuentasBancarias[numeroCuenta]["Productos"][idProducto]["Saldo"] = datos_cdt["monto"]
+                    cuentasBancarias[numeroCuenta]["Productos"][idProducto]["Plazo"] = datos_cdt["plazo"]
+                    cuentasBancarias[numeroCuenta]["Productos"][idProducto]["Tasa"] = datos_cdt["tasa"]
+                    agregarHistorial(numeroCuenta, idProducto, datos_cdt["monto"], "Apertura CDT")
+
                 input("Presione Enter para continuar...")
                 LimpiarConsola()
 
@@ -248,6 +283,7 @@ while True:
 
                         # Sumar al saldo
                         cuentasBancarias[numeroCuenta]["Productos"][idProducto]['Saldo'] += monto
+                        agregarHistorial(numeroCuenta, idProducto, monto, "Depósito")
 
                         print(f"\nDepósito realizado con éxito.")
                         print(f"Nuevo saldo: {cuentasBancarias[numeroCuenta]['Productos'][idProducto]['Saldo']}")
@@ -273,39 +309,42 @@ while True:
 
                 # Mostrar menú de créditos
                 while True:
-                    print('\n¿Qué tipo de crédito deseas solicitar?')
-                    opcion = input('1. Crédito Libre Inversión \n2. Crédito Vivienda \n3. Crédito Compra Automóvil \n0. Salir \nOpción: ')
-                    e = True
-                    idProducto = None
+                    try:
+                        print('\n¿Qué tipo de crédito deseas solicitar?')
+                        opcion = input('1. Crédito Libre Inversión \n2. Crédito Vivienda \n3. Crédito Compra Automóvil \n0. Salir \nOpción: ')
+                        e = True
+                        idProducto = None
 
-                    match opcion:
-                        case "1":
-                            producto = 'Crédito Libre Inversión'
-                            while e:
-                                idProducto = random.randint(80000, creditoLibreInv)
-                                if not any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values()):
-                                    e = False
-                            break
-                        case "2":
-                            producto = 'Crédito Vivienda'
-                            while e:
-                                idProducto = random.randint(400000, creditoVivienda)
-                                if not any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values()):
-                                    e = False
-                            break
-                        case "3":
-                            producto = 'Crédito Compra Automóvil'
-                            while e:
-                                idProducto = random.randint(100000, creditoCompraAuto)
-                                if not any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values()):
-                                    e = False
-                            break
-                        case "0":
-                            print("Solicitud cancelada.")
-                            continue
-                        case _:
-                            print("Opción inválida.")
-                            continue
+                        match opcion:
+                            case "1":
+                                producto = 'Crédito Libre Inversión'
+                                while e:
+                                    idProducto = random.randint(80000, creditoLibreInv)
+                                    if not any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values()):
+                                        e = False
+                                break
+                            case "2":
+                                producto = 'Crédito Vivienda'
+                                while e:
+                                    idProducto = random.randint(400000, creditoVivienda)
+                                    if not any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values()):
+                                        e = False
+                                break
+                            case "3":
+                                producto = 'Crédito Compra Automóvil'
+                                while e:
+                                    idProducto = random.randint(100000, creditoCompraAuto)
+                                    if not any(idProducto in cuenta["Productos"] for cuenta in cuentasBancarias.values()):
+                                        e = False
+                                break
+                            case "0":
+                                print("Solicitud cancelada.")
+                                continue
+                            case _:
+                                print("Opción inválida.")
+                                continue
+                    except (ValueError, KeyboardInterrupt, TypeError) as e:
+                        print(f'Error: {e}')
 
                 LimpiarConsola()
                 # Datos para evaluación
@@ -342,7 +381,6 @@ while True:
                     print(f"Crédito {producto} creado con ID {idProducto} y saldo {montoSolicitado}")
                 else:
                     print("❌ No eres apto para el crédito (RCI mayor a 0.4).")
-
                 input("Enter para continuar...")
                 LimpiarConsola()
 
@@ -368,6 +406,8 @@ while True:
                         #Revisa que el saldo de la cuenta, es mayor al monto que desea retirar el cliente
                         if cuentasBancarias[numeroCuenta]["Productos"][idProducto]['Saldo'] > monto:
                             cuentasBancarias[numeroCuenta]["Productos"][idProducto]['Saldo'] -= monto
+                            agregarHistorial(numeroCuenta, idProducto, -monto, "Retiro")
+
                             print(f"\nDepósito realizado con éxito.")
                             print(f"Nuevo saldo: {cuentasBancarias[numeroCuenta]['Productos'][idProducto]['Saldo']}")
                         else:
@@ -404,7 +444,9 @@ while True:
 
                             if monto > 0:
                                 if monto >= producto["Saldo"]:
-                                    producto["Saldo"] = 0
+                                    producto["Saldo"] -= monto
+                                    agregarHistorial(numeroCuenta, idProducto, -monto, "Pago Cuota Crédito")
+
                                     print("Crédito pagado en su totalidad.")
                                 else:
                                     producto["Saldo"] -= monto
@@ -435,18 +477,53 @@ while True:
                     idProducto = int(input("\nIngrese el ID del producto al que desea Cancelar: "))
                     if cuentasBancarias[numeroCuenta]["Productos"][idProducto] == 0:
                         valorEliminado = cuentasBancarias[numeroCuenta]["Productos"].pop(idProducto)
+                        print(valorEliminado)
+                        print(cuentasBancarias)
                     else:
                         print('')
 
-                    print(valorEliminado)
-                    print(cuentasBancarias)
                     input('Enter para continuar')
 
                 LimpiarConsola()
 
+            case 7:
+                LimpiarConsola()
+                print("Redimir CDT")
+                numeroCuenta = int(input("Ingrese el número de cuenta: "))
+
+                if numeroCuenta in cuentasBancarias:
+                    print("\nCDTs disponibles:")
+                    for idProd, datosProd in cuentasBancarias[numeroCuenta]["Productos"].items():
+                        if datosProd["NombreProducto"] == "CDT":
+                            print(f"  {idProd} - Monto: {datosProd['Saldo']} - Plazo: {datosProd.get('Plazo', 0)} días")
+
+                    idProducto = int(input("\nIngrese el ID del CDT a redimir: "))
+
+                    if idProducto in cuentasBancarias[numeroCuenta]["Productos"]:
+                        cdt = cuentasBancarias[numeroCuenta]["Productos"][idProducto]
+                        interes_ganado = cdt["Saldo"] * cdt["Tasa"] * (cdt["Plazo"] / 365)
+                        total_a_pagar = cdt["Saldo"] + interes_ganado
+                        print(f"Total a recibir: {total_a_pagar:.2f}")
+
+                        agregarHistorial(numeroCuenta, idProducto, total_a_pagar, "Redención CDT")
+                        cdt["Saldo"] = 0
+                        cdt["Estado"] = "Pagado"
+                    else:
+                        print("CDT no encontrado.")
+                else:
+                    print("Cuenta no encontrada.")
+
+                input("\nPresione Enter para continuar...")
+                LimpiarConsola()
+
             case 0:
+                LimpiarConsola()
                 print("Saliendo del sistema...")
                 break
+
+            case _:
+                print('Ingresa una Opcion valida')
+                LimpiarConsola()
 
     except (ValueError, TypeError, KeyboardInterrupt) as e:
         print(f"Error: {e}. Por favor, ingrese un valor válido.")
