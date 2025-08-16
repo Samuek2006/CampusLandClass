@@ -12,20 +12,21 @@
 - [¿Qué encontrarás aquí?](#qué-encontrarás-aquí)
 - [Objetivo del Repositorio](#objetivo-del-repositorio)
 - [Temas Cubiertos](#temas-cubiertos)
+- [Proyectos Destacados](#proyectos-destacados)
 - [Reglas de Uso](#reglas-de-uso)
 - [Autores y Colaboradores](#autores-y-colaboradores)
 - [Sugerencias](#sugerencias)
-
 
 ---
 
 <details>
 <summary>📂 <strong>¿Qué encontrarás aquí?</strong></summary>
 
-- **`/pythonClass`** – Ejercicios y ejemplos trabajados en clase.
+- **`/pythonClass`** – Ejercicios prácticos y ejemplos trabajados en clase.
 - **`/pythonHome`** – Tareas, trabajos y proyectos desarrollados en casa.
-- **`README.md`** – Documentación principal del repositorio.
-- **Archivos de código documentado** con explicaciones paso a paso de los temas vistos.
+- **`/Practica`** – Scripts cortos de aplicación en la vida real (salario, morse, notas, etc.).
+- **README.md** – Documentación principal del repositorio.
+- **Archivos de código documentado** con explicaciones paso a paso y diagramas de solución.
 </details>
 
 ---
@@ -35,7 +36,8 @@
 
 - Centralizar **todos los archivos y documentos** relacionados con el curso. 
 - Mantener un **historial de código comentado y ordenado** para facilitar el aprendizaje.
-- Contar con una **base de ejemplos y tareas** para futuras consultas.
+- Contar con una **base de ejemplos, proyectos y tareas** para futuras consultas.
+- Promover la **práctica constante de la lógica de programación** con proyectos aplicados.
 </details>
 
 ---
@@ -44,12 +46,28 @@
 <summary>🧠 <strong>Temas Cubiertos</strong></summary>
 
 - Fundamentos de **Python** 🐍
-- **Estructuras de Datos** (Listas, Tuplas, Diccionarios, Conjuntos)
-- **Control de Flujo** (condicionales, bucles)
-- **Funciones y Módulos**
+- **Estructuras de Datos**: listas, tuplas, diccionarios, conjuntos
+- **Control de Flujo**: condicionales, bucles
+- **Funciones y Modularización** (creación y uso de módulos propios)
+- **Manejo de Archivos**: JSON, CSV y TXT
 - **POO (Programación Orientada a Objetos)**
+- **Juegos básicos en consola** (piedra-papel-tijera, simuladores sencillos)
+- **Algoritmos de lógica y matemáticas** (IMC, zodiaco, clasificación de figuras, edades, etc.)
+- **Sistemas Bancarios**: desde básicos hasta proyectos modulares con persistencia de datos
 - **Control de versiones con Git y GitHub**
-- Y más conforme avance el curso...
+</details>
+
+---
+
+<details>
+<summary>🌟 <strong>Proyectos Destacados</strong></summary>
+
+- **Sistema de Gestión de Cuentas Bancarias** (varias versiones: simple, modular, con JSON)  
+- **Calculadoras y Conversores**: IMC, descuentos, tarifas, temperaturas, monedas, etc.  
+- **Clasificaciones y Simuladores**: edades, figuras geométricas, contaminación, notas, alarmas.  
+- **Persistencia de datos**: uso de JSON, CSV y TXT para guardar y recuperar información.  
+- **Juegos en consola**: piedra-papel-tijera, minijuego sencillo y simulaciones interactivas.  
+- **Proyectos con listas sobre listas**: control académico, barras de carga, gestión de datos.  
 </details>
 
 ---
@@ -67,8 +85,8 @@
 <details>
 <summary>✍️ <strong>Autores y Colaboradores</strong></summary>
 
-- **Instructor(es):** CampusLand
-- **Estudiante:** Samuel Felipe Calderon Soto
+- **Instructor(es):** CampusLand  
+- **Estudiante:** Samuel Felipe Calderón Soto  
 </details>
 
 ---
@@ -76,7 +94,7 @@
 <details>
 <summary>💡 <strong>Sugerencias</strong></summary>
 
-¿Tienes ideas para mejorar la organización o documentación del repositorio?
+¿Tienes ideas para mejorar la organización o documentación del repositorio?  
 ¡Tus aportes siempre serán bienvenidos! 🔥
 </details>
 
