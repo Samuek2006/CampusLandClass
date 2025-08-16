@@ -1,0 +1,41 @@
+{
+    "cuentasBancarias": {
+        "1000": {
+            "CC": "100",
+            "titular": "sam",
+            "Correo": "mbnas",
+            "Edad": 10,
+            "Contacto": {
+                "Movil": "831",
+                "Fijo": "3813"
+            },
+            "Ubicacion": {
+                "Pais": "col",
+                "Departamento": "san",
+                "Ciudad": "buc",
+                "Direccion": "ksa"
+            },
+            "Productos": {
+                "P002": {
+                    "NombreProducto": "Cuenta Ahorros",
+                    "Saldo": 0,
+                    "Estado": "Activa",
+                    "Historial": {}
+                },
+                "2": {
+                    "NombreProducto": "Credito",
+                    "TipoProducto": "credito",
+                    "Saldo": 100000.0,
+                    "Estado": "Activo",
+                    "Historial": {
+                        "1": {
+                            "FechaMovimiento": "2025-08-15",
+                            "Valor": 100000.0,
+                            "TipoMovimiento": "Cr\u00e9dito Aprobado"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
