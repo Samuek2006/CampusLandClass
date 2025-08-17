@@ -1,9 +1,6 @@
 import modules.utilidades as utilidades
 import modules.operaciones as operaciones
 
-time = utilidades.Stop()
-consola = utilidades.Limpiar_consola()
-
 #Funcion Menu Principal
 def menuPrincipal():
     while True:
@@ -46,16 +43,19 @@ def menuPrincipal():
 
             case 0:
                 print('Saliendo del sistema')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
                 break
 
             case _:
                 print('Elija una opcion valida')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
 
 #Funcion Menu Clientes
 def menuClientes():
     while True:
+        utilidades.Limpiar_consola()
         print('=== Menu Clientes ===')
         print('''
     Seleccione una opción:
@@ -83,12 +83,14 @@ def menuClientes():
 
             case 0:
                 print('Saliendo del sistema')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
                 break
 
             case _:
                 print('Elija una opcion valida')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
 
 #Funcion Menu Saldos
 def menuSaldos():
@@ -112,12 +114,14 @@ def menuSaldos():
 
             case 0:
                 print('Saliendo del sistema')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
                 break
 
             case _:
                 print('Elija una opcion correcta')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
 
 #Funcion Menu Creditos
 def menuCreditos():
@@ -135,25 +139,27 @@ def menuCreditos():
 
         match opcion:
             case 1:
-                producto = 'Credito'
+                producto = 'Credito Libre Inversion'
                 break
 
             case 2:
-                producto = 'Credito'
+                producto = 'Credito Vivienda'
                 break
 
             case 3:
-                producto = 'Credito'
+                producto = 'Credito Compra AutoMovil'
                 break
 
             case 0:
                 print('Saliendo del sistema')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
                 break
 
             case _:
                 print('Elija una opcion correcta')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
 
     return producto
 
@@ -174,29 +180,28 @@ def menuPortafolio():
         match opcion:
             case 1:
                 producto = 'Cuenta Ahorros'
-                tipoProducto = 'Debito'
                 break
 
             case 2:
                 producto = 'Cuenta Corriente'
-                tipoProducto = 'Debito'
                 break
 
             case 3:
                 producto = 'CDT'
-                tipoProducto = 'Inversion'
                 break
 
             case 0:
                 print('Saliendo del sistema')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
                 break
 
             case _:
                 print('Elija una opcion correcta')
-                time
+                utilidades.Stop()
+                utilidades.Limpiar_consola()
 
-    return producto, tipoProducto
+    return producto
 
 def leer_opcion():
     try:

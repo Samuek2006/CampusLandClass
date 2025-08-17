@@ -1,69 +1,95 @@
 {
     "cuentasBancarias": {
         "1000": {
-            "CC": "100",
-            "titular": "sam",
-            "Correo": "mbnas",
-            "Edad": 10,
+            "CC": "123456789",
+            "titular": "Juan P\u00e9rez",
+            "Correo": "juan@mail.com",
+            "Edad": 30,
             "Contacto": {
-                "Movil": "831",
-                "Fijo": "3813"
+                "Movil": "3001234567",
+                "Fijo": "6001234"
             },
             "Ubicacion": {
-                "Pais": "col",
-                "Departamento": "san",
-                "Ciudad": "buc",
-                "Direccion": "ksa"
+                "Pais": "Colombia",
+                "Departamento": "Santander",
+                "Ciudad": "Bucaramanga",
+                "Direccion": "Calle 123"
             },
             "Productos": {
-                "P002": {
-                    "NombreProducto": "Cuenta Ahorros",
-                    "Saldo": 200000.0,
+                "1": {
+                    "NombreProducto": "Cuenta de Ahorros",
+                    "TipoProducto": "Debito",
+                    "Saldo": 3000000,
                     "Estado": "Activa",
                     "Historial": {
-                        "2025-08-16 22:33:12.019048": "Dep\u00f3sito de 100000.0",
-                        "2025-08-16 22:36:50.586067": "Dep\u00f3sito de 100000.0"
+                        "2025-08-17 17:07:37.555753": "Pago de cuota cr\u00e9dito 4 por 1000000",
+                        "2025-08-17 17:07:55.666774": "Pago de cuota cr\u00e9dito 4 por 1000000"
                     }
                 },
-                "3": {
-                    "NombreProducto": "Credito",
+                "4": {
+                    "NombreProducto": "Cr\u00e9dito Vivienda",
                     "TipoProducto": "credito",
-                    "Saldo": 100000.0,
+                    "MontoOriginal": 12000000,
+                    "Saldo": 10000000,
+                    "PlazoMeses": 12,
+                    "Cuota": 1000000,
+                    "CuotasRestantes": 10,
                     "Estado": "Activo",
                     "Historial": {
                         "1": {
-                            "FechaMovimiento": "2025-08-16",
-                            "Valor": 100000.0,
+                            "FechaMovimiento": "2025-08-17",
+                            "Valor": 12000000,
                             "TipoMovimiento": "Cr\u00e9dito Aprobado"
-                        }
+                        },
+                        "2025-08-17 17:07:37.555687": "Pago cuota de 1000000. Cuotas restantes: 11",
+                        "2025-08-17 17:07:55.666757": "Pago cuota de 1000000. Cuotas restantes: 10"
                     }
                 }
             }
         },
-        "4000": {
-            "CC": "101",
-            "titular": "same",
-            "Correo": "jjas",
-            "Edad": 190,
+        "5000": {
+            "CC": "42545",
+            "titular": "fdskajtae",
+            "Correo": "k<jdgh",
+            "Edad": 80,
             "Contacto": {
-                "Movil": "8892",
-                "Fijo": "8771"
+                "Movil": "4554",
+                "Fijo": "25445"
             },
             "Ubicacion": {
-                "Pais": "col",
-                "Departamento": "buc",
-                "Ciudad": "san",
-                "Direccion": "ouas"
+                "Pais": "nikas",
+                "Departamento": "fkaosdf",
+                "Ciudad": "asfas",
+                "Direccion": "sfadfwe4"
             },
             "Productos": {
-                "P003": {
-                    "NombreProducto": [
-                        "CDT",
-                        "Inversion"
-                    ],
-                    "Saldo": 0,
+                "P004": {
+                    "NombreProducto": "Cuenta Corriente",
+                    "TipoProducto": "Debito",
+                    "Saldo": 899999999000000.0,
                     "Estado": "Activa",
-                    "Historial": {}
+                    "Historial": {
+                        "2025-08-17 17:09:28.344587": "Dep\u00f3sito de 900000000000000.0",
+                        "2025-08-17 17:09:51.882346": "Pago de cuota cr\u00e9dito 2 por 1000000.0"
+                    }
+                },
+                "2": {
+                    "NombreProducto": "Credito Vivienda",
+                    "TipoProducto": "credito",
+                    "MontoOriginal": 5000000.0,
+                    "Saldo": 4000000.0,
+                    "PlazoMeses": 5,
+                    "Cuota": 1000000.0,
+                    "CuotasRestantes": 4,
+                    "Estado": "Activo",
+                    "Historial": {
+                        "1": {
+                            "FechaMovimiento": "2025-08-17",
+                            "Valor": 5000000.0,
+                            "TipoMovimiento": "Cr\u00e9dito Aprobado"
+                        },
+                        "2025-08-17 17:09:51.882330": "Pago cuota de 1000000.0. Cuotas restantes: 4"
+                    }
                 }
             }
         }

@@ -30,6 +30,7 @@ def crear_cuenta():
     # Producto inicial
     idProducto = input("Ingrese un ID para el producto (ej: P001): ")
     producto = menu.menuPortafolio()
+    tipoProducto = 'Debito'
     estado = "Activa"
 
     nueva_cuenta = {
@@ -51,6 +52,7 @@ def crear_cuenta():
             "Productos": {
                 idProducto: {
                     "NombreProducto": producto,
+                    "TipoProducto": tipoProducto,
                     "Saldo": 0,
                     "Estado": estado,
                     "Historial": {}
@@ -135,11 +137,15 @@ def solicitarCredito():
         # Generar un ID de producto único
         idProducto = str(len(data["cuentasBancarias"][numeroCuenta]["Productos"]) + 1)
 
-        # Registrar el crédito en la cuenta
+        # Registrar el crédito en la cuenta con más información
         data["cuentasBancarias"][numeroCuenta]["Productos"][idProducto] = {
             "NombreProducto": producto,
             "TipoProducto": "credito",
-            "Saldo": montoSolicitado,
+            "MontoOriginal": montoSolicitado,
+            "Saldo": montoSolicitado,          # saldo pendiente
+            "PlazoMeses": plazoMeses,
+            "Cuota": cuota,
+            "CuotasRestantes": plazoMeses,
             "Estado": "Activo",
             "Historial": {
                 1: {
@@ -153,7 +159,8 @@ def solicitarCredito():
         # Guardar cambios en el archivo JSON
         corafiles.write_json(DB_FILE, data)
 
-        print(f"Crédito {producto} creado con ID {idProducto} y saldo {montoSolicitado}")
+        print(f"Crédito {producto} creado con ID {idProducto}.")
+        print(f"Monto aprobado: {montoSolicitado} | Plazo: {plazoMeses} meses | Cuota mensual: {cuota}")
         utilidades.Stop()
         utilidades.Limpiar_consola()
 
@@ -210,72 +217,88 @@ def pagoCuota():
     """
     Permite pagar una cuota de un crédito que tenga el usuario
     """
-
     utilidades.Limpiar_consola()
     numeroCuenta = input("Ingrese el número de cuenta: ")
-    idProducto = input("Ingrese el ID del crédito que desea pagar: ")
-    utilidades.Stop()
-    utilidades.Limpiar_consola()
+    idCredito = input("Ingrese el ID del crédito que desea pagar: ")
 
     data = corafiles.read_json(DB_FILE)
 
     try:
         cuenta = data["cuentasBancarias"][numeroCuenta]
-        producto = cuenta["Productos"][idProducto]
+        credito = cuenta["Productos"][idCredito]
 
         # Validar que sea crédito
-        if producto["Tipo"] != "Credito":
+        if credito["TipoProducto"].lower() != "credito":
             print("⚠ El producto seleccionado no es un crédito.")
             utilidades.Stop()
             utilidades.Limpiar_consola()
             return
 
-        # Validar que tenga saldo pendiente
-        if producto["SaldoPendiente"] <= 0:
+        # Validar saldo pendiente
+        if credito["Saldo"] <= 0:
             print("✅ Este crédito ya está totalmente pagado.")
             utilidades.Stop()
             utilidades.Limpiar_consola()
             return
 
-        # Valor de la cuota
-        cuota = producto.get("Cuota", 0)
+        # Tomar valor de la cuota
+        cuota = credito.get("Cuota", 0)
         if cuota <= 0:
             print("⚠ Este crédito no tiene definida la cuota.")
             utilidades.Stop()
             utilidades.Limpiar_consola()
             return
 
-        # Validar saldo disponible en la cuenta de ahorros/corriente
-        saldoDisponible = cuenta["SaldoTotal"]
-        if saldoDisponible < cuota:
+        # Mostrar productos de débito disponibles
+        print("\nProductos disponibles para pagar:")
+        productos_debito = {pid: prod for pid, prod in cuenta["Productos"].items()
+                            if prod["TipoProducto"].lower() == "debito"}
+
+        if not productos_debito:
+            print("⚠ Esta cuenta no tiene productos de débito para pagar el crédito.")
+            utilidades.Stop()
+            utilidades.Limpiar_consola()
+            return
+
+        for pid, prod in productos_debito.items():
+            print(f"- {pid}: {prod['NombreProducto']} (Saldo: {prod['Saldo']})")
+
+        idDebito = input("Ingrese el ID del producto de débito para pagar: ")
+        productoDebito = productos_debito.get(idDebito)
+
+        if not productoDebito:
+            print("⚠ El producto de débito no existe o no es válido.")
+            utilidades.Stop()
+            utilidades.Limpiar_consola()
+            return
+
+        # Validar saldo suficiente
+        if productoDebito["Saldo"] < cuota:
             print("⚠ Fondos insuficientes para pagar la cuota.")
             utilidades.Stop()
             utilidades.Limpiar_consola()
             return
 
-        # Descontar la cuota del saldo de la cuenta
-        cuenta["SaldoTotal"] -= cuota
+        # Descontar de débito
+        productoDebito["Saldo"] -= cuota
 
-        # Reducir saldo pendiente del crédito
-        producto["SaldoPendiente"] -= cuota
+        # Reducir saldo y cuotas del crédito
+        credito["Saldo"] -= cuota
+        credito["CuotasRestantes"] -= 1
 
-        # Guardar movimiento
-        if "Movimientos" not in producto:
-            producto["Movimientos"] = []
-        producto["Movimientos"].append({
-            "Tipo": "Pago Cuota",
-            "Monto": cuota,
-            "FechaMovimiento": time.strftime("%Y-%m-%d %H:%M:%S")
-        })
+        # Guardar movimiento en historial
+        credito["Historial"][str(datetime.now())] = f"Pago cuota de {cuota}. Cuotas restantes: {credito['CuotasRestantes']}"
+        productoDebito["Historial"][str(datetime.now())] = f"Pago de cuota crédito {idCredito} por {cuota}"
 
+        # Guardar cambios
         corafiles.write_json(DB_FILE, data)
 
-        print(f"✅ Pago de cuota realizado con éxito. Nuevo saldo pendiente: {producto['SaldoPendiente']}")
+        print(f"✅ Pago realizado. Nuevo saldo pendiente del crédito: {credito['Saldo']} | Cuotas restantes: {credito['CuotasRestantes']}")
         utilidades.Stop()
         utilidades.Limpiar_consola()
 
     except KeyError:
-        print("⚠ La cuenta o el producto no existen.")
+        print("⚠ La cuenta o el producto de crédito no existen.")
         utilidades.Stop()
         utilidades.Limpiar_consola()
 
@@ -297,8 +320,11 @@ def cancelarCuenta():
         producto = cuenta["Productos"][idProducto]
 
         # Validar fondos suficientes
-        if producto["Saldo"] != 0:
-            print("⚠ La cuenta tiene fondos, no puede se cancelada.")
+        if producto["Saldo"] != 0 or producto["TipoProducto"] == "credito":
+            if producto["Saldo"] != 0:
+                print("⚠ La cuenta tiene fondos, no puede se Cancelada...")
+            elif producto["TipoProducto"] == "credito":
+                print('La cuetna no puede ser Cancelada porque es un Credito..')
             utilidades.Stop()
             utilidades.Limpiar_consola()
             return

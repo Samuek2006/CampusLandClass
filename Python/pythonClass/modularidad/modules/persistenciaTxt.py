@@ -1,42 +1,85 @@
 """
-📔Persistencia con Archivos de texto:
-Ejemplo práctico que utiliza el manejo de archivos de texto en Python. Implementaremos un gestor de tareas, donde el usuario podrá:
+📔 Persistencia con Archivos de Texto: Gestor de Tareas
+======================================================
 
-✅ Agregar tareas ✅ Listar tareas ✅ Marcar tareas como completadas ✅ Eliminar tareas ✅ Guardar todas las tareas en un archivo de texto (tareas.txt)**
+Este programa implementa un gestor de tareas simple utilizando archivos de texto (.txt).  
+Permite al usuario:
 
-🔍 Explicación del Código
-    -inicializar_archivo()
-        Crea el archivo tareas.txt si no existe.
-    - agregar_tarea(tarea)
-        Añade una nueva tarea al archivo, marcándola como Pendiente.
-    - listar_tareas()
-        Muestra todas las tareas guardadas en el archivo.
-    - completar_tarea(numero)
-        Cambia el estado de una tarea de Pendiente a Completada.
-    - eliminar_tarea(numero)
-        Borra una tarea específica del archivo.
-    - menu()
-        Muestra un menú interactivo para gestionar las tareas.
+✅ Agregar tareas  
+✅ Listar tareas  
+✅ Marcar tareas como completadas  
+✅ Eliminar tareas  
+✅ Guardar todas las tareas en un archivo (tareas.txt)
+
+-----------------------------------
+🔍 Explicación de Funciones:
+-----------------------------------
+- inicializar_archivo():
+    Crea el archivo tareas.txt si no existe.
+
+- agregar_tarea(tarea):
+    Añade una nueva tarea al archivo.
+
+- listar_tareas():
+    Muestra todas las tareas guardadas en el archivo.
+
+- completar_tarea(numero):
+    Marca una tarea como "Completada".
+
+- eliminar_tarea(numero):
+    Borra una tarea específica del archivo.
+
+- menu():
+    Muestra un menú interactivo para gestionar las tareas.
 """
 
 import os
 
+# Nombre del archivo donde se guardarán las tareas
 ARCHIVO_TAREAS = "data/tareas.txt"
 
-# Función para inicializar el archivo de tareas
+
+# ================================
+# INICIALIZAR ARCHIVO
+# ================================
 def inicializar_archivo():
+    """
+    Crea el archivo de tareas si no existe.
+    """
     if not os.path.exists(ARCHIVO_TAREAS):
         with open(ARCHIVO_TAREAS, "w", encoding="utf-8") as archivo:
             archivo.write("")
 
-# Función para agregar una tarea
-def agregar_tarea(tarea):
+
+# ================================
+# AGREGAR TAREA
+# ================================
+def agregar_tarea(tarea: str):
+    """
+    Agrega una tarea nueva al archivo, marcada como "Pendiente".
+
+    Args:
+        tarea (str): Descripción de la tarea.
+
+    Ejemplo:
+        agregar_tarea("Estudiar Python")
+    """
     with open(ARCHIVO_TAREAS, "a", encoding="utf-8") as archivo:
-        archivo.write(f"{tarea}\n")
+        archivo.write(f"{tarea} - Pendiente\n")
     print(f"✅ Tarea agregada: {tarea}")
 
-# Función para listar todas las tareas
+
+# ================================
+# LISTAR TAREAS
+# ================================
 def listar_tareas():
+    """
+    Muestra todas las tareas guardadas en el archivo con su estado.
+
+    Ejemplo de salida:
+        1. Estudiar Python - Pendiente
+        2. Hacer ejercicio - Completada
+    """
     with open(ARCHIVO_TAREAS, "r", encoding="utf-8") as archivo:
         tareas = archivo.readlines()
 
@@ -47,8 +90,20 @@ def listar_tareas():
         for i, tarea in enumerate(tareas, start=1):
             print(f"{i}. {tarea.strip()}")
 
-# Función para marcar una tarea como completada
-def completar_tarea(numero):
+
+# ================================
+# COMPLETAR TAREA
+# ================================
+def completar_tarea(numero: int):
+    """
+    Marca una tarea como "Completada".
+
+    Args:
+        numero (int): Número de la tarea en la lista.
+
+    Ejemplo:
+        completar_tarea(2)  # Marca como completada la tarea número 2
+    """
     with open(ARCHIVO_TAREAS, "r", encoding="utf-8") as archivo:
         tareas = archivo.readlines()
 
@@ -60,8 +115,20 @@ def completar_tarea(numero):
     else:
         print("❌ Número de tarea inválido.")
 
-        # Función para eliminar una tarea
-def eliminar_tarea(numero):
+
+# ================================
+# ELIMINAR TAREA
+# ================================
+def eliminar_tarea(numero: int):
+    """
+    Elimina una tarea específica del archivo.
+
+    Args:
+        numero (int): Número de la tarea en la lista.
+
+    Ejemplo:
+        eliminar_tarea(1)  # Elimina la primera tarea
+    """
     with open(ARCHIVO_TAREAS, "r", encoding="utf-8") as archivo:
         tareas = archivo.readlines()
 
@@ -73,8 +140,15 @@ def eliminar_tarea(numero):
     else:
         print("❌ Número de tarea inválido.")
 
-# Función principal con menú interactivo
+
+# ================================
+# MENÚ INTERACTIVO
+# ================================
 def menu():
+    """
+    Muestra un menú interactivo para gestionar las tareas.
+    Permite agregar, listar, completar o eliminar tareas.
+    """
     inicializar_archivo()
     while True:
         print("\n📌 Menú de Gestor de Tareas")
