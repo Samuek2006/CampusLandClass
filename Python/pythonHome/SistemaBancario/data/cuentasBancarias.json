@@ -18,22 +18,52 @@
             "Productos": {
                 "P002": {
                     "NombreProducto": "Cuenta Ahorros",
-                    "Saldo": 0,
+                    "Saldo": 200000.0,
                     "Estado": "Activa",
-                    "Historial": {}
+                    "Historial": {
+                        "2025-08-16 22:33:12.019048": "Dep\u00f3sito de 100000.0",
+                        "2025-08-16 22:36:50.586067": "Dep\u00f3sito de 100000.0"
+                    }
                 },
-                "2": {
+                "3": {
                     "NombreProducto": "Credito",
                     "TipoProducto": "credito",
                     "Saldo": 100000.0,
                     "Estado": "Activo",
                     "Historial": {
                         "1": {
-                            "FechaMovimiento": "2025-08-15",
+                            "FechaMovimiento": "2025-08-16",
                             "Valor": 100000.0,
                             "TipoMovimiento": "Cr\u00e9dito Aprobado"
                         }
                     }
+                }
+            }
+        },
+        "4000": {
+            "CC": "101",
+            "titular": "same",
+            "Correo": "jjas",
+            "Edad": 190,
+            "Contacto": {
+                "Movil": "8892",
+                "Fijo": "8771"
+            },
+            "Ubicacion": {
+                "Pais": "col",
+                "Departamento": "buc",
+                "Ciudad": "san",
+                "Direccion": "ouas"
+            },
+            "Productos": {
+                "P003": {
+                    "NombreProducto": [
+                        "CDT",
+                        "Inversion"
+                    ],
+                    "Saldo": 0,
+                    "Estado": "Activa",
+                    "Historial": {}
                 }
             }
         }

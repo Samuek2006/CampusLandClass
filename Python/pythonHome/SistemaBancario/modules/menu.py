@@ -7,6 +7,7 @@ consola = utilidades.Limpiar_consola()
 #Funcion Menu Principal
 def menuPrincipal():
     while True:
+        print("=== Bienvenido al Sistema de Gestión Bancaria ===")
         print('''
     Seleccione una opción:
     1. Crear cuenta
@@ -55,6 +56,7 @@ def menuPrincipal():
 #Funcion Menu Clientes
 def menuClientes():
     while True:
+        print('=== Menu Clientes ===')
         print('''
     Seleccione una opción:
     1. Datos Cliente
@@ -91,6 +93,7 @@ def menuClientes():
 #Funcion Menu Saldos
 def menuSaldos():
     while True:
+        print('=== Menu de Saldos ===')
         print('''
     Seleccione una opción:
     1. Cta Ahorros
@@ -119,6 +122,7 @@ def menuSaldos():
 #Funcion Menu Creditos
 def menuCreditos():
     while True:
+        print('=== Menu de Creditos ===')
         print('''
     Seleccione una opción:
     1. Credito Libre Inversion
@@ -156,6 +160,7 @@ def menuCreditos():
 #Funcion Menu Portafolio
 def menuPortafolio():
     while True:
+        print('=== Menu del Portafolio ===')
         print('''
     Seleccione una opción:
     1. Cta Ahorros
@@ -169,14 +174,17 @@ def menuPortafolio():
         match opcion:
             case 1:
                 producto = 'Cuenta Ahorros'
+                tipoProducto = 'Debito'
                 break
 
             case 2:
                 producto = 'Cuenta Corriente'
+                tipoProducto = 'Debito'
                 break
 
             case 3:
                 producto = 'CDT'
+                tipoProducto = 'Inversion'
                 break
 
             case 0:
@@ -188,7 +196,7 @@ def menuPortafolio():
                 print('Elija una opcion correcta')
                 time
 
-    return producto
+    return producto, tipoProducto
 
 def leer_opcion():
     try:

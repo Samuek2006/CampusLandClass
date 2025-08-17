@@ -6,8 +6,6 @@ import time
 
 # Archivo donde se guardarán las cuentas
 DB_FILE = "data/cuentasBancarias.json"
-time = utilidades.Stop()
-consola = utilidades.Limpiar_consola()
 
 # Inicializamos el archivo si no existe
 corafiles.initialize_json(DB_FILE)
@@ -16,7 +14,7 @@ def crear_cuenta():
     """
     Crea una nueva cuenta bancaria y la guarda en el archivo JSON
     """
-    consola
+    utilidades.Limpiar_consola()
     numeroCuenta = input("Ingrese el número de cuenta: ")
     cc = input("Ingrese el número de cédula: ")
     titular = input("Ingrese el nombre del titular: ")
@@ -63,22 +61,20 @@ def crear_cuenta():
 
     corafiles.update_json(DB_FILE, nueva_cuenta, ["cuentasBancarias"])
     print(f"✅ Cuenta {numeroCuenta} creada correctamente.")
-    time
-    consola
-
-
+    utilidades.Stop()
+    utilidades.Limpiar_consola()
 
 def depositar():
     """
     Permite depositar dinero en un producto de una cuenta
     """
-    consola
+    utilidades.Limpiar_consola()
     numeroCuenta = input("Ingrese el número de cuenta: ")
     idProducto = input("Ingrese el ID del producto donde desea depositar: ")
     monto = float(input("Ingrese el monto a depositar: "))
 
     data = corafiles.read_json(DB_FILE)
-    consola
+    utilidades.Limpiar_consola()
 
     # Verificamos si existe la cuenta y el producto
     try:
@@ -94,18 +90,19 @@ def depositar():
         # Guardamos cambios
         corafiles.write_json(DB_FILE, data)
         print(f"💰 Se depositaron {monto} en el producto {idProducto} de la cuenta {numeroCuenta}.")
-        time
-        consola
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
     except KeyError:
         print("⚠ La cuenta o el producto no existen.")
-        time
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
 def solicitarCredito():
     """
     Permite solicitar un crédito
     """
-    consola
+    utilidades.Limpiar_consola()
     numeroCuenta = input("Ingrese el número de cuenta: ")
 
     # Leer la base de datos
@@ -113,10 +110,10 @@ def solicitarCredito():
 
     if numeroCuenta not in data["cuentasBancarias"]:
         print("⚠ La cuenta no existe.")
-        time
+        utilidades.Stop()
         return
 
-    consola
+    utilidades.Limpiar_consola()
     print('\n¿Qué tipo de crédito deseas solicitar?')
     producto = menu.menuCreditos()
 
@@ -124,7 +121,7 @@ def solicitarCredito():
     ingresosMensuales = float(input('Ingresa el total de ingresos mensuales: '))
     montoSolicitado = float(input('Ingresa el monto de crédito solicitado: '))
     plazoMeses = int(input('Ingresa el plazo (meses) para pagar: '))
-    consola
+    utilidades.Limpiar_consola()
 
     # Calculo del RCI - Relación Cuota Ingresos
     cuota = montoSolicitado / plazoMeses
@@ -132,8 +129,8 @@ def solicitarCredito():
 
     if RCI <= 0.4:
         print("✅ Crédito aprobado.")
-        time
-        consola
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
         # Generar un ID de producto único
         idProducto = str(len(data["cuentasBancarias"][numeroCuenta]["Productos"]) + 1)
@@ -157,13 +154,13 @@ def solicitarCredito():
         corafiles.write_json(DB_FILE, data)
 
         print(f"Crédito {producto} creado con ID {idProducto} y saldo {montoSolicitado}")
-        time
-        consola
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
     else:
         print("❌ No eres apto para el crédito (RCI mayor a 0.4).")
-        time
-        consola
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
     input("Enter para continuar...")
 
@@ -172,12 +169,12 @@ def retirar():
     Permite retirar dinero en un producto de una cuenta
     """
 
-    consola
+    utilidades.Limpiar_consola()
     numeroCuenta = input("Ingrese el número de cuenta: ")
     idProducto = input("Ingrese el ID del producto donde desea retirar: ")
     monto = float(input("Ingrese el monto a retirar: "))
-    time
-    consola
+    utilidades.Stop()
+    utilidades.Limpiar_consola()
 
     data = corafiles.read_json(DB_FILE)
 
@@ -188,8 +185,8 @@ def retirar():
         # Validar fondos suficientes
         if producto["Saldo"] < monto:
             print("⚠ Fondos insuficientes para realizar el retiro.")
-            time
-            consola
+            utilidades.Stop()
+            utilidades.Limpiar_consola()
             return
 
         # Actualizar saldo (ahora sí resta)
@@ -201,23 +198,24 @@ def retirar():
         # Guardar cambios
         corafiles.write_json(DB_FILE, data)
         print(f"💸 Se retiraron {monto} del producto {idProducto} de la cuenta {numeroCuenta}.")
-        time
-        consola
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
     except KeyError:
         print("⚠ La cuenta o el producto no existen.")
-        time
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
 def pagoCuota():
     """
     Permite pagar una cuota de un crédito que tenga el usuario
     """
 
-    consola
+    utilidades.Limpiar_consola()
     numeroCuenta = input("Ingrese el número de cuenta: ")
     idProducto = input("Ingrese el ID del crédito que desea pagar: ")
-    time
-    consola
+    utilidades.Stop()
+    utilidades.Limpiar_consola()
 
     data = corafiles.read_json(DB_FILE)
 
@@ -228,31 +226,31 @@ def pagoCuota():
         # Validar que sea crédito
         if producto["Tipo"] != "Credito":
             print("⚠ El producto seleccionado no es un crédito.")
-            time
-            consola
+            utilidades.Stop()
+            utilidades.Limpiar_consola()
             return
 
         # Validar que tenga saldo pendiente
         if producto["SaldoPendiente"] <= 0:
             print("✅ Este crédito ya está totalmente pagado.")
-            time
-            consola
+            utilidades.Stop()
+            utilidades.Limpiar_consola()
             return
 
         # Valor de la cuota
         cuota = producto.get("Cuota", 0)
         if cuota <= 0:
             print("⚠ Este crédito no tiene definida la cuota.")
-            time
-            consola
+            utilidades.Stop()
+            utilidades.Limpiar_consola()
             return
 
         # Validar saldo disponible en la cuenta de ahorros/corriente
         saldoDisponible = cuenta["SaldoTotal"]
         if saldoDisponible < cuota:
             print("⚠ Fondos insuficientes para pagar la cuota.")
-            time
-            consola
+            utilidades.Stop()
+            utilidades.Limpiar_consola()
             return
 
         # Descontar la cuota del saldo de la cuenta
@@ -273,23 +271,24 @@ def pagoCuota():
         corafiles.write_json(DB_FILE, data)
 
         print(f"✅ Pago de cuota realizado con éxito. Nuevo saldo pendiente: {producto['SaldoPendiente']}")
-        time
-        consola
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
     except KeyError:
         print("⚠ La cuenta o el producto no existen.")
-        time
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
 def cancelarCuenta():
     """
     Permite cancelar un producto de una cuenta
     """
 
-    consola
+    utilidades.Limpiar_consola()
     numeroCuenta = input("Ingrese el número de cuenta: ")
     idProducto = input("Ingrese el ID del producto que desea cancelar: ")
-    time
-    consola
+    utilidades.Stop()
+    utilidades.Limpiar_consola()
 
     data = corafiles.read_json(DB_FILE)
 
@@ -300,8 +299,8 @@ def cancelarCuenta():
         # Validar fondos suficientes
         if producto["Saldo"] != 0:
             print("⚠ La cuenta tiene fondos, no puede se cancelada.")
-            time
-            consola
+            utilidades.Stop()
+            utilidades.Limpiar_consola()
             return
 
         # Eliminar el producto
@@ -310,10 +309,11 @@ def cancelarCuenta():
         # Guardar cambios en el JSON
         corafiles.write_json(DB_FILE, data)
         print(f"✅ El producto {idProducto} ha sido cancelado correctamente.")
-        time
-        consola
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
     except KeyError:
         print("⚠ La cuenta o el producto no existen.")
-        time
+        utilidades.Stop()
+        utilidades.Limpiar_consola()
 
