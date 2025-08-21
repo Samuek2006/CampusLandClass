@@ -1,94 +1,47 @@
 {
     "cuentasBancarias": {
-        "1000": {
-            "CC": "123456789",
-            "titular": "Juan P\u00e9rez",
-            "Correo": "juan@mail.com",
-            "Edad": 30,
-            "Contacto": {
-                "Movil": "3001234567",
-                "Fijo": "6001234"
-            },
-            "Ubicacion": {
-                "Pais": "Colombia",
-                "Departamento": "Santander",
-                "Ciudad": "Bucaramanga",
-                "Direccion": "Calle 123"
-            },
-            "Productos": {
-                "1": {
-                    "NombreProducto": "Cuenta de Ahorros",
-                    "TipoProducto": "Debito",
-                    "Saldo": 3000000,
-                    "Estado": "Activa",
-                    "Historial": {
-                        "2025-08-17 17:07:37.555753": "Pago de cuota cr\u00e9dito 4 por 1000000",
-                        "2025-08-17 17:07:55.666774": "Pago de cuota cr\u00e9dito 4 por 1000000"
-                    }
-                },
-                "4": {
-                    "NombreProducto": "Cr\u00e9dito Vivienda",
-                    "TipoProducto": "credito",
-                    "MontoOriginal": 12000000,
-                    "Saldo": 10000000,
-                    "PlazoMeses": 12,
-                    "Cuota": 1000000,
-                    "CuotasRestantes": 10,
-                    "Estado": "Activo",
-                    "Historial": {
-                        "1": {
-                            "FechaMovimiento": "2025-08-17",
-                            "Valor": 12000000,
-                            "TipoMovimiento": "Cr\u00e9dito Aprobado"
-                        },
-                        "2025-08-17 17:07:37.555687": "Pago cuota de 1000000. Cuotas restantes: 11",
-                        "2025-08-17 17:07:55.666757": "Pago cuota de 1000000. Cuotas restantes: 10"
-                    }
-                }
-            }
-        },
         "5000": {
-            "CC": "42545",
-            "titular": "fdskajtae",
-            "Correo": "k<jdgh",
-            "Edad": 80,
+            "CC": "255544",
+            "titular": "samuel",
+            "Correo": "camsjhie",
+            "Edad": 50,
             "Contacto": {
-                "Movil": "4554",
-                "Fijo": "25445"
+                "Movil": "3255",
+                "Fijo": "1455"
             },
             "Ubicacion": {
-                "Pais": "nikas",
-                "Departamento": "fkaosdf",
-                "Ciudad": "asfas",
-                "Direccion": "sfadfwe4"
+                "Pais": "colombia",
+                "Departamento": "santander",
+                "Ciudad": "bucaramanga",
+                "Direccion": "kjuyiu1123"
             },
             "Productos": {
-                "P004": {
+                "P001": {
                     "NombreProducto": "Cuenta Corriente",
                     "TipoProducto": "Debito",
-                    "Saldo": 899999999000000.0,
+                    "Saldo": 491666.6666666667,
                     "Estado": "Activa",
                     "Historial": {
-                        "2025-08-17 17:09:28.344587": "Dep\u00f3sito de 900000000000000.0",
-                        "2025-08-17 17:09:51.882346": "Pago de cuota cr\u00e9dito 2 por 1000000.0"
+                        "2025-08-20 07:28:30.514757": "Dep\u00f3sito de 500000.0",
+                        "2025-08-20 07:28:57.552639": "Pago de cuota cr\u00e9dito 2 por 8333.333333333334"
                     }
                 },
                 "2": {
                     "NombreProducto": "Credito Vivienda",
                     "TipoProducto": "credito",
-                    "MontoOriginal": 5000000.0,
-                    "Saldo": 4000000.0,
-                    "PlazoMeses": 5,
-                    "Cuota": 1000000.0,
-                    "CuotasRestantes": 4,
+                    "MontoOriginal": 100000.0,
+                    "Saldo": 91666.66666666667,
+                    "PlazoMeses": 12,
+                    "Cuota": 8333.333333333334,
+                    "CuotasRestantes": 11,
                     "Estado": "Activo",
                     "Historial": {
                         "1": {
-                            "FechaMovimiento": "2025-08-17",
-                            "Valor": 5000000.0,
+                            "FechaMovimiento": "2025-08-20",
+                            "Valor": 100000.0,
                             "TipoMovimiento": "Cr\u00e9dito Aprobado"
                         },
-                        "2025-08-17 17:09:51.882330": "Pago cuota de 1000000.0. Cuotas restantes: 4"
+                        "2025-08-20 07:28:57.552623": "Pago cuota de 8333.333333333334. Cuotas restantes: 11"
                     }
                 }
             }

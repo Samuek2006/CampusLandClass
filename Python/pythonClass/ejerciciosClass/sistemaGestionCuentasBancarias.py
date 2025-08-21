@@ -499,6 +499,12 @@ while True:
                 print('Ingresa una Opcion valida')
                 LimpiarConsola()
 
-    except (ValueError, TypeError, KeyboardInterrupt) as e:
-        print(f"Error: {e}. Por favor, ingrese un valor válido.")
+    except ValueError:
+        print("Error: debe ingresar un número válido.")
         continue
+    except TypeError:
+        print("Error: tipo de dato inválido.")
+        continue
+    except KeyboardInterrupt:
+        print("\nPrograma interrumpido por el usuario.")
+        break

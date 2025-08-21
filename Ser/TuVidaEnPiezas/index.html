@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rompecabezas de tus Sueños</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #tablero {
+            display: grid;
+            grid-template-columns: repeat(2, 150px);
+            grid-template-rows: repeat(2, 150px);
+            gap: 10px;
+            margin-bottom: 30px;
+            background: #ddd;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .dropzone {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #aaa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: rgba(0, 0, 0, 0.2);
+        }
+
+        .pieza {
+            width: 140px;
+            height: 140px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            text-align: center;
+            padding: 10px;
+        }
+
+        #piezas {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .verde {
+            background: #4CAF50;
+        }
+
+        .rojo {
+            background: #F44336;
+        }
+
+        .amarillo {
+            background: #FFC107;
+            color: black;
+        }
+
+        .azul {
+            background: #2196F3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧩 El Rompecabezas de tus Sueños</h1>
+
+    <div id="tablero">
+        <div class="dropzone" data-pieza="meta">Meta</div>
+        <div class="dropzone" data-pieza="valor">Valor</div>
+        <div class="dropzone" data-pieza="habilidad">Habilidades</div>
+        <div class="dropzone" data-pieza="plan">Plan</div>
+    </div>
+
+    <div id="piezas">
+        <div class="pieza verde" draggable="true" id="meta">Meta a corto o largo plazo</div>
+        <div class="pieza rojo" draggable="true" id="valor">Un valor que guíe tus decisiones</div>
+        <div class="pieza azul" draggable="true" id="habilidad">Una habilidad que te acerque a tu meta</div>
+        <div class="pieza amarillo" draggable="true" id="plan">Un plan B por si las cosas cambian</div>
+    </div>
+
+    <script>
+        const piezas = document.querySelectorAll(".pieza");
+        const dropzones = document.querySelectorAll(".dropzone");
+
+        piezas.forEach(pieza => {
+            pieza.addEventListener("dragstart", e => {
+                e.dataTransfer.setData("id", pieza.id);
+            });
+        });
+
+        dropzones.forEach(zona => {
+            zona.addEventListener("dragover", e => {
+                e.preventDefault();
+            });
+
+            zona.addEventListener("drop", e => {
+                const id = e.dataTransfer.getData("id");
+                const pieza = document.getElementById(id);
+
+                if (zona.dataset.pieza === id) {
+                    zona.appendChild(pieza);
+                    pieza.style.cursor = "default";
+                } else {
+                    alert("❌ Esa pieza no va aquí, inténtalo de nuevo.");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
