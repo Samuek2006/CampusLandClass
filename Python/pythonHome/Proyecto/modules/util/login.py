@@ -3,7 +3,7 @@ from modules.util import utilidades as util
 from modules.util import session as session
 from modules.admin import admin as admin
 from modules.vistaCamper import camper as camper
-import modules.menu as menu
+import modules.menus as menus
 import getpass, json
 
 DB_CampusLands = 'data/CampusLands.json'
@@ -22,7 +22,7 @@ def register():
     rol = "Camper"  # de momento solo campers
 
     # Validar que no exista ya el correo en ninguna sección
-    for section in ["campers", "trainers", "admins"]:
+    for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
         for _, info in data.get(section, {}).items():
             if info.get("Credenciales", {}).get("correo") == correo:
                 print("❌ Este correo ya está registrado, intenta con otro.")
@@ -61,7 +61,7 @@ def login():
     password = getpass.getpass("Ingresa tu contraseña: ")
 
     # Buscar en campers, trainers, admins
-    for section in ["campers", "trainers", "admins"]:
+    for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
         for user_id, info in data.get(section, {}).items():
             cred = info.get("Credenciales", {})
             if cred.get("correo") == correo:
@@ -78,13 +78,13 @@ def login():
 
                     # Redirigir según rol
                     if rol == "Camper":
-                        menu.menuCamper()
+                        menus.menuCamper()
 
                     elif rol == "Trainer":
-                        menu.menuTrainer()
+                        menus.menuTrainer()
 
                     elif rol == "Admin":
-                        menu.menuCoordinador()
+                        menus.menuCoordinador()
 
                     else:
                         print(f"⚠️ Rol desconocido: {rol}")

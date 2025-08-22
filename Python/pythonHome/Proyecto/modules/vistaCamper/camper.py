@@ -1,7 +1,8 @@
 from modules.util import utilidades as util
 from modules.admin import admin as admin
 from modules.util import corefiles as core
-import modules.menu as menu
+from modules.util import session as session
+import modules.menus as menus
 
 DB_CampusLands = "data/CampusLands.json"
 
@@ -21,6 +22,25 @@ def userRegister():
 
 def pruebaLogica():
     data = core.read_json(DB_CampusLands)
-    usuarios = data.get("campers", {})
+    for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
+        for user_id in data.get(section, {}).items():
+            usuarios = data.get("camperCampusLands", {})
+            if usuarios.get(user_id) == session.session["user_id"]:
 
-    nota = util.Random()
+                print('Presenta Tu Prueba Logica')
+                util.Limpiar_consola()
+                print('Presentando Prueba Logica....')
+                util.Stop()
+                util.Limpiar_consola()
+
+                nota = util.Random()
+                print(f'Tu Resultado de la prueba Logica es de: {nota}')
+
+                if nota >= 60:
+                    estado = 'Aprobado'
+                else:
+                    estado = 'Reprobado'
+
+                cuenta = usuarios[user_id]
+                cuenta["Estado"] = estado
+

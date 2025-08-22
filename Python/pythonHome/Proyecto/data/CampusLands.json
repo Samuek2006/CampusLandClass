@@ -1,1 +1,22 @@
-{}
+{
+    "campers": {},
+    "camperCampusLands": {
+        "1": {
+            "identificacion": "1",
+            "Nombre": "1",
+            "Apellido": "1",
+            "Direccion": "1",
+            "acudiente": "1",
+            "telefono": 1,
+            "rol": "Camper",
+            "Estado": "Inscrito",
+            "riesgoCamper": "Sin Riesgo",
+            "Credenciales": {
+                "correo": "sergio@correo.com",
+                "password": "1234"
+            }
+        }
+    },
+    "trainerCampusLands": {},
+    "adminCampusLands": {}
+}

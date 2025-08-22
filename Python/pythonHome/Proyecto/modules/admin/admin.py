@@ -1,5 +1,5 @@
 import modules.util.corefiles as corefiles
-import modules.menu as menu
+import modules.menus as menus
 import modules.vistaCamper.riesgo as riesgo
 
 #DataBase
@@ -112,7 +112,7 @@ def addRutasAprendizaje():
         match opcion:
             case "S":
                 while True:
-                    menuRuta = menu.menuRutasAprendizaje()
+                    menuRuta = menus.menuRutasAprendizaje()
                     match menuRuta:
                         case 1:
                             # 1. Fundamentos de Programación
