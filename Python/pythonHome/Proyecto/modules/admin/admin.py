@@ -3,13 +3,12 @@ import modules.menu as menu
 import modules.vistaCamper.riesgo as riesgo
 
 #DataBase
-DB_FileCamper = "data/camperCampusLands.json"
-DB_FileTrainer = "data/trainerCampusLands.json"
-DB_FileAdmin = "data/adminCampusLands.json"
+DB_CampusLands = "data/CampusLands.json"
 DB_RutasAprendizaje = "data/rutasAprendizaje.json"
 
 def addCamper():
-    identificacion = int(input('Ingresa el Documento de Identidad del Camper: '))
+    identificacion = input('Ingresa el Documento de Identidad del Camper: ').strip()
+    rol = 'Camper'
     name = input('Ingresa el Nombre del Camper: ')
     apellido = input('Ingresa el Apellido del Camper: ')
     direccion = input('Ingresa la Direccion de Residencia del Camper: ')
@@ -18,19 +17,22 @@ def addCamper():
     riesgoCamper = riesgo.advertencias()
 
     campers = {
-        identificacion: {
-            "Nombre": name,
-            "Apellido": apellido,
-            "Direccion": direccion,
-            "acudiente": acudiente,
-            "telefono": telefono,
-            "Estado" : "Inscrito",
-            "riesgoCamper": str(riesgoCamper)
-        }
+        "identificacion": identificacion,
+        "Nombre": name,
+        "Apellido": apellido,
+        "Direccion": direccion,
+        "acudiente": acudiente,
+        "telefono": telefono,
+        "rol" : rol,
+        "Estado" : "Inscrito",
+        "riesgoCamper": str(riesgoCamper),
+        "Credenciales": {}
     }
 
-    corefiles.update_json(DB_FileCamper, campers, ["camperCampusLands"])
+    corefiles.update_json(DB_CampusLands, {identificacion: campers}, ["camperCampusLands"])
     print(f'✅ Camper {campers} creado correctamente')
+
+    return campers
 
 
 def addTreiner():
@@ -47,6 +49,7 @@ def addTreiner():
         identificacion: {
             "Nombre": name,
             "Apellido": apellido,
+            "Telefono": telefono,
             "Habilidades": habilidades,
             "StackTecnologico": stackTecnologico,
             "Disponibilidad": disponibilidad,
@@ -54,7 +57,7 @@ def addTreiner():
         }
     }
 
-    corefiles.update_json(DB_FileTrainer, trainer, ["trainerCampusLands.json"])
+    corefiles.update_json(DB_CampusLands, trainer, ["trainerCampusLands"])
     print(f'✅ Trainer {trainer} creado correctamente')
 
 def addAdmin():
@@ -75,7 +78,7 @@ def addAdmin():
         }
     }
 
-    corefiles.update_json(DB_FileAdmin, admin, ["adminCampusLands"])
+    corefiles.update_json(DB_CampusLands, admin, ["adminCampusLands"])
     print(f'✅ Admin {admin} creado correctamente')
 
 def rutasExistentes():

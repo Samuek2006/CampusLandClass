@@ -1,39 +1,98 @@
 from modules.util import corefiles as core
 from modules.util import utilidades as util
+from modules.util import session as session
+from modules.admin import admin as admin
 from modules.vistaCamper import camper as camper
-import getpass
+import modules.menu as menu
+import getpass, json
 
-DB_Cuentas = 'data/cuentasCampusLands.json'
+DB_CampusLands = 'data/CampusLands.json'
 
-def login():
-    user = input('Ingresa Tu Correo: ')
-    password = getpass.getpass('Ingresa tu contraseña: ')
-    cuenta = {
-        user: {
-            "Contraseña": password
-        }
-    }
-
-    core.update_json(DB_Cuentas, cuenta, ["cuentasCampusLands"] )
+# Inicializar estructura base si no existe
+core.initialize_json(DB_CampusLands, {
+    "camperCampusLands": {},
+    "trainerCampusLands": {},
+    "adminCampusLands": {}
+})
 
 def register():
-    user = input("Ingresa tu correo: ")
+    data = core.read_json(DB_CampusLands)
+
+    correo = input("Ingresa tu correo: ").strip()
+    rol = "Camper"  # de momento solo campers
+
+    # Validar que no exista ya el correo en ninguna sección
+    for section in ["campers", "trainers", "admins"]:
+        for _, info in data.get(section, {}).items():
+            if info.get("Credenciales", {}).get("correo") == correo:
+                print("❌ Este correo ya está registrado, intenta con otro.")
+                return
+
+    # Crear contraseña
     password = getpass.getpass("Crea una contraseña: ")
     confirm = getpass.getpass("Confirma tu contraseña: ")
 
-    if password == confirm:
-        cuenta = {
-            user : {
-                "Contraseña" : password
-            }
-        }
+    if password != confirm:
+        print("❌ Las contraseñas no coinciden.")
+        return
 
-        core.update_json(DB_Cuentas, cuenta, ["cuentasCampusLands"])
-        print(f"\n✅ Usuario {user} registrado con éxito")
+    # Pedir datos del camper desde vistaCamper
+    print("\n📝 Ahora ingresa los datos personales del camper:")
 
-        util.Limpiar_consola()
-        camper.userRegister()
-        util.Limpiar_consola()
+    camper_data = camper.userRegister()
+    identificacion = camper_data["identificacion"]
 
-    else:
-        print("\n❌ Las contraseñas no coinciden. Intenta de nuevo.")
+    data_campus = core.read_json(DB_CampusLands)
+    data_campus["camperCampusLands"][identificacion]["Credenciales"] = {
+        "correo": correo,
+        "password": password
+    }
+    core.write_json(DB_CampusLands, data_campus)
+    print(f"✅ Usuario {correo} registrado con éxito y camper creado.")
+
+    util.Stop()
+    util.Limpiar_consola()
+
+
+def login():
+    data = core.read_json(DB_CampusLands)
+
+    correo = input("Ingresa tu correo: ").strip()
+    password = getpass.getpass("Ingresa tu contraseña: ")
+
+    # Buscar en campers, trainers, admins
+    for section in ["campers", "trainers", "admins"]:
+        for user_id, info in data.get(section, {}).items():
+            cred = info.get("Credenciales", {})
+            if cred.get("correo") == correo:
+                if cred.get("password") == password:
+                    rol = info["rol"]
+
+                    # Guardamos la sesión
+                    session.session["is_logged_in"] = True
+                    session.session["user_id"] = user_id
+                    session.session["correo"] = correo
+                    session.session["rol"] = rol
+
+                    print(f"✅ Bienvenido {info.get('Nombre', 'Usuario')} (Rol: {rol})")
+
+                    # Redirigir según rol
+                    if rol == "Camper":
+                        menu.menuCamper()
+
+                    elif rol == "Trainer":
+                        menu.menuTrainer()
+
+                    elif rol == "Admin":
+                        menu.menuCoordinador()
+
+                    else:
+                        print(f"⚠️ Rol desconocido: {rol}")
+
+                    return True
+                else:
+                    print("❌ Contraseña incorrecta.")
+                    return False
+
+    print("❌ Usuario no encontrado.")
+    return False
