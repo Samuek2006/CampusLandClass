@@ -1,13 +1,13 @@
-from modules.util import utilidades as util
+from util import utilidades as util
 from modules.admin import admin as admin
-from modules.util import corefiles as core
-from modules.util import session as session
+from util import corefiles as core
+from util import session as session
 import modules.menus as menus
 
 DB_CampusLands = "data/CampusLands.json"
 
 # Inicializar estructura si no existe
-core.initialize_json(DB_CampusLands, {"campers": {}})
+core.initialize_json(DB_CampusLands, {"camperCampusLands": {}})
 
 def userRegister():
     print('=== REGISTRARSE A CAMPUSLANDS ===')

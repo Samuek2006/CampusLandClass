@@ -1,8 +1,38 @@
 {
-    "campers": {},
     "camperCampusLands": {
         "1": {
             "identificacion": "1",
+            "Nombre": "1",
+            "Apellido": "1",
+            "Direccion": "1",
+            "acudiente": "1",
+            "telefono": 1,
+            "rol": "Admin",
+            "Estado": "Aprobado",
+            "riesgoCamper": "Expulsado",
+            "Skill": {
+                "Skill Actual": {
+                    "Prueba": 0,
+                    "Trabajos": 0,
+                    "Quizes": 0,
+                    "Definitiva": 0
+                },
+                "Skill Culminadas": {
+                    "Nombre Skill Culminado": {
+                        "Prueba": 0,
+                        "Trabajos": 0,
+                        "Quizes": 0,
+                        "Definitiva": 0
+                    }
+                }
+            },
+            "Credenciales": {
+                "correo": "sergio@correo.com",
+                "password": "1234"
+            }
+        },
+        "90": {
+            "identificacion": "90",
             "Nombre": "1",
             "Apellido": "1",
             "Direccion": "1",
@@ -12,7 +42,7 @@
             "Estado": "Inscrito",
             "riesgoCamper": "Sin Riesgo",
             "Credenciales": {
-                "correo": "sergio@correo.com",
+                "correo": "jyuiyyqhj",
                 "password": "1234"
             }
         }

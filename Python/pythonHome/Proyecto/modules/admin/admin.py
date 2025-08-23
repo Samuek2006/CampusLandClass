@@ -1,4 +1,4 @@
-import modules.util.corefiles as corefiles
+import util.corefiles as corefiles
 import modules.menus as menus
 import modules.vistaCamper.riesgo as riesgo
 
@@ -26,6 +26,22 @@ def addCamper():
         "rol" : rol,
         "Estado" : "Inscrito",
         "riesgoCamper": str(riesgoCamper),
+        "Skill": {
+            "Skill Actual": {
+                "Prueba": 0,
+                "Trabajos": 0,
+                "Quizes": 0,
+                "Definitiva": 0
+            },
+            "Skill Culminadas": {
+                "Nombre Skill Culminado": {
+                    "Prueba": 0,
+                    "Trabajos": 0,
+                    "Quizes": 0,
+                    "Definitiva": 0
+                }
+            }
+        },
         "Credenciales": {}
     }
 

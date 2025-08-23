@@ -1,6 +1,6 @@
-from modules.util import corefiles as core
-from modules.util import utilidades as util
-from modules.util import session as session
+from util import corefiles as core
+from util import utilidades as util
+from util import session as session
 from modules.admin import admin as admin
 from modules.vistaCamper import camper as camper
 import modules.menus as menus
