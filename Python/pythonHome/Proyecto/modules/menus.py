@@ -2,6 +2,7 @@ from util import login as login
 from util import utilidades as util
 from util import corefiles as core
 from modules.vistaCamper import riesgo as riego
+from modules.vistaCamper import camper as camper
 
 DB_CampusLands = 'data/CampusLands.json'
 core.initialize_json(DB_CampusLands, {
@@ -152,7 +153,8 @@ def menuCoordinador():
                     SubGestionCampers()
 
                 case 2:
-                    pass
+                    util.Limpiar_consola()
+                    SubAdmisiones()
 
                 case 3:
                     pass
@@ -194,6 +196,7 @@ Sub Menus del Coordinador
 def SubGestionCampers():
     while True:
         try:
+            util.Limpiar_consola()
             print("""
 === Gestion De Campers ===
 1. Registrar Camper
@@ -207,157 +210,67 @@ def SubGestionCampers():
 
             match opcion:
                 case 1:
-                    util.Limpiar_consola()
                     login.register()
                     util.Stop()
-                    util.Limpiar_consola()
 
                 case 2:
-                    util.Limpiar_consola()
-                    print('=== Listar Campers ===')
                     data = core.read_json(DB_CampusLands)
-
+                    print('=== Listar Campers ===')
                     for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
-                        if section in data:
-                            print(f"\n--- {section} ---")
-                            for user_id, info in data[section].items():
-                                print(f"ID: {info['identificacion']} | Nombre: {info['Nombre']} {info['Apellido']} | Estado: {info['Estado']} | Rol: {info['rol']}")
-
-                    input('Enter para continuar...')
+                        print(f"\n--- {section} ---")
+                        for _, info in data.get(section, {}).items():
+                            print(f"ID: {info['identificacion']} | Nombre: {info['Nombre']} {info['Apellido']} | Estado: {info['Estado']} | Rol: {info['rol']}")
                     util.Stop()
-                    util.Limpiar_consola()
 
                 case 3:
-                    data = core.read_json(DB_CampusLands)
-
-                    util.Limpiar_consola()
-                    print('=== Consultar Camper Individual ===')
-
-                    user = input('Ingresa el Documento del Camper que Quieres Consultar: ').strip()
-                    encontrado = False
-
-                    for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
-                        for user_id, info in data.get(section, {}).items():
-                            if info.get("identificacion") == user:
-                                encontrado = True
-                                print("\n=== Información del Camper ===")
-                                print(f"Nombre completo: {info['Nombre']} {info['Apellido']}")
-                                print(f"Documento: {info['identificacion']}")
-                                print(f"Dirección: {info['Direccion']}")
-                                print(f"Acudiente: {info['acudiente']}")
-                                print(f"Teléfono: {info['telefono']}")
-                                print(f"Rol: {info['rol']}")
-                                print(f"Estado: {info['Estado']}")
-                                print(f"Riesgo: {info['riesgoCamper']}")
-
-                                print("\n--- Skill Actual ---")
-                                for key, val in info["Skill"]["Skill Actual"].items():
-                                    print(f"{key}: {val}")
-
-                                print("\n--- Skills Culminadas ---")
-                                for skill, notas in info["Skill"]["Skill Culminadas"].items():
-                                    print(f"\n{skill}:")
-                                    for key, val in notas.items():
-                                        print(f"{key}: {val}")
-
-                                print("\n--- Credenciales ---")
-                                if info["Credenciales"]:
-                                    for k, v in info["Credenciales"].items():
-                                        print(f"{k}: {v}")
-
-                                else:
-                                    print("Sin credenciales registradas")
-
-                                input('Enter para continuar...')
-                                util.Stop()
-                                util.Limpiar_consola()
-
-                    if not encontrado:
+                    user = input('Documento del camper: ').strip()
+                    section, user_id, info, _ = camper.buscarUsuario(user)
+                    if info:
+                        camper.mostrarInfoCamper(info)
+                    else:
                         print("⚠️ No se encontró un camper con ese documento.")
-                        input('Enter para continuar...')
-                        util.Stop()
-                        util.Limpiar_consola()
+                    util.Stop()
 
                 case 4:
-                    util.Limpiar_consola()
-                    print('=== Cambiar estado ===')
-
-                    data = core.read_json(DB_CampusLands)
-
-                    user = input('Ingresa el Documento del Camper que Quieres Consultar: ').strip()
-                    encontrado = False
-
-                    for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
-                        for user_id, info in data.get(section, {}).items():
-                            if info.get("identificacion") == user:
-                                encontrado = True
-
-                                opcion = EstadoCamper()
-                                data[section][user_id]["Estado"] = opcion
-
-                                core.update_json(DB_CampusLands, data)
-                                print(f"✅ Estado del camper {info['Nombre']} actualizado a: {opcion}")
-
-                                input('Enter para continuar...')
-                                util.Stop()
-                                util.Limpiar_consola()
-
-                    if not encontrado:
+                    user = input('Documento del camper: ').strip()
+                    section, user_id, info, data = camper.buscarUsuario(user)
+                    if info:
+                        opcion = EstadoCamper()
+                        data[section][user_id]["Estado"] = opcion
+                        core.update_json(DB_CampusLands, data)
+                        print(f"✅ Estado actualizado a: {opcion}")
+                    else:
                         print("⚠️ No se encontró un camper con ese documento.")
-                        input('Enter para continuar...')
-                        util.Stop()
-                        util.Limpiar_consola()
+                    util.Stop()
 
                 case 5:
-                    util.Limpiar_consola()
-                    print('=== Marcar/consultar riesgo ===')
+                    user = input('Documento del camper: ').strip()
+                    section, user_id, info, data = camper.buscarUsuario(user)
+                    if info:
+                        print(f"\n=== Camper encontrado: {info['Nombre']} {info['Apellido']} ===")
+                        faltas_totales = int(input("Ingrese cantidad de inasistencias: "))
+                        dias_seguidos = int(input("Ingrese cantidad de días seguidos ausente: "))
+                        promedio_general = float(input("Ingrese promedio general: "))
+                        skills_reprobados = int(input("Ingrese número de skills perdidos: "))
+                        faltas_negativas = int(input("Ingrese número de faltas negativas (Houston): "))
 
-                    data = core.read_json(DB_CampusLands)
-
-                    user = input('Ingresa el Documento del Camper que Quieres Consultar: ').strip()
-                    encontrado = False
-
-                    for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
-                        for user_id, info in data.get(section, {}).items():
-                            if info.get("identificacion") == user:
-                                encontrado = True
-                                print(f"\n=== Camper encontrado: {info['Nombre']} {info['Apellido']} ===")
-
-                                # ---- Aquí pides datos para evaluar ----
-                                faltas_totales = int(input("Ingrese cantidad de inasistencias: "))
-                                dias_seguidos = int(input("Ingrese cantidad de días seguidos ausente: "))
-                                promedio_general = float(input("Ingrese promedio general: "))
-                                skills_reprobados = int(input("Ingrese número de skills perdidos: "))
-                                faltas_negativas = int(input("Ingrese número de faltas negativas (Houston): "))
-
-                                # ---- Determinas el estado final ----
-                                estado = riego.advertencias(
-                                    faltas_totales,
-                                    dias_seguidos,
-                                    promedio_general,
-                                    skills_reprobados,
-                                    faltas_negativas,
-                                    data, section, user_id
-                                )
-
-                                print(f"✅ Estado de riesgo actualizado: {estado}")
-                                util.Stop()
-                                util.Limpiar_consola()
-
-                    if not encontrado:
+                        estado = riego.advertencias(
+                            faltas_totales, dias_seguidos,
+                            promedio_general, skills_reprobados,
+                            faltas_negativas, data, section, user_id
+                        )
+                        print(f"✅ Estado de riesgo actualizado: {estado}")
+                    else:
                         print("⚠️ No se encontró un camper con ese documento.")
-                        input('Enter para continuar...')
-                        util.Stop()
-                        util.Limpiar_consola()
+                    util.Stop()
 
                 case 0:
                     print('Saliendo...')
                     break
 
                 case _:
-                    print('Ingresa una opcion valida entre (1 y 5)')
+                    print('Ingresa una opción válida (0-5)')
                     util.Stop()
-                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -371,6 +284,7 @@ def SubGestionCampers():
 def SubAdmisiones():
     while True:
         try:
+            util.Limpiar_consola()
             print("""
 === Admisiones ===
 1. Registrar notas de examen de ingreso
@@ -378,6 +292,32 @@ def SubAdmisiones():
 3. Listar aprobados examen.
 0. Salir
 """)
+            opcion = int(input('Ingresa Una Opcion: '))
+            match opcion:
+                case 1:
+                    util.Limpiar_consola()
+                    print('=== Registrar notas de examen de ingreso ===')
+                    user_id = input('Ingresa el documento del Camper al Cual le asignara la Nota del examen: ').strip()
+                    camper.pruebaLogica(user_id)
+
+                case 2:
+                    util.Limpiar_consola()
+                    print('=== Calcular promedio y actualizar estado ===')
+                    camper.calcularPromedio()
+
+                case 3:
+                    util.Limpiar_consola()
+                    print('=== Listado de Campers Aprobados ===')
+                    camper.listarAprobados()
+
+                case 0:
+                    print('Regresando ...')
+                    break
+
+                case _:
+                    print('Ingresa una opcion valida entre (1 y 3)')
+                    util.Stop()
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")

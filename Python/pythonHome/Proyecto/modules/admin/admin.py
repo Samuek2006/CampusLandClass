@@ -26,6 +26,7 @@ def addCamper():
         "rol" : rol,
         "Estado" : "Inscrito",
         "riesgoCamper": str(riesgoCamper),
+        "Grupo": "x",
         "Skill": {
             "Skill Actual": {
                 "Prueba": 0,

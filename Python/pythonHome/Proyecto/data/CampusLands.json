@@ -8,10 +8,13 @@
             "acudiente": "1",
             "telefono": 1,
             "rol": "Admin",
-            "Estado": "Aprobado",
+            "Estado": "Reprobado",
+            "Nota Examen Ingreso": 12,
             "riesgoCamper": "Expulsado",
+            "Grupo": "x",
             "Skill": {
                 "Skill Actual": {
+                    "Nombre Skill": "java",
                     "Prueba": 0,
                     "Trabajos": 0,
                     "Quizes": 0,
@@ -41,6 +44,24 @@
             "rol": "Camper",
             "Estado": "Inscrito",
             "riesgoCamper": "Sin Riesgo",
+            "Grupo": "x",
+            "Skill": {
+                "Skill Actual": {
+                    "Nombre Skill": "java",
+                    "Prueba": 0,
+                    "Trabajos": 0,
+                    "Quizes": 0,
+                    "Definitiva": 0
+                },
+                "Skill Culminadas": {
+                    "Nombre Skill Culminado": {
+                        "Prueba": 0,
+                        "Trabajos": 0,
+                        "Quizes": 0,
+                        "Definitiva": 0
+                    }
+                }
+            },
             "Credenciales": {
                 "correo": "jyuiyyqhj",
                 "password": "1234"
