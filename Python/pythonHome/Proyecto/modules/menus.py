@@ -169,19 +169,24 @@ def menuCoordinador():
                     SubAdmisiones()
 
                 case 3:
-                    pass
+                    util.Limpiar_consola()
+                    SubGestionTrainer()
 
                 case 4:
-                    pass
+                    util.Limpiar_consola()
+                    SubGestionRutas()
 
                 case 5:
-                    pass
+                    util.Limpiar_consola()
+                    SubGestionAreasSalones()
 
                 case 6:
-                    pass
+                    util.Limpiar_consola()
+                    SubMatriculas()
 
                 case 7:
-                    pass
+                    util.Limpiar_consola()
+                    SubReportes()
 
                 case 0:
                     print('Saliendo...')
