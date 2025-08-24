@@ -1,0 +1,25 @@
+{
+    "rutasAprendizaje": {
+        "NodeJS": {
+            "Modulo 1": "Introducción a JavaScript y entorno Node.js",
+            "Modulo 2": "Módulos, NPM y manejo de paquetes",
+            "Modulo 3": "Express.js, APIs REST y conexión a bases de datos",
+            "Modulo 4": "Proyecto",
+            "Modulo 5": "Examen"
+        },
+        "Java": {
+            "Modulo 1": "Fundamentos de Java y POO",
+            "Modulo 2": "Colecciones, Excepciones y Streams",
+            "Modulo 3": "Java EE / Spring Boot y acceso a bases de datos",
+            "Modulo 4": "Proyecto",
+            "Modulo 5": "Examen"
+        },
+        "NetCore": {
+            "Modulo 1": "Fundamentos de C# y .NET Core",
+            "Modulo 2": "Programación Orientada a Objetos y LINQ",
+            "Modulo 3": "ASP.NET Core, APIs REST y Entity Framework",
+            "Modulo 4": "Proyecto",
+            "Modulo 5": "Examen"
+        }
+    }
+}

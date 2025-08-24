@@ -122,8 +122,15 @@ def calcularPromedio():
     print("✅ Promedios calculados y estados actualizados.")
     input("Enter para continuar...")
 
+def listarCampersInscritos():
+    data = core.read_json(DB_CampusLands)
+    campers = data.get("camperCampusLands", {})
+    print("\n📋 Campers Inscritos:")
+    for cid, camper in campers.items():
+        if camper.get("Estado") == "Inscrito":
+            print(f"- {camper['Nombre']} {camper['Apellido']} ({cid})")
 
-def listarAprobados():
+def listarCampersAprobados():
     """
     Lista todos los campers que aprobaron el examen de ingreso.
     """
@@ -144,3 +151,51 @@ def listarAprobados():
             print(f"- {ident} | {nombre} {apellido} | Nota: {nota}")
 
     input("\nEnter para continuar...")
+
+def campersBajoRendimiento():
+    data = core.read_json(DB_CampusLands)
+    campers = data.get("camperCampusLands", {})
+    print("\n📋 Campers con Bajo Rendimiento:")
+    for cid, camper in campers.items():
+        skill = camper.get("Skill", {}).get("Skill Actual", {})
+        definitiva = skill.get("Definitiva", 0)
+        if definitiva < 60:  # regla base
+            print(f"- {camper['Nombre']} {camper['Apellido']} ({cid}) "
+                    f"→ Nota: {definitiva}")
+
+def asociacionesCamperTrainerRuta():
+    data = core.read_json(DB_CampusLands)
+    grupos = data.get("gruposCampusLands", {})
+    trainers = data.get("trainerCampusLands", {})
+    campers = data.get("camperCampusLands", {})
+
+    print("\n📋 Asociaciones Camper – Trainer – Ruta:")
+    for gid, grupo in grupos.items():
+        ruta = grupo.get("Ruta")
+        trainer_id = grupo.get("Trainer")
+        trainer_name = trainers.get(trainer_id, {}).get("Nombre", "Sin asignar")
+
+        for cid in grupo.get("Campers", []):
+            camper_name = campers.get(cid, {}).get("Nombre", "Desconocido")
+            print(f"- Camper {camper_name} ({cid}) → Trainer {trainer_name} → Ruta {ruta}")
+
+def estadisticasGeneral():
+    data = core.read_json(DB_CampusLands)
+    campers = data.get("camperCampusLands", {})
+
+    aprobados = sum(1 for c in campers.values() if c.get("Estado") == "Aprobado")
+    perdidos = sum(1 for c in campers.values() if c.get("Estado") == "Reprobado")
+    inscritos = sum(1 for c in campers.values() if c.get("Estado") == "Inscrito")
+
+    print("\n📊 Estadísticas Generales:")
+    print(f"✅ Aprobados: {aprobados}")
+    print(f"❌ Reprobados: {perdidos}")
+    print(f"📌 Inscritos: {inscritos}")
+
+def campersEnRiesgoAlto():
+    data = core.read_json(DB_CampusLands)
+    campers = data.get("camperCampusLands", {})
+    print("\n⚠️ Campers en Riesgo Alto:")
+    for cid, camper in campers.items():
+        if camper.get("riesgoCamper") == "Alto" or camper.get("riesgoCamper") == "Expulsado":
+            print(f"- {camper['Nombre']} {camper['Apellido']} ({cid}) → Riesgo: {camper['riesgoCamper']}")

@@ -1,10 +1,13 @@
 import util.corefiles as corefiles
-import modules.menus as menus
 import modules.vistaCamper.riesgo as riesgo
+import modules.admin.grupos as grupos
 
-#DataBase
+# DataBase
 DB_CampusLands = "data/CampusLands.json"
-DB_RutasAprendizaje = "data/rutasAprendizaje.json"
+DB_RutasAprendizaje = "data/RutasAprendizaje.json"
+
+# Estructura inicial
+corefiles.initialize_json(DB_RutasAprendizaje, {"rutasAprendizaje": {}})
 
 def addCamper():
     identificacion = input('Ingresa el Documento de Identidad del Camper: ').strip()
@@ -23,10 +26,10 @@ def addCamper():
         "Direccion": direccion,
         "acudiente": acudiente,
         "telefono": telefono,
-        "rol" : rol,
-        "Estado" : "Inscrito",
+        "rol": rol,
+        "Estado": "Inscrito",
         "riesgoCamper": str(riesgoCamper),
-        "Grupo": "x",
+        "Grupo": None,
         "Skill": {
             "Skill Actual": {
                 "Prueba": 0,
@@ -47,43 +50,58 @@ def addCamper():
     }
 
     corefiles.update_json(DB_CampusLands, {identificacion: campers}, ["camperCampusLands"])
-    print(f'✅ Camper {campers} creado correctamente')
 
+    # 🔥 Asignar grupo y ruta automáticamente
+    grupos.agregarCamperAGrupo(identificacion)
+
+    print(f'✅ Camper {name} {apellido} creado correctamente')
     return campers
 
-
-def addTreiner():
-    identificacion = int(input('Ingrese el Documento de identificacion del trainer: '))
-    name = input('ingrese el Nombre del Trainer: ')
-    apellido = input('Ingresa el Apellido del Trainer: ')
-    telefono = int(input('Ingresa el Telefono del Trainer: '))
-    habilidades = input('Ingresa las habilidades del trainer: ')
-    stackTecnologico = input('Ingresa las Tecnologias que Trabaja: ')
-    disponibilidad = int(input('Ingresa la Disponibilidad de Tiempo que Tiene el Trainer: '))
-    exp = int(input('Ingresa la Experiencia del Trainer: '))
+def addTrainer():
+    identificacion = input('Ingrese el Documento de identificación del trainer: ').strip()
+    name = input('Ingrese el Nombre del Trainer: ').strip()
+    apellido = input('Ingrese el Apellido del Trainer: ').strip()
+    telefono = input('Ingrese el Teléfono del Trainer: ').strip()
+    email = input('Ingrese el Email del Trainer: ').strip()
+    direccion = input('Ingrese la Dirección del Trainer: ').strip()
+    habilidades = input('Ingrese las habilidades del Trainer: ').strip()
+    stackTecnologico = input('Ingrese las tecnologías que maneja: ').strip()
+    disponibilidad = input('Ingrese la disponibilidad (ej: Full-time, Medio tiempo, Horas): ').strip()
+    exp = input('Ingrese los años de experiencia del Trainer: ').strip()
 
     trainer = {
         identificacion: {
             "Nombre": name,
             "Apellido": apellido,
             "Telefono": telefono,
+            "Email": email,
+            "Direccion": direccion,
             "Habilidades": habilidades,
             "StackTecnologico": stackTecnologico,
             "Disponibilidad": disponibilidad,
-            "Experiencia": exp
+            "Experiencia": exp,
+            "Rol": "trainer",
+            "Estado": "Activo",
+            "RutasAsignadas": [],
+            "Credenciales": {},
+            "GruposAsignados": []
         }
     }
 
     corefiles.update_json(DB_CampusLands, trainer, ["trainerCampusLands"])
-    print(f'✅ Trainer {trainer} creado correctamente')
+
+    # 🔥 Intentar asignar trainer automáticamente a un grupo disponible
+    grupos.asignarTrainerAGrupoAuto(identificacion)
+
+    print(f'✅ Trainer {name} {apellido} creado correctamente.')
 
 def addAdmin():
-    identificacion = int(input('Ingrese el Documento de identificacion del trainer: '))
+    identificacion = input('Ingrese el Documento de identificacion del Admin: ').strip()
     name = input('ingrese el Nombre del Admin: ')
-    telefono = int(input('Ingresa el Telefono del Admin: '))
+    telefono = input('Ingresa el Telefono del Admin: ')
     apellido = input('Ingresa el Apellido del Admin: ')
     estudios = input('Ingresa el Nivel Academico: ')
-    exp = int(input('Ingresa la Experiencia del Admin: '))
+    exp = input('Ingresa la Experiencia del Admin: ')
 
     admin = {
         identificacion: {
@@ -96,118 +114,4 @@ def addAdmin():
     }
 
     corefiles.update_json(DB_CampusLands, admin, ["adminCampusLands"])
-    print(f'✅ Admin {admin} creado correctamente')
-
-def rutasExistentes():
-    ruta = {
-        "NodeJS" : {
-            "Modulo 1": "Introducción a JavaScript y entorno Node.js",
-            "Modulo 2": "Módulos, NPM y manejo de paquetes",
-            "Modulo 3": "Express.js, APIs REST y conexión a bases de datos",
-            "Modulo 4": "Proyecto",
-            "Modulo 5": "Examen"
-        },
-        "Java" : {
-            "Modulo 1": "Fundamentos de Java y POO",
-            "Modulo 2": "Colecciones, Excepciones y Streams",
-            "Modulo 3": "Java EE / Spring Boot y acceso a bases de datos",
-            "Modulo 4": "Proyecto",
-            "Modulo 5": "Examen"
-        },
-        "NetCore" : {
-            "Modulo 1": "Fundamentos de C# y .NET Core",
-            "Modulo 2": "Programación Orientada a Objetos y LINQ",
-            "Modulo 3": "ASP.NET Core, APIs REST y Entity Framework",
-            "Modulo 4": "Proyecto",
-            "Modulo 5": "Examen"
-        }
-    }
-
-def addRutasAprendizaje():
-    while True:
-        opcion = int('Deseas agregar una nueva ruta de aprendizaje (S/N): ').upper()
-        match opcion:
-            case "S":
-                while True:
-                    menuRuta = menus.menuRutasAprendizaje()
-                    match menuRuta:
-                        case 1:
-                            # 1. Fundamentos de Programación
-                            FundamentosProgramacion = 'Fundamentos de Programacion'
-                            ruta = {
-                                FundamentosProgramacion: {
-                                    "Modulo 1": "Introducción a la Algoritmia",
-                                    "Modulo 2": "PSeInt",
-                                    "Modulo 3": "Python",
-                                    "Modulo 4": "Proyecto",
-                                    "Modulo 5": "Examen"
-                                }
-                            }
-
-                        case 2:
-                            # 2. Programación Web
-                            programacionWeb = 'Programacion Web'
-                            ruta = {
-                                programacionWeb: {
-                                    "Modulo 1": "HTML",
-                                    "Modulo 2": "CSS",
-                                    "Modulo 3": "Bootstrap",
-                                    "Modulo 4": "Proyecto",
-                                    "Modulo 5": "Examen"
-                                }
-                            }
-
-                        case 3:
-                            # 3. Programación Formal
-                            programacionFormal = 'Programacion Formal'
-                            ruta = {
-                                programacionFormal: {
-                                    "Modulo 1": "Java",
-                                    "Modulo 2": "JavaScript",
-                                    "Modulo 3": "C#",
-                                    "Modulo 4": "Proyecto",
-                                    "Modulo 5": "Examen"
-                                }
-                            }
-
-                        case 4:
-                            # 4. Bases de Datos
-                            basesDatos = 'Bases de Datos'
-                            ruta = {
-                                basesDatos: {
-                                    "Modulo 1": "MySQL (SGDB principal)",
-                                    "Modulo 2": "MongoDB (alternativo NoSQL)",
-                                    "Modulo 3": "PostgreSQL (alternativo SQL)",
-                                    "Modulo 4": "Proyecto",
-                                    "Modulo 5": "Examen"
-                                }
-                            }
-
-                        case 5:
-                            # 5. Backend
-                            backend = 'Backend'
-                            ruta = {
-                                backend: {
-                                    "Modulo 1": "NetCore",
-                                    "Modulo 2": "Spring Boot",
-                                    "Modulo 3": "NodeJS y Express",
-                                    "Modulo 4": "Proyecto",
-                                    "Modulo 5": "Examen"
-                                }
-                            }
-
-                        case 0:
-                            print('Saliendo...')
-                            break
-
-                        case _:
-                            print('Ingresa una Opcion Valida')
-
-                    corefiles.update_json(DB_RutasAprendizaje, ruta, ["rutasAprendizaje"])
-
-            case "N":
-                print('Saliendo...')
-                break
-
-            case _:
-                print('Ingresa una Opcion Valida')
+    print(f'✅ Admin {name} {apellido} creado correctamente')

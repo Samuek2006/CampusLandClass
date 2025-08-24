@@ -1,11 +1,18 @@
 from util import login as login
 from util import utilidades as util
-from util import corefiles as core
+from util import corefiles as corefiles
 from modules.vistaCamper import riesgo as riego
 from modules.vistaCamper import camper as camper
+from modules.vistaTrainer import trainer as trainer
+from modules.admin import rutas as rutas
+from modules.admin import grupos as grupos
+from modules.admin import areasSalones as areas
+
+DB_RutasAprendizaje = "data/RutasAprendizaje.json"
+corefiles.initialize_json(DB_RutasAprendizaje, {"rutasAprendizaje": {}})
 
 DB_CampusLands = 'data/CampusLands.json'
-core.initialize_json(DB_CampusLands, {
+corefiles.initialize_json(DB_CampusLands, {
     "camperCampusLands": {}
 })
 
@@ -62,30 +69,35 @@ def EstadoCamper():
             return None
 
 def menuRutasAprendizaje():
-    while True:
-        try:
-            print('''
-1. Fundamentos de Programacion (Introducción a la algoritmia, PSeInt y Python)
-2. Programacion Web (HTML, CSS y Bootstrap)
-3. Programacion Formal (Java, JavaScript, C#)
-4. Bases de datos (Mysql, MongoDb y Postgresql). Cada ruta tiene un SGDB principal y un alternativo
-5. Backend (NetCore, Spring Boot, NodeJS y Express)
-            ''')
-            opcion = int(input('Ingresa una Opcion: '))
-            if opcion in range(1, 6):
-                return opcion
+    try:
+        data = corefiles.read_json(DB_RutasAprendizaje)
+        rutas = data.get("rutasAprendizaje", {})
 
-            else:
-                print("⚠️ Opción fuera de rango. Debe estar entre 1 y 5.")
+        if not rutas:
+            print("⚠️ No hay rutas de aprendizaje registradas.")
+            return None
 
-        except ValueError:
-            print("❌ Error: Ingresa un número válido.")
-        except KeyboardInterrupt:
-            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú.")
+        print("\n=== Rutas de Aprendizaje Disponibles ===")
+        for i, ruta in enumerate(rutas.keys(), start=1):
+            print(f"{i}. {ruta}")
+
+        print("0. Cancelar")
+
+        opcion = int(input("Ingresa una opción: "))
+        if opcion == 0:
             return None
-        except EOFError:
-            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú.")
+        elif 1 <= opcion <= len(rutas):
+            return list(rutas.keys())[opcion - 1]  # devuelve el nombre de la ruta
+        else:
+            print("⚠️ Opción fuera de rango.")
             return None
+
+    except ValueError:
+        print("❌ Error: Ingresa un número válido.")
+        return None
+    except Exception as e:
+        print(f"⚠️ Error al mostrar menú de rutas: {e}")
+        return None
 
 def menuPrincipal():
     while True:
@@ -214,7 +226,7 @@ def SubGestionCampers():
                     util.Stop()
 
                 case 2:
-                    data = core.read_json(DB_CampusLands)
+                    data = corefiles.read_json(DB_CampusLands)
                     print('=== Listar Campers ===')
                     for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
                         print(f"\n--- {section} ---")
@@ -237,7 +249,7 @@ def SubGestionCampers():
                     if info:
                         opcion = EstadoCamper()
                         data[section][user_id]["Estado"] = opcion
-                        core.update_json(DB_CampusLands, data)
+                        corefiles.update_json(DB_CampusLands, data)
                         print(f"✅ Estado actualizado a: {opcion}")
                     else:
                         print("⚠️ No se encontró un camper con ese documento.")
@@ -340,6 +352,46 @@ def SubGestionTrainer():
 5. Listar Trainers activos.
 0. Salir
 """)
+            opcion = int(input('Ingresa una Opcion: '))
+
+            match opcion:
+                case 1:
+                    util.Limpiar_consola()
+                    trainer.addTrainer()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 2:
+                    util.Limpiar_consola()
+                    trainer.editarTrainer()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 3:
+                    util.Limpiar_consola()
+                    trainer.listarTrainers()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 4:
+                    util.Limpiar_consola()
+                    trainer.asignarDisponibilidadRutas()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 5:
+                    util.Limpiar_consola()
+                    trainer.listarTrainersActivos()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 0:
+                    print('Saliendo...')
+                    break
+
+                case _:
+                    print('Ingresa una opción válida (0-5)')
+                    util.Stop()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -357,10 +409,26 @@ def SubGestionRutas():
 === Gestion de Rutas ===
 1. Crear nueva ruta de entrenamiento.
 2. Listar rutas existentes.
-3. Gestionar módulos dentro de ruta
+3. Gestionar módulos dentro de ruta.
 4. Definir SGBD principal y alterno.
 0. Salir
 """)
+            opcion = int(input("Seleccione una opción: "))
+
+            match opcion:
+                case 1:
+                    rutas.addRutasAprendizaje()
+                case 2:
+                    rutas.rutasExistentes()
+                case 3:
+                    rutas.gestionarModulosRuta()
+                case 4:
+                    rutas.definirSGBD()
+                case 0:
+                    print("Saliendo de Gestión de Rutas...")
+                    break
+                case _:
+                    print("⚠️ Opción inválida. Intenta de nuevo.")
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -375,19 +443,87 @@ def SubGestionModulos():
     while True:
         try:
             print("""
-=== Gestion de Modulos ===
-1. Crear Modulos de la Ruta
-2. Editar Modulos de la Ruta
+=== Gestion de Módulos ===
+1. Crear módulos en una ruta
+2. Editar módulos de una ruta
 0. Salir
 """)
+            opcion = int(input("👉 Selecciona una opción: "))
+
+            match opcion:
+                case 1:  # Crear módulos
+                    nombre_ruta = menuRutasAprendizaje()
+                    if not nombre_ruta:
+                        continue
+
+                    data = corefiles.read_json(DB_RutasAprendizaje)
+                    rutas = data.get("rutasAprendizaje", {})
+                    modulos = rutas.get(nombre_ruta, {})
+
+                    try:
+                        num_modulos = int(input("¿Cuántos módulos deseas agregar?: "))
+                    except ValueError:
+                        print("⚠️ Ingresa un número válido.")
+                        continue
+
+                    for i in range(1, num_modulos + 1):
+                        contenido = input(f"👉 Nombre del módulo {len(modulos)+1}: ").strip()
+                        modulos[f"Modulo {len(modulos)+1}"] = contenido if contenido else f"Modulo {len(modulos)+1} vacío"
+
+                    data["rutasAprendizaje"][nombre_ruta] = modulos
+                    corefiles.write_json(DB_RutasAprendizaje, data)
+                    print(f"✅ Se agregaron {num_modulos} módulos a la ruta '{nombre_ruta}'.")
+
+                case 2:  # Editar módulos
+                    nombre_ruta = menuRutasAprendizaje()
+                    if not nombre_ruta:
+                        continue
+
+                    data = corefiles.read_json(DB_RutasAprendizaje)
+                    rutas = data.get("rutasAprendizaje", {})
+                    modulos = rutas.get(nombre_ruta, {})
+
+                    if not modulos:
+                        print("⚠️ Esta ruta aún no tiene módulos.")
+                        continue
+
+                    print(f"\n📚 Módulos actuales en la ruta '{nombre_ruta}':")
+                    for clave, contenido in modulos.items():
+                        print(f"{clave}: {contenido}")
+
+                    try:
+                        num_mod = int(input("👉 Ingresa el número de módulo a editar: "))
+                    except ValueError:
+                        print("⚠️ Ingresa un número válido.")
+                        continue
+
+                    clave_mod = f"Modulo {num_mod}"
+                    if clave_mod not in modulos:
+                        print("⚠️ Ese módulo no existe.")
+                        continue
+
+                    nuevo_contenido = input(f"✏️ Nuevo contenido para {clave_mod} (antes: {modulos[clave_mod]}): ").strip()
+                    if nuevo_contenido:
+                        modulos[clave_mod] = nuevo_contenido
+                        data["rutasAprendizaje"][nombre_ruta] = modulos
+                        corefiles.write_json(DB_RutasAprendizaje, data)
+                        print(f"✅ Módulo {num_mod} actualizado correctamente.")
+                    else:
+                        print("⚠️ No se hicieron cambios.")
+                case 0:
+                    print("🚪 Saliendo de Gestión de Módulos...")
+                    break
+
+                case _:
+                    print("⚠️ Opción inválida. Ingresa 0, 1 o 2.")
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
         except KeyboardInterrupt:
-            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú principal.")
+            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú de módulos.")
             break
         except EOFError:
-            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú principal.")
+            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú de módulos.")
             break
 
 def SubGestionAreasSalones():
@@ -396,18 +532,35 @@ def SubGestionAreasSalones():
             print("""
 === Gestion de Areas/Salones ===
 1. Ver áreas disponibles y su capacidad
-2. Consultar disponibilidad de cupos por franja de 4h.
-3. Crear Nueva Area/Salon
+2. Consultar disponibilidad de cupos por franja de 4h
+3. Crear Nueva Área/Salón
+4. Asignar Grupo a Área y Franja
 0. Salir
 """)
+            opcion = int(input("👉 Ingresa una opción: "))
+
+            match opcion:
+                case 0:
+                    print("🚪 Saliendo de Gestión de Áreas/Salones...")
+                    break
+                case 1:
+                    areas.verAreas()
+                case 2:
+                    areas.consultarDisponibilidad()
+                case 3:
+                    areas.crearArea()
+                case 4:
+                    areas.asignarHorarioGrupo()
+                case _:
+                    print("⚠️ Opción inválida. Ingresa 0-4.")
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
         except KeyboardInterrupt:
-            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú principal.")
+            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú de áreas/salones.")
             break
         except EOFError:
-            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú principal.")
+            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú de áreas/salones.")
             break
 
 def SubMatriculas():
@@ -420,14 +573,26 @@ def SubMatriculas():
 3. Cerrar matrícula
 0. Salir
 """)
+            opcion = int(input("Ingresa una opción: "))
 
+            match opcion:
+                case 1:
+                    doc = input("Documento del camper: ").strip()
+                    grupos.agregarCamperAGrupo(doc)
+                case 2:
+                    grupos.listarGruposActivos()
+                case 3:
+                    idGrupo = input("ID del grupo a cerrar: ").strip()
+                    grupos.cerrarGrupo(idGrupo)
+                case 0:
+                    print("👋 Saliendo del módulo de matrículas...")
+                    break
+                case _:
+                    print("⚠️ Opción inválida.")
         except ValueError:
-            print("❌ Error: Ingresa un número válido.")
-        except KeyboardInterrupt:
-            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú principal.")
-            break
-        except EOFError:
-            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú principal.")
+            print("❌ Ingresa un número válido.")
+        except (KeyboardInterrupt, EOFError):
+            print("\n⛔ Saliendo del módulo de matrículas...")
             break
 
 def SubReportes():
@@ -435,24 +600,80 @@ def SubReportes():
         try:
             print("""
 === Gestion de Reportes ===
-1. Listar campers inscritos.
-2. Listar campers aprobados examen inicial.
-3. Listar trainers activos.
-4. Listar campers con bajo rendimiento.
-5. Asociaciones camper–trainer–ruta.
-6.Estadísticas de aprobados y perdidos por módulo, ruta y trainer.
-7. Campers en riesgo alto.
+1. Listar campers inscritos
+2. Listar campers aprobados examen inicial
+3. Listar trainers activos
+4. Listar campers con bajo rendimiento
+5. Asociaciones camper–trainer–ruta
+6. Estadísticas de aprobados y perdidos por módulo, ruta y trainer
+7. Campers en riesgo alto
 0. Salir
 """)
+
+            opcion = input("Selecciona una opción: ").strip()
+
+            match opcion:
+                case "1":
+                    util.Limpiar_consola()
+                    print("📋 Reporte: Campers inscritos")
+                    camper.listarCampersInscritos()
+                    util.Limpiar_consola()
+
+                case "2":
+                    util.Limpiar_consola()
+                    print("📋 Reporte: Campers aprobados examen inicial")
+                    camper.listarCampersAprobados()
+                    util.Limpiar_consola()
+
+                case "3":
+                    util.Limpiar_consola()
+                    print("📋 Reporte: Trainers activos")
+                    trainer.listarTrainersActivos()
+                    util.Limpiar_consola()
+
+                case "4":
+                    util.Limpiar_consola()
+                    print("📋 Reporte: Campers con bajo rendimiento")
+                    camper.campersBajoRendimiento()
+
+                case "5":
+                    util.Limpiar_consola()
+                    print("📋 Reporte: Asociaciones camper–trainer–ruta")
+                    camper.asociacionesCamperTrainerRuta()
+                    util.Limpiar_consola()
+
+                case "6":
+                    util.Limpiar_consola()
+                    print("📊 Reporte: Estadísticas de aprobados y perdidos por módulo, ruta y trainer")
+                    camper.estadisticasGeneral()
+                    util.Limpiar_consola()
+
+                case "7":
+                    util.Limpiar_consola()
+                    print("📋 Reporte: Campers en riesgo alto")
+                    camper.campersEnRiesgoAlto()
+                    util.Limpiar_consola()
+
+                case "0":
+                    util.Limpiar_consola()
+                    print("👋 Saliendo del menú de reportes...")
+                    util.Limpiar_consola()
+                    break
+
+                case _:
+                    util.Limpiar_consola()
+                    print("❌ Opción no válida. Intenta de nuevo.")
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
         except KeyboardInterrupt:
-            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú principal.")
+            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú de reportes.")
             break
         except EOFError:
-            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú principal.")
+            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú de reportes.")
             break
+
 
 #Menu Trainer
 def menuTrainer():
@@ -504,7 +725,7 @@ def menuTrainer():
             break
 
 """
-Sub Menus del Coordinador
+Sub Menus del Trainer
 """
 def SubInformacionTrainer():
     while True:
