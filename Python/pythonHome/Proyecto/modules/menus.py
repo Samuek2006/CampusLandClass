@@ -14,7 +14,9 @@ corefiles.initialize_json(DB_RutasAprendizaje, {"rutasAprendizaje": {}})
 
 DB_CampusLands = 'data/CampusLands.json'
 corefiles.initialize_json(DB_CampusLands, {
-    "camperCampusLands": {}
+    "camperCampusLands": {},
+    "trainerCampusLands": {},
+    "adminCampusLands": {}
 })
 
 def EstadoCamper():
@@ -156,6 +158,7 @@ def menuCoordinador():
 5. Gestión de Áreas/Salones
 6. Matrículas
 7. Reportes
+8. Gestión de Coordinadores
 0. Salir
             """)
             opcion = int(input('Ingresa una Opcion: '))
@@ -188,6 +191,10 @@ def menuCoordinador():
                 case 7:
                     util.Limpiar_consola()
                     SubReportes()
+
+                case 8:
+                    util.Limpiar_consola()
+                    SubGestionCoordinador()
 
                 case 0:
                     print('Saliendo...')
@@ -234,24 +241,31 @@ def SubGestionCampers():
                     util.Limpiar_consola()
 
                 case 2:
+                    util.Limpiar_consola()
                     data = corefiles.read_json(DB_CampusLands)
                     print('=== Listar Campers ===')
                     for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
                         print(f"\n--- {section} ---")
                         for _, info in data.get(section, {}).items():
                             print(f"ID: {info['identificacion']} | Nombre: {info['Nombre']} {info['Apellido']} | Estado: {info['Estado']} | Rol: {info['rol']}")
+                    input('Enter Para Continuar...')
                     util.Stop()
+                    util.Limpiar_consola()
 
                 case 3:
+                    util.Limpiar_consola()
                     user = input('Documento del camper: ').strip()
                     section, user_id, info, _ = camper.buscarUsuario(user)
                     if info:
                         camper.mostrarInfoCamper(info)
+                        input('Enter Para Continuar...')
                     else:
                         print("⚠️ No se encontró un camper con ese documento.")
                     util.Stop()
+                    util.Limpiar_consola()
 
                 case 4:
+                    util.Limpiar_consola()
                     user = input('Documento del camper: ').strip()
                     section, user_id, info, data = camper.buscarUsuario(user)
                     if info:
@@ -262,8 +276,10 @@ def SubGestionCampers():
                     else:
                         print("⚠️ No se encontró un camper con ese documento.")
                     util.Stop()
+                    util.Limpiar_consola()
 
                 case 5:
+                    util.Limpiar_consola()
                     user = input('Documento del camper: ').strip()
                     section, user_id, info, data = camper.buscarUsuario(user)
                     if info:
@@ -283,14 +299,19 @@ def SubGestionCampers():
                     else:
                         print("⚠️ No se encontró un camper con ese documento.")
                     util.Stop()
+                    util.Limpiar_consola()
 
                 case 0:
+                    util.Limpiar_consola()
                     print('Saliendo...')
+                    util.Limpiar_consola()
                     break
 
                 case _:
+                    util.Limpiar_consola()
                     print('Ingresa una opción válida (0-5)')
                     util.Stop()
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -347,6 +368,62 @@ def SubAdmisiones():
         except EOFError:
             print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú principal.")
             break
+
+def SubGestionCoordinador():
+    while True:
+        try:
+            print("""
+=== Gestion De Coordinadores (Admins) ===
+1. Crear Coordinador
+2. Editar Coordinador
+3. Listar Coordinadores Totales
+4. Listar Coordinadores Activos
+0. Salir
+""")
+            opcion = int(input('Ingresa una Opcion: '))
+
+            match opcion:
+                case 1:
+                    util.Limpiar_consola()
+                    admin.addAdmin()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 2:
+                    util.Limpiar_consola()
+                    admin.editarAdmin()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 3:
+                    util.Limpiar_consola()
+                    admin.listarAdminsTotales()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 4:
+                    util.Limpiar_consola()
+                    admin.listarAdminsActivos()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 0:
+                    print('Saliendo...')
+                    break
+
+                case _:
+                    print('Ingresa una opción válida (0-4)')
+                    util.Stop()
+
+        except ValueError:
+            print("❌ Error: Ingresa un número válido.")
+        except KeyboardInterrupt:
+            print("\n⛔ Interrupción detectada. Cerrando menú...")
+            break
+        except EOFError:
+            print("\n⛔ Entrada inesperada. Cerrando menú...")
+            break
+
 
 def SubGestionTrainer():
     while True:
@@ -614,16 +691,28 @@ def SubMatriculas():
 
             match opcion:
                 case 1:
+                    util.Limpiar_consola()
                     doc = input("Documento del camper: ").strip()
                     grupos.agregarCamperAGrupo(doc)
+                    util.Limpiar_consola()
+
                 case 2:
+                    util.Limpiar_consola()
                     grupos.listarGruposActivos()
+                    util.Limpiar_consola()
+
                 case 3:
+                    util.Limpiar_consola()
                     idGrupo = input("ID del grupo a cerrar: ").strip()
                     grupos.cerrarGrupo(idGrupo)
+                    util.Limpiar_consola()
+
                 case 0:
+                    util.Limpiar_consola()
                     print("👋 Saliendo del módulo de matrículas...")
+                    util.Limpiar_consola()
                     break
+
                 case _:
                     print("⚠️ Opción inválida.")
         except ValueError:

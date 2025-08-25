@@ -37,8 +37,13 @@ def listarTrainers():
 
     print("\n=== Lista de Trainers ===")
     for doc, t in trainers.items():
-        print(f"ID: {doc} | {t['Nombre']} {t['Apellido']} | Estado: {t['Estado']} | Disponibilidad: {t['Disponibilidad']}")
+        if isinstance(t, dict):  # ✅ Validamos que sea dict
+            print(f"ID: {doc} | {t.get('Nombre', '')} {t.get('Apellido', '')} "
+                  f"| Estado: {t.get('Estado', '')} | Disponibilidad: {t.get('Disponibilidad', '')}")
+        else:
+            print(f"⚠️ Trainer con ID {doc} tiene un formato incorrecto: {t}")
     input('Enter Para Continuar...')
+
 
 def asignarDisponibilidadRutas():
     data = corefiles.read_json(DB_CampusLands)
@@ -62,12 +67,14 @@ def asignarDisponibilidadRutas():
     if ruta_seleccionada:
         if "RutasAsignadas" not in trainer:
             trainer["RutasAsignadas"] = []
-        trainer["RutasAsignadas"].append(ruta_seleccionada)
-        print(f"✅ Ruta '{ruta_seleccionada}' asignada al trainer.")
+        if ruta_seleccionada not in trainer["RutasAsignadas"]:  # ✅ evita duplicados
+            trainer["RutasAsignadas"].append(ruta_seleccionada)
+            print(f"✅ Ruta '{ruta_seleccionada}' asignada al trainer.")
+        else:
+            print(f"⚠️ El trainer ya tiene la ruta '{ruta_seleccionada}' asignada.")
 
-    # Guardar cambios
-    data["trainerCampusLands"][doc] = trainer
-    corefiles.update_json(DB_CampusLands, data, ["trainerCampusLands"])
+    # ✅ Guardar cambios correctamente
+    corefiles.update_json(DB_CampusLands, {doc: trainer}, ["trainerCampusLands"])
     print(f"✅ Trainer {trainer['Nombre']} actualizado correctamente.\n")
 
 def listarTrainersActivos():
@@ -76,7 +83,10 @@ def listarTrainersActivos():
 
     print("\n=== Trainers Activos ===")
     for doc, t in trainers.items():
-        if t.get("Estado", "").strip().lower() == "activo":
-            print(f"ID: {doc} | {t.get('Nombre', '')} {t.get('Apellido', '')} | "
-                    f"Disponibilidad: {t.get('Disponibilidad', '')} | Rutas: {t.get('RutasAsignadas', [])}")
+        if isinstance(t, dict):  # ✅ aseguramos que sea un diccionario
+            if t.get("Estado", "").strip().lower() == "activo":
+                print(f"ID: {doc} | {t.get('Nombre', '')} {t.get('Apellido', '')} | "
+                      f"Disponibilidad: {t.get('Disponibilidad', '')} | Rutas: {t.get('RutasAsignadas', [])}")
+        else:
+            print(f"⚠️ Trainer con ID {doc} tiene un formato inválido: {t}")
     input('Enter Para Continuar...')

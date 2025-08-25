@@ -1,3 +1,26 @@
 {
-    "grupos": {}
+    "grupos": {
+        "1": {
+            "idGrupo": 1,
+            "nombre": "Grupo 1",
+            "ruta": "NodeJS",
+            "trainer": "2",
+            "campers": [
+                "2",
+                "3",
+                "1"
+            ],
+            "capacidadMax": 33,
+            "estado": "cerrado"
+        },
+        "2": {
+            "idGrupo": 2,
+            "nombre": "Grupo 2",
+            "ruta": "Java",
+            "trainer": "1",
+            "campers": [],
+            "capacidadMax": 33,
+            "estado": "abierto"
+        }
+    }
 }

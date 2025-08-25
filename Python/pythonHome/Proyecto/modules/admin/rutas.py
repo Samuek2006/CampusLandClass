@@ -1,5 +1,6 @@
 import util.corefiles as corefiles
 import modules.menus as menus
+from unicodedata import normalize
 
 DB_RutasAprendizaje = "data/RutasAprendizaje.json"
 DB_CampusLands = "data/CampusLands.json"
@@ -63,6 +64,7 @@ def addRutasAprendizaje():
             # ----------------------------
             elif tipo == "N":
                 nombre_ruta = input("Ingrese el nombre de la nueva ruta: ").strip()
+                nombre_ruta = normalize('NFD', nombre_ruta)
 
                 try:
                     num_modulos = int(input("¿Cuántos módulos tendrá esta ruta?: "))

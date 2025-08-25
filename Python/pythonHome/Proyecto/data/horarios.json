@@ -1,3 +1,9 @@
 {
-    "horarios": {}
+    "horarios": {
+        "2": {
+            "Ruta": "Java",
+            "Area": "apolo 11",
+            "Franja": "1"
+        }
+    }
 }

@@ -5,7 +5,7 @@ from typing import Dict, List, Optional
 def read_json(file_path):
     if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
         return {}  # Devuelve dict vacío si el archivo no existe o está vacío
-    with open(file_path, "r", encoding="utf-8") as file:
+    with open(file_path, "r", encoding='utf-8') as file:
         try:
             return json.load(file)
         except json.JSONDecodeError:
@@ -14,7 +14,12 @@ def read_json(file_path):
 def write_json(file_path: str, data: Dict) -> None:
     """Escribe datos en el archivo JSON"""
     with open(file_path, "w", encoding='utf-8') as file:
-        json.dump(data, file, indent=4)
+        json.dump(data, file, indent=4, ensure_ascii=False)
+
+    # """Escribe datos en un archivo TXT con formato JSON"""
+    # with open(file_path, "w", encoding="utf-8") as file:
+    #     file.write(json.dumps(data, indent=4, ensure_ascii=False))
+
 
 def update_json(file_path: str, data: Dict, path: Optional[List[str]] = None) -> None:
     """

@@ -1,5 +1,4 @@
 import util.corefiles as corefiles
-import modules.vistaCamper.riesgo as riesgo
 import modules.admin.grupos as grupos
 
 # DataBase
@@ -70,39 +69,40 @@ def addTrainer():
     exp = input('Ingrese los años de experiencia del Trainer: ').strip()
 
     trainer = {
-        identificacion: {
-            "Nombre": name,
-            "Apellido": apellido,
-            "Telefono": telefono,
-            "Email": email,
-            "Direccion": direccion,
-            "Habilidades": habilidades,
-            "StackTecnologico": stackTecnologico,
-            "Disponibilidad": disponibilidad,
-            "Experiencia": exp,
-            "Rol": "trainer",
-            "Estado": "Activo",
-            "RutasAsignadas": [],
-            "Credenciales": {},
-            "GruposAsignados": []
-        }
+        "identificacion": identificacion,
+        "Nombre": name,
+        "Apellido": apellido,
+        "Telefono": telefono,
+        "Email": email,
+        "Direccion": direccion,
+        "Habilidades": habilidades,
+        "StackTecnologico": stackTecnologico,
+        "Disponibilidad": disponibilidad,
+        "Experiencia": exp,
+        "Rol": "trainer",
+        "Estado": "Activo",
+        "RutasAsignadas": [],
+        "Credenciales": {},
+        "GruposAsignados": []
     }
 
-    corefiles.update_json(DB_CampusLands, trainer, ["trainerCampusLands"])
-    grupo = grupos.crearGrupo()
-    # 🔥 Intentar asignar trainer automáticamente a un grupo disponible
-    grupos.asignarTrainerAGrupo(grupo, identificacion)
+    # ✅ Guardar el trainer en CampusLands.json con su identificación como clave
+    corefiles.update_json(DB_CampusLands, {identificacion: trainer}, ["trainerCampusLands"])
+
+    # ✅ Intentar asignar trainer automáticamente a un grupo disponible
+    grupos.asignarTrainerDisponible(identificacion)
 
     print(f'✅ Trainer {name} {apellido} creado correctamente.')
     input('Enter para Continuar...')
+    return trainer
 
 def addAdmin():
     identificacion = input('Ingrese el Documento de identificacion del Admin: ').strip()
-    name = input('ingrese el Nombre del Admin: ')
-    telefono = input('Ingresa el Telefono del Admin: ')
-    apellido = input('Ingresa el Apellido del Admin: ')
-    estudios = input('Ingresa el Nivel Academico: ')
-    exp = input('Ingresa la Experiencia del Admin: ')
+    name = input('Ingrese el Nombre del Admin: ').strip()
+    telefono = input('Ingresa el Telefono del Admin: ').strip()
+    apellido = input('Ingresa el Apellido del Admin: ').strip()
+    estudios = input('Ingresa el Nivel Academico: ').strip()
+    exp = input('Ingresa la Experiencia del Admin: ').strip()
 
     admin = {
         identificacion: {
@@ -110,9 +110,44 @@ def addAdmin():
             "Apellido": apellido,
             "Telefono": telefono,
             "Estudios": estudios,
-            "Experiencia": exp
+            "Experiencia": exp,
+            "Estado": "Activo",
+            "Rol": "Admin"
         }
     }
 
     corefiles.update_json(DB_CampusLands, admin, ["adminCampusLands"])
     print(f'✅ Admin {name} {apellido} creado correctamente')
+
+    corefiles.update_json(DB_CampusLands, admin, ["adminCampusLands"])
+    print(f'✅ Admin {name} {apellido} creado correctamente')
+
+def editarAdmin():
+    identificacion = input("Ingrese el Documento del Admin a editar: ").strip()
+    data = corefiles.read_json(DB_CampusLands)
+
+    if identificacion not in data.get("adminCampusLands", {}):
+        print("❌ Admin no encontrado.")
+        return
+
+    campo = input("¿Qué campo quieres editar? (Nombre, Apellido, Telefono, Estudios, Experiencia, Estado): ").strip()
+    nuevo_valor = input(f"Ingrese el nuevo valor para {campo}: ").strip()
+
+    data["adminCampusLands"][identificacion][campo] = nuevo_valor
+    corefiles.save_json(DB_CampusLands, data)
+    print(f"✅ Admin {identificacion} actualizado correctamente.")
+    input('Enter Para Continuar...')
+
+def listarAdminsTotales():
+    data = corefiles.read_json(DB_CampusLands)
+    for id, info in data.get("adminCampusLands", {}).items():
+        print(f"- {id}: {info['Nombre']} {info['Apellido']} ({info['Estado']})")
+    input('Enter Para Continuar...')
+
+
+def listarAdminsActivos():
+    data = corefiles.read_json(DB_CampusLands)
+    for id, info in data.get("adminCampusLands", {}).items():
+        if info.get("Estado") == "Activo":
+            print(f"- {id}: {info['Nombre']} {info['Apellido']}")
+    input('Enter Para Continuar...')

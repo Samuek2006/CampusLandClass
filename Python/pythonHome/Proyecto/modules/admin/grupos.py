@@ -1,7 +1,5 @@
 import util.corefiles as corefiles
-import modules.admin.rutas as rutas
-import modules.vistaTrainer as trainers
-import modules.vistaCamper as campers
+import util.utilidades as util
 
 DB_Grupos = "data/Grupos.json"
 DB_Rutas = "data/RutasAprendizaje.json"
@@ -22,6 +20,7 @@ def obtenerSiguienteRuta():
         return None
 
     indice = len(data_grupos) % len(rutas_list)
+    util.Stop()
     return rutas_list[indice]
 
 
@@ -30,11 +29,13 @@ def crearGrupo():
     data = corefiles.read_json(DB_Grupos)
     grupos = data.get("grupos", {})
 
-    idGrupo = len(grupos) + 1
-    nombre = f"Grupo {idGrupo}"
     ruta_asignada = obtenerSiguienteRuta()
     if not ruta_asignada:
-        return
+        print("❌ No se pudo crear el grupo porque no hay rutas disponibles.")
+        return None
+
+    idGrupo = len(grupos) + 1
+    nombre = f"Grupo {idGrupo}"
 
     grupo = {
         "idGrupo": idGrupo,
@@ -49,6 +50,7 @@ def crearGrupo():
     data["grupos"][str(idGrupo)] = grupo
     corefiles.write_json(DB_Grupos, data)
     print(f"✅ Grupo '{nombre}' creado con la ruta '{ruta_asignada}'.")
+    util.Stop()
     return idGrupo
 
 
@@ -70,7 +72,7 @@ def asignarTrainerAGrupo(idGrupo, docTrainer):
     grupos[str(idGrupo)]["trainer"] = docTrainer
     corefiles.write_json(DB_Grupos, data)
     print(f"✅ Trainer {docTrainer} asignado al grupo {idGrupo}.")
-
+    util.Stop()
 
 def agregarCamperAGrupo(docCamper):
     """Agrega un camper al primer grupo abierto con cupo disponible."""
@@ -84,13 +86,17 @@ def agregarCamperAGrupo(docCamper):
             grupo_seleccionado = g
             break
 
-    # Si no existe grupo abierto → crear uno nuevo
+    # Si no existe grupo abierto → intentar crear uno nuevo
     if not grupo_seleccionado:
-        crearGrupo()
+        nuevo = crearGrupo()
+        if not nuevo:  # crearGrupo() no creó nada porque no hay rutas
+            print("❌ No se pudo asignar camper: no hay rutas creadas.")
+            return
         data = corefiles.read_json(DB_Grupos)
         grupos = data.get("grupos", {})
-        grupo_seleccionado = list(grupos.values())[-1]  # el último creado
+        grupo_seleccionado = grupos[str(nuevo)]
 
+    # Agregar camper al grupo
     grupo_seleccionado["campers"].append(docCamper)
 
     # Cerrar grupo si llegó a capacidad
@@ -101,8 +107,17 @@ def agregarCamperAGrupo(docCamper):
 
     data["grupos"][str(grupo_seleccionado["idGrupo"])] = grupo_seleccionado
     corefiles.write_json(DB_Grupos, data)
-    print(f"✅ Camper {docCamper} agregado al grupo {grupo_seleccionado['nombre']}.")
 
+    # 🔥 Actualizar grupo también en CampusLands.json
+    campers_data = corefiles.read_json(DB_Campers)
+    camperCampusLands = campers_data.get("camperCampusLands", {})
+
+    if docCamper in camperCampusLands:
+        camperCampusLands[docCamper]["Grupo"] = grupo_seleccionado["nombre"]
+        campers_data["camperCampusLands"] = camperCampusLands
+        corefiles.write_json(DB_Campers, campers_data)
+
+    print(f"✅ Camper {docCamper} agregado al grupo {grupo_seleccionado['nombre']}.")
 
 def listarGruposActivos():
     """Muestra los grupos abiertos y su información."""
@@ -117,6 +132,7 @@ def listarGruposActivos():
     print("\n=== Grupos Activos ===")
     for g in abiertos:
         print(f"- {g['nombre']} | Ruta: {g['ruta']} | Trainer: {g['trainer']} | Cupos: {len(g['campers'])}/{g['capacidadMax']}")
+        util.Stop()
 
 
 def cerrarGrupo(idGrupo):
@@ -131,3 +147,26 @@ def cerrarGrupo(idGrupo):
     grupos[str(idGrupo)]["estado"] = "cerrado"
     corefiles.write_json(DB_Grupos, data)
     print(f"🚪 Grupo {idGrupo} cerrado manualmente.")
+    util.Stop()
+
+def asignarTrainerDisponible(docTrainer):
+    """Asigna automáticamente un trainer a los grupos sin trainer (máximo 2)."""
+    data = corefiles.read_json(DB_Grupos)
+    grupos = data.get("grupos", {})
+
+    # Contar cuántos grupos ya tiene este trainer
+    count = sum(1 for g in grupos.values() if g["trainer"] == docTrainer)
+    if count >= 2:
+        print(f"⚠️ Trainer {docTrainer} ya tiene 2 grupos asignados.")
+        return
+
+    # Buscar grupos sin trainer
+    for g in grupos.values():
+        if not g["trainer"]:
+            g["trainer"] = docTrainer
+            data["grupos"][str(g["idGrupo"])] = g
+            corefiles.write_json(DB_Grupos, data)
+            print(f"✅ Trainer {docTrainer} asignado automáticamente al grupo {g['nombre']}.")
+            count += 1
+            if count >= 2:  # regla de máximo 2 grupos
+                break

@@ -1,4 +1,5 @@
 # Autor
+Sahiam Valentina Esteban Esteban  
 Samuel Felipe Calderon Soto
 
 # 📚 Proyecto de Gestión - CampusLands
@@ -28,21 +29,43 @@ Toda la información se administra mediante menús y s    e guarda en archivos *
 
 ---
 
+## Librerias Utilizadas
+
+- **Time**: Libreria para manejar el tiempo de ejecuciones en el sistema.  
+- **Os**: Libreria para usar comandos de consola.  
+- **Random**: Libreria para dar datos aleatorios.  
+- **Getpass**: Libreria que me permite ocultar, variables en consola, principalmente para las Passwork.  
+- **Json**: Libreria para manejar Json, en el sistema.  
+
+---
+
 ## 📂 Estructura del Proyecto
 ```
 CampusLands  
-├── main.py # Archivo principal de ejecución  
-├── data/ # Archivos JSON con la información  
+├── data/  
 │ ├── AreasSalones.json  
 │ ├── CampusLands.json  
 │ ├── Grupos.json  
+│ ├── horarios.json  
 │ └── RutasAprendizaje.json  
-├── modules/ # Módulos del sistema  
+├── modules/  
 │ ├── menus.py  
-│ ├── admin/ # Funciones de administrador  
-│ ├── vistaCamper/ # Funciones de campers  
-│ └── vistaTrainer/ # Funciones de trainers  
-├── util/ # Utilidades (login, sesión, manejo de archivos)  
+│ ├── admin/  
+│ │ ├── admin.py  
+│ │ ├── areasSalones.py  
+│ │ ├── grupos.py  
+│ │ └── rutas.py  
+│ ├── vistaCamper/  
+│ │ ├── camper.py  
+│ │ └── riesgo.py  
+│ └── vistaTrainer/  
+│   └── trainer.py  
+├── util/  
+│   ├── corefiles.py  
+│   ├── login.py  
+│   ├── session.py  
+│   └── utilidades.py  
+├── main.py  
 └── README.md # Este archivo  
 ```
 

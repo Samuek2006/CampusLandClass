@@ -6,7 +6,11 @@ from util import session as session
 DB_CampusLands = "data/CampusLands.json"
 
 # Inicializar estructura si no existe
-core.initialize_json(DB_CampusLands, {"camperCampusLands": {}})
+core.initialize_json(DB_CampusLands, {
+    "camperCampusLands": {},
+    "trainerCampusLands": {},
+    "adminCampusLands": {}
+})
 
 def userRegister():
     util.Limpiar_consola()
@@ -164,6 +168,7 @@ def campersBajoRendimiento():
         if definitiva < 60:  # regla base
             print(f"- {camper['Nombre']} {camper['Apellido']} ({cid}) "
                     f"→ Nota: {definitiva}")
+    input('Enter Para Continuar...')
 
 def asociacionesCamperTrainerRuta():
     data = core.read_json(DB_CampusLands)

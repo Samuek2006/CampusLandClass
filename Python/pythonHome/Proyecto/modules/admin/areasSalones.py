@@ -1,4 +1,5 @@
 import util.corefiles as corefiles
+import util.utilidades as util
 
 DB_Horarios = 'data/horarios.json'
 DB_AreasSalones = "data/AreasSalones.json"
@@ -90,6 +91,7 @@ def asignarHorarioGrupo():
 
     grupo = input("👉 Nombre del grupo: ").strip()
     ruta = input("👉 Ruta asignada al grupo: ").strip()
+    util.Limpiar_consola()
 
     # Seleccionar área
     print("\n=== Selecciona un área ===")
@@ -105,6 +107,7 @@ def asignarHorarioGrupo():
         return
 
     # Seleccionar franja
+    util.Limpiar_consola()
     print(f"\n=== Franjas de {nombre_area} ===")
     lista_franjas = list(areas[nombre_area]["Franjas"].keys())
     for i, franja in enumerate(lista_franjas, 1):

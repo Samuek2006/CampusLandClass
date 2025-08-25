@@ -1,3 +1,13 @@
 {
-    "areasSalones": {}
+    "areasSalones": {
+        "apolo 11": {
+            "Capacidad": 33,
+            "Franjas": {
+                "1": {
+                    "ocupados": 2,
+                    "disponibles": 31
+                }
+            }
+        }
+    }
 }

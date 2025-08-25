@@ -1,5 +1,472 @@
 {
-    "camperCampusLands": {},
-    "trainerCampusLands": {},
-    "adminCampusLands": {}
+    "camperCampusLands": {
+        "1": {
+            "identificacion": "1",
+            "Nombre": "1",
+            "Apellido": "1",
+            "Direccion": "1",
+            "acudiente": "1",
+            "telefono": 1,
+            "rol": "Camper",
+            "Estado": "Aprobado",
+            "riesgoCamper": "Riesgo",
+            "Grupo": "Grupo 1",
+            "Skill": {
+                "Skill Actual": {
+                    "Prueba": 0,
+                    "Trabajos": 0,
+                    "Quizes": 0,
+                    "Definitiva": 0
+                },
+                "Skill Culminadas": {
+                    "Nombre Skill Culminado": {
+                        "Prueba": 0,
+                        "Trabajos": 0,
+                        "Quizes": 0,
+                        "Definitiva": 0
+                    }
+                }
+            },
+            "Credenciales": {
+                "correo": "samuelcalderon",
+                "password": "1234"
+            },
+            "Nota Examen Ingreso": 99
+        },
+        "2": {
+            "identificacion": "2",
+            "Nombre": "22",
+            "Apellido": "2",
+            "Direccion": "2",
+            "acudiente": "2",
+            "telefono": 2,
+            "rol": "Camper",
+            "Estado": "Inscrito",
+            "riesgoCamper": "Sin Riesgo",
+            "Grupo": null,
+            "Skill": {
+                "Skill Actual": {
+                    "Prueba": 0,
+                    "Trabajos": 0,
+                    "Quizes": 0,
+                    "Definitiva": 0
+                },
+                "Skill Culminadas": {
+                    "Nombre Skill Culminado": {
+                        "Prueba": 0,
+                        "Trabajos": 0,
+                        "Quizes": 0,
+                        "Definitiva": 0
+                    }
+                }
+            },
+            "Credenciales": {
+                "correo": "felie",
+                "password": "1234"
+            }
+        },
+        "3": {
+            "identificacion": "3",
+            "Nombre": "3",
+            "Apellido": "3",
+            "Direccion": "3",
+            "acudiente": "3",
+            "telefono": 3,
+            "rol": "Camper",
+            "Estado": "Inscrito",
+            "riesgoCamper": "Sin Riesgo",
+            "Grupo": "Grupo 1",
+            "Skill": {
+                "Skill Actual": {
+                    "Prueba": 0,
+                    "Trabajos": 0,
+                    "Quizes": 0,
+                    "Definitiva": 0
+                },
+                "Skill Culminadas": {
+                    "Nombre Skill Culminado": {
+                        "Prueba": 0,
+                        "Trabajos": 0,
+                        "Quizes": 0,
+                        "Definitiva": 0
+                    }
+                }
+            },
+            "Credenciales": {
+                "correo": "le",
+                "password": "1234"
+            }
+        }
+    },
+    "trainerCampusLands": {
+        "identificacion": "1",
+        "Nombre": "1",
+        "Apellido": "1",
+        "Telefono": "1",
+        "Email": "1",
+        "Direccion": "1",
+        "Habilidades": "1",
+        "StackTecnologico": "1",
+        "Disponibilidad": "1",
+        "Experiencia": "1",
+        "Rol": "trainer",
+        "Estado": "Activo",
+        "RutasAsignadas": [],
+        "Credenciales": {},
+        "GruposAsignados": [],
+        "2": {
+            "identificacion": "2",
+            "Nombre": "2",
+            "Apellido": "2",
+            "Telefono": "2",
+            "Email": "2",
+            "Direccion": "2",
+            "Habilidades": "2",
+            "StackTecnologico": "2",
+            "Disponibilidad": "2",
+            "Experiencia": "2",
+            "Rol": "trainer",
+            "Estado": "Activo",
+            "RutasAsignadas": [
+                "NodeJS",
+                "Java"
+            ],
+            "Credenciales": {},
+            "GruposAsignados": []
+        },
+        "3": {
+            "identificacion": "3",
+            "Nombre": "3",
+            "Apellido": "3",
+            "Telefono": "3",
+            "Email": "3",
+            "Direccion": "3",
+            "Habilidades": "3",
+            "StackTecnologico": "3",
+            "Disponibilidad": "3",
+            "Experiencia": "3",
+            "Rol": "trainer",
+            "Estado": "Activo",
+            "RutasAsignadas": [],
+            "Credenciales": {},
+            "GruposAsignados": []
+        },
+        "camperCampusLands": {
+            "1": {
+                "identificacion": "1",
+                "Nombre": "1",
+                "Apellido": "1",
+                "Direccion": "1",
+                "acudiente": "1",
+                "telefono": 1,
+                "rol": "Camper",
+                "Estado": "Aprobado",
+                "riesgoCamper": "Riesgo",
+                "Grupo": null,
+                "Skill": {
+                    "Skill Actual": {
+                        "Prueba": 0,
+                        "Trabajos": 0,
+                        "Quizes": 0,
+                        "Definitiva": 0
+                    },
+                    "Skill Culminadas": {
+                        "Nombre Skill Culminado": {
+                            "Prueba": 0,
+                            "Trabajos": 0,
+                            "Quizes": 0,
+                            "Definitiva": 0
+                        }
+                    }
+                },
+                "Credenciales": {
+                    "correo": "samuelcalderon",
+                    "password": "1234"
+                },
+                "Nota Examen Ingreso": 99
+            },
+            "2": {
+                "identificacion": "2",
+                "Nombre": "22",
+                "Apellido": "2",
+                "Direccion": "2",
+                "acudiente": "2",
+                "telefono": 2,
+                "rol": "Camper",
+                "Estado": "Inscrito",
+                "riesgoCamper": "Sin Riesgo",
+                "Grupo": null,
+                "Skill": {
+                    "Skill Actual": {
+                        "Prueba": 0,
+                        "Trabajos": 0,
+                        "Quizes": 0,
+                        "Definitiva": 0
+                    },
+                    "Skill Culminadas": {
+                        "Nombre Skill Culminado": {
+                            "Prueba": 0,
+                            "Trabajos": 0,
+                            "Quizes": 0,
+                            "Definitiva": 0
+                        }
+                    }
+                },
+                "Credenciales": {
+                    "correo": "felie",
+                    "password": "1234"
+                }
+            },
+            "3": {
+                "identificacion": "3",
+                "Nombre": "3",
+                "Apellido": "3",
+                "Direccion": "3",
+                "acudiente": "3",
+                "telefono": 3,
+                "rol": "Camper",
+                "Estado": "Inscrito",
+                "riesgoCamper": "Sin Riesgo",
+                "Grupo": "Grupo 1",
+                "Skill": {
+                    "Skill Actual": {
+                        "Prueba": 0,
+                        "Trabajos": 0,
+                        "Quizes": 0,
+                        "Definitiva": 0
+                    },
+                    "Skill Culminadas": {
+                        "Nombre Skill Culminado": {
+                            "Prueba": 0,
+                            "Trabajos": 0,
+                            "Quizes": 0,
+                            "Definitiva": 0
+                        }
+                    }
+                },
+                "Credenciales": {
+                    "correo": "le",
+                    "password": "1234"
+                }
+            }
+        },
+        "trainerCampusLands": {
+            "identificacion": "1",
+            "Nombre": "1",
+            "Apellido": "1",
+            "Telefono": "1",
+            "Email": "1",
+            "Direccion": "1",
+            "Habilidades": "1",
+            "StackTecnologico": "1",
+            "Disponibilidad": "1",
+            "Experiencia": "1",
+            "Rol": "trainer",
+            "Estado": "Activo",
+            "RutasAsignadas": [],
+            "Credenciales": {},
+            "GruposAsignados": [],
+            "2": {
+                "identificacion": "2",
+                "Nombre": "2",
+                "Apellido": "2",
+                "Telefono": "2",
+                "Email": "2",
+                "Direccion": "2",
+                "Habilidades": "2",
+                "StackTecnologico": "2",
+                "Disponibilidad": "2",
+                "Experiencia": "2",
+                "Rol": "trainer",
+                "Estado": "Activo",
+                "RutasAsignadas": [
+                    "Java"
+                ],
+                "Credenciales": {},
+                "GruposAsignados": []
+            },
+            "3": {
+                "identificacion": "3",
+                "Nombre": "3",
+                "Apellido": "3",
+                "Telefono": "3",
+                "Email": "3",
+                "Direccion": "3",
+                "Habilidades": "3",
+                "StackTecnologico": "3",
+                "Disponibilidad": "3",
+                "Experiencia": "3",
+                "Rol": "trainer",
+                "Estado": "Activo",
+                "RutasAsignadas": [],
+                "Credenciales": {},
+                "GruposAsignados": []
+            },
+            "camperCampusLands": {
+                "1": {
+                    "identificacion": "1",
+                    "Nombre": "1",
+                    "Apellido": "1",
+                    "Direccion": "1",
+                    "acudiente": "1",
+                    "telefono": 1,
+                    "rol": "Camper",
+                    "Estado": "Aprobado",
+                    "riesgoCamper": "Riesgo",
+                    "Grupo": null,
+                    "Skill": {
+                        "Skill Actual": {
+                            "Prueba": 0,
+                            "Trabajos": 0,
+                            "Quizes": 0,
+                            "Definitiva": 0
+                        },
+                        "Skill Culminadas": {
+                            "Nombre Skill Culminado": {
+                                "Prueba": 0,
+                                "Trabajos": 0,
+                                "Quizes": 0,
+                                "Definitiva": 0
+                            }
+                        }
+                    },
+                    "Credenciales": {
+                        "correo": "samuelcalderon",
+                        "password": "1234"
+                    },
+                    "Nota Examen Ingreso": 99
+                },
+                "2": {
+                    "identificacion": "2",
+                    "Nombre": "22",
+                    "Apellido": "2",
+                    "Direccion": "2",
+                    "acudiente": "2",
+                    "telefono": 2,
+                    "rol": "Camper",
+                    "Estado": "Inscrito",
+                    "riesgoCamper": "Sin Riesgo",
+                    "Grupo": null,
+                    "Skill": {
+                        "Skill Actual": {
+                            "Prueba": 0,
+                            "Trabajos": 0,
+                            "Quizes": 0,
+                            "Definitiva": 0
+                        },
+                        "Skill Culminadas": {
+                            "Nombre Skill Culminado": {
+                                "Prueba": 0,
+                                "Trabajos": 0,
+                                "Quizes": 0,
+                                "Definitiva": 0
+                            }
+                        }
+                    },
+                    "Credenciales": {
+                        "correo": "felie",
+                        "password": "1234"
+                    }
+                },
+                "3": {
+                    "identificacion": "3",
+                    "Nombre": "3",
+                    "Apellido": "3",
+                    "Direccion": "3",
+                    "acudiente": "3",
+                    "telefono": 3,
+                    "rol": "Camper",
+                    "Estado": "Inscrito",
+                    "riesgoCamper": "Sin Riesgo",
+                    "Grupo": "Grupo 1",
+                    "Skill": {
+                        "Skill Actual": {
+                            "Prueba": 0,
+                            "Trabajos": 0,
+                            "Quizes": 0,
+                            "Definitiva": 0
+                        },
+                        "Skill Culminadas": {
+                            "Nombre Skill Culminado": {
+                                "Prueba": 0,
+                                "Trabajos": 0,
+                                "Quizes": 0,
+                                "Definitiva": 0
+                            }
+                        }
+                    },
+                    "Credenciales": {
+                        "correo": "le",
+                        "password": "1234"
+                    }
+                }
+            },
+            "trainerCampusLands": {
+                "identificacion": "1",
+                "Nombre": "1",
+                "Apellido": "1",
+                "Telefono": "1",
+                "Email": "1",
+                "Direccion": "1",
+                "Habilidades": "1",
+                "StackTecnologico": "1",
+                "Disponibilidad": "1",
+                "Experiencia": "1",
+                "Rol": "trainer",
+                "Estado": "Activo",
+                "RutasAsignadas": [],
+                "Credenciales": {},
+                "GruposAsignados": [],
+                "2": {
+                    "identificacion": "2",
+                    "Nombre": "2",
+                    "Apellido": "2",
+                    "Telefono": "2",
+                    "Email": "2",
+                    "Direccion": "2",
+                    "Habilidades": "2",
+                    "StackTecnologico": "2",
+                    "Disponibilidad": "2",
+                    "Experiencia": "2",
+                    "Rol": "trainer",
+                    "Estado": "Activo",
+                    "RutasAsignadas": [
+                        "Java"
+                    ],
+                    "Credenciales": {},
+                    "GruposAsignados": []
+                },
+                "3": {
+                    "identificacion": "3",
+                    "Nombre": "3",
+                    "Apellido": "3",
+                    "Telefono": "3",
+                    "Email": "3",
+                    "Direccion": "3",
+                    "Habilidades": "3",
+                    "StackTecnologico": "3",
+                    "Disponibilidad": "3",
+                    "Experiencia": "3",
+                    "Rol": "trainer",
+                    "Estado": "Activo",
+                    "RutasAsignadas": [],
+                    "Credenciales": {},
+                    "GruposAsignados": []
+                }
+            },
+            "adminCampusLands": {}
+        },
+        "adminCampusLands": {}
+    },
+    "adminCampusLands": {
+        "9": {
+            "Nombre": "1",
+            "Apellido": "1",
+            "Telefono": "1",
+            "Estudios": "1",
+            "Experiencia": "1",
+            "Estado": "Activo",
+            "Rol": "Admin"
+        }
+    }
 }
