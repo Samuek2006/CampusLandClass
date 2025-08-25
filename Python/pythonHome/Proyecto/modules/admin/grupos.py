@@ -49,6 +49,7 @@ def crearGrupo():
     data["grupos"][str(idGrupo)] = grupo
     corefiles.write_json(DB_Grupos, data)
     print(f"✅ Grupo '{nombre}' creado con la ruta '{ruta_asignada}'.")
+    return idGrupo
 
 
 def asignarTrainerAGrupo(idGrupo, docTrainer):

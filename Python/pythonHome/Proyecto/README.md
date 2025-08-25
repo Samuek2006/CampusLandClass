@@ -4,7 +4,7 @@ Samuel Felipe Calderon Soto
 # 📚 Proyecto de Gestión - CampusLands
 
 Este proyecto es un sistema en **Python** para la gestión de datos de un campus, incluyendo **áreas, salones, grupos, rutas de aprendizaje, campers y trainers**.  
-Toda la información se administra mediante menús y se guarda en archivos **JSON**.
+Toda la información se administra mediante menús y s    e guarda en archivos **JSON**.
 
 ---
 
@@ -29,22 +29,22 @@ Toda la información se administra mediante menús y se guarda en archivos **JSO
 ---
 
 ## 📂 Estructura del Proyecto
-
-CampusLands
-├── main.py # Archivo principal de ejecución
-├── data/ # Archivos JSON con la información
-│ ├── AreasSalones.json
-│ ├── CampusLands.json
-│ ├── Grupos.json
-│ └── RutasAprendizaje.json
-├── modules/ # Módulos del sistema
-│ ├── menus.py
-│ ├── admin/ # Funciones de administrador
-│ ├── vistaCamper/ # Funciones de campers
-│ └── vistaTrainer/ # Funciones de trainers
-├── util/ # Utilidades (login, sesión, manejo de archivos)
-└── README.md # Este archivo
-
+```
+CampusLands  
+├── main.py # Archivo principal de ejecución  
+├── data/ # Archivos JSON con la información  
+│ ├── AreasSalones.json  
+│ ├── CampusLands.json  
+│ ├── Grupos.json  
+│ └── RutasAprendizaje.json  
+├── modules/ # Módulos del sistema  
+│ ├── menus.py  
+│ ├── admin/ # Funciones de administrador  
+│ ├── vistaCamper/ # Funciones de campers  
+│ └── vistaTrainer/ # Funciones de trainers  
+├── util/ # Utilidades (login, sesión, manejo de archivos)  
+└── README.md # Este archivo  
+```
 
 ---
 

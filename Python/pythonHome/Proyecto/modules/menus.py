@@ -7,6 +7,7 @@ from modules.vistaTrainer import trainer as trainer
 from modules.admin import rutas as rutas
 from modules.admin import grupos as grupos
 from modules.admin import areasSalones as areas
+from modules.admin import admin as admin
 
 DB_RutasAprendizaje = "data/RutasAprendizaje.json"
 corefiles.initialize_json(DB_RutasAprendizaje, {"rutasAprendizaje": {}})
@@ -227,8 +228,10 @@ def SubGestionCampers():
 
             match opcion:
                 case 1:
+                    util.Limpiar_consola()
                     login.register()
                     util.Stop()
+                    util.Limpiar_consola()
 
                 case 2:
                     data = corefiles.read_json(DB_CampusLands)
@@ -325,7 +328,7 @@ def SubAdmisiones():
                 case 3:
                     util.Limpiar_consola()
                     print('=== Listado de Campers Aprobados ===')
-                    camper.listarAprobados()
+                    camper.listarCampersAprobados()
 
                 case 0:
                     print('Regresando ...')
@@ -362,7 +365,7 @@ def SubGestionTrainer():
             match opcion:
                 case 1:
                     util.Limpiar_consola()
-                    trainer.addTrainer()
+                    admin.addTrainer()
                     util.Stop()
                     util.Limpiar_consola()
 
@@ -422,13 +425,26 @@ def SubGestionRutas():
 
             match opcion:
                 case 1:
+                    util.Limpiar_consola()
                     rutas.addRutasAprendizaje()
+                    util.Limpiar_consola()
+
                 case 2:
+                    util.Limpiar_consola()
                     rutas.rutasExistentes()
+                    input('Enter Para Continuar...')
+                    util.Limpiar_consola()
+
                 case 3:
+                    util.Limpiar_consola()
                     rutas.gestionarModulosRuta()
+                    util.Limpiar_consola()
+
                 case 4:
+                    util.Limpiar_consola()
                     rutas.definirSGBD()
+                    util.Limpiar_consola()
+
                 case 0:
                     print("Saliendo de Gestión de Rutas...")
                     break
@@ -549,13 +565,29 @@ def SubGestionAreasSalones():
                     print("🚪 Saliendo de Gestión de Áreas/Salones...")
                     break
                 case 1:
+                    util.Limpiar_consola()
                     areas.verAreas()
+                    input('Enter Para Continuar...')
+                    util.Limpiar_consola()
+
                 case 2:
+                    util.Limpiar_consola()
                     areas.consultarDisponibilidad()
+                    input('Enter Para Continuar...')
+                    util.Limpiar_consola()
+
                 case 3:
+                    util.Limpiar_consola()
                     areas.crearArea()
+                    input('Enter Para Continuar...')
+                    util.Limpiar_consola()
+
                 case 4:
+                    util.Limpiar_consola()
                     areas.asignarHorarioGrupo()
+                    input('Enter Para Continuar...')
+                    util.Limpiar_consola()
+
                 case _:
                     print("⚠️ Opción inválida. Ingresa 0-4.")
 
@@ -640,6 +672,7 @@ def SubReportes():
                     util.Limpiar_consola()
                     print("📋 Reporte: Campers con bajo rendimiento")
                     camper.campersBajoRendimiento()
+                    util.Limpiar_consola()
 
                 case "5":
                     util.Limpiar_consola()

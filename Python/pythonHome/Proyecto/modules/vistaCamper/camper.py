@@ -2,7 +2,6 @@ from util import utilidades as util
 from modules.admin import admin as admin
 from util import corefiles as core
 from util import session as session
-import modules.menus as menus
 
 DB_CampusLands = "data/CampusLands.json"
 
@@ -10,6 +9,7 @@ DB_CampusLands = "data/CampusLands.json"
 core.initialize_json(DB_CampusLands, {"camperCampusLands": {}})
 
 def userRegister():
+    util.Limpiar_consola()
     print('=== REGISTRARSE A CAMPUSLANDS ===')
     campers = admin.addCamper()
     print('''
@@ -18,6 +18,7 @@ def userRegister():
 === Logeate nuevamente para que se te Asigne la Prueba Logica ===
 ''')
     util.Stop()
+    util.Limpiar_consola()
     return campers
 
 def pruebaLogica(user_id: str):
@@ -129,6 +130,7 @@ def listarCampersInscritos():
     for cid, camper in campers.items():
         if camper.get("Estado") == "Inscrito":
             print(f"- {camper['Nombre']} {camper['Apellido']} ({cid})")
+    input('Enter Para Continuar..')
 
 def listarCampersAprobados():
     """
@@ -178,6 +180,7 @@ def asociacionesCamperTrainerRuta():
         for cid in grupo.get("Campers", []):
             camper_name = campers.get(cid, {}).get("Nombre", "Desconocido")
             print(f"- Camper {camper_name} ({cid}) → Trainer {trainer_name} → Ruta {ruta}")
+    input('Enter Para Continuar...')
 
 def estadisticasGeneral():
     data = core.read_json(DB_CampusLands)
@@ -191,6 +194,7 @@ def estadisticasGeneral():
     print(f"✅ Aprobados: {aprobados}")
     print(f"❌ Reprobados: {perdidos}")
     print(f"📌 Inscritos: {inscritos}")
+    input('Enter Para Continuar...')
 
 def campersEnRiesgoAlto():
     data = core.read_json(DB_CampusLands)
@@ -199,3 +203,4 @@ def campersEnRiesgoAlto():
     for cid, camper in campers.items():
         if camper.get("riesgoCamper") == "Alto" or camper.get("riesgoCamper") == "Expulsado":
             print(f"- {camper['Nombre']} {camper['Apellido']} ({cid}) → Riesgo: {camper['riesgoCamper']}")
+    input('Enter Para Continuar...')

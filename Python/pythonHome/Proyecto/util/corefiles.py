@@ -2,13 +2,14 @@ import os
 import json
 from typing import Dict, List, Optional
 
-def read_json(file_path: str) -> Dict:
-    """Lee y retorna el contenido del archivo JSON"""
-    try:
-        with open(file_path, "r", encoding='utf-8') as file:
+def read_json(file_path):
+    if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
+        return {}  # Devuelve dict vacío si el archivo no existe o está vacío
+    with open(file_path, "r", encoding="utf-8") as file:
+        try:
             return json.load(file)
-    except FileNotFoundError:
-        return {}
+        except json.JSONDecodeError:
+            return {}  # Maneja archivo corrupto
 
 def write_json(file_path: str, data: Dict) -> None:
     """Escribe datos en el archivo JSON"""
@@ -21,7 +22,7 @@ def update_json(file_path: str, data: Dict, path: Optional[List[str]] = None) ->
     Ejemplo: update_json('db.json', {'nuevo': 'dato'}, ['ruta', 'subruta'])
     """
     current_data = read_json(file_path)
-    
+
     if not path:
         current_data.update(data)
     else:

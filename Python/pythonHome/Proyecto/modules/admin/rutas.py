@@ -37,59 +37,20 @@ def addRutasAprendizaje():
             if tipo == "P":
                 menuRuta = menus.menuRutasAprendizaje()
                 match menuRuta:
-                    case 1:
-                        ruta = {
-                            "Fundamentos de Programacion": {
-                                "Modulo 1": "Introducción a la Algoritmia",
-                                "Modulo 2": "PSeInt",
-                                "Modulo 3": "Python",
-                                "Modulo 4": "Proyecto",
-                                "Modulo 5": "Examen"
-                            }
-                        }
-                    case 2:
-                        ruta = {
-                            "Programacion Web": {
-                                "Modulo 1": "HTML",
-                                "Modulo 2": "CSS",
-                                "Modulo 3": "Bootstrap",
-                                "Modulo 4": "Proyecto",
-                                "Modulo 5": "Examen"
-                            }
-                        }
-                    case 3:
-                        ruta = {
-                            "Programacion Formal": {
-                                "Modulo 1": "Java",
-                                "Modulo 2": "JavaScript",
-                                "Modulo 3": "C#",
-                                "Modulo 4": "Proyecto",
-                                "Modulo 5": "Examen"
-                            }
-                        }
-                    case 4:
-                        ruta = {
-                            "Bases de Datos": {
-                                "Modulo 1": "MySQL (SGDB principal)",
-                                "Modulo 2": "MongoDB (alternativo NoSQL)",
-                                "Modulo 3": "PostgreSQL (alternativo SQL)",
-                                "Modulo 4": "Proyecto",
-                                "Modulo 5": "Examen"
-                            }
-                        }
-                    case 5:
-                        ruta = {
-                            "Backend": {
-                                "Modulo 1": "NetCore",
-                                "Modulo 2": "Spring Boot",
-                                "Modulo 3": "NodeJS y Express",
-                                "Modulo 4": "Proyecto",
-                                "Modulo 5": "Examen"
-                            }
-                        }
-                    case 0:
+                    case "Fundamentos de Programacion":
+                        ruta = { ... }
+                    case "Programacion Web":
+                        ruta = { ... }
+                    case "Programacion Formal":
+                        ruta = { ... }
+                    case "Bases de Datos":
+                        ruta = { ... }
+                    case "Backend":
+                        ruta = { ... }
+                    case None:
                         print("Saliendo del menú de rutas predefinidas...")
                         continue
+
                     case _:
                         print("⚠️ Opción inválida.")
                         continue

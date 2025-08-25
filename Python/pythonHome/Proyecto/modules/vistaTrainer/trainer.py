@@ -38,6 +38,7 @@ def listarTrainers():
     print("\n=== Lista de Trainers ===")
     for doc, t in trainers.items():
         print(f"ID: {doc} | {t['Nombre']} {t['Apellido']} | Estado: {t['Estado']} | Disponibilidad: {t['Disponibilidad']}")
+    input('Enter Para Continuar...')
 
 def asignarDisponibilidadRutas():
     data = corefiles.read_json(DB_CampusLands)
@@ -75,5 +76,7 @@ def listarTrainersActivos():
 
     print("\n=== Trainers Activos ===")
     for doc, t in trainers.items():
-        if t["Estado"].lower() == "activo":
-            print(f"ID: {doc} | {t['Nombre']} {t['Apellido']} | Disponibilidad: {t['Disponibilidad']} | Rutas: {t['RutasAsignadas']}")
+        if t.get("Estado", "").strip().lower() == "activo":
+            print(f"ID: {doc} | {t.get('Nombre', '')} {t.get('Apellido', '')} | "
+                    f"Disponibilidad: {t.get('Disponibilidad', '')} | Rutas: {t.get('RutasAsignadas', [])}")
+    input('Enter Para Continuar...')

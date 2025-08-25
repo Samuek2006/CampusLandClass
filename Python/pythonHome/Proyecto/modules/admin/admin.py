@@ -17,7 +17,7 @@ def addCamper():
     direccion = input('Ingresa la Direccion de Residencia del Camper: ')
     acudiente = input('Ingresa el Nombre de Acudiente del Camper: ')
     telefono = int(input('Ingresa el Telefono del Camper: '))
-    riesgoCamper = riesgo.advertencias()
+    riesgoCamper = 'Sin Riesgo'
 
     campers = {
         "identificacion": identificacion,
@@ -89,11 +89,12 @@ def addTrainer():
     }
 
     corefiles.update_json(DB_CampusLands, trainer, ["trainerCampusLands"])
-
+    grupo = grupos.crearGrupo()
     # 🔥 Intentar asignar trainer automáticamente a un grupo disponible
-    grupos.asignarTrainerAGrupoAuto(identificacion)
+    grupos.asignarTrainerAGrupo(grupo, identificacion)
 
     print(f'✅ Trainer {name} {apellido} creado correctamente.')
+    input('Enter para Continuar...')
 
 def addAdmin():
     identificacion = input('Ingrese el Documento de identificacion del Admin: ').strip()
