@@ -8,6 +8,7 @@ from modules.admin import rutas as rutas
 from modules.admin import grupos as grupos
 from modules.admin import areasSalones as areas
 from modules.admin import admin as admin
+import util.session as session
 
 DB_RutasAprendizaje = "data/RutasAprendizaje.json"
 corefiles.initialize_json(DB_RutasAprendizaje, {"rutasAprendizaje": {}})
@@ -244,10 +245,16 @@ def SubGestionCampers():
                     util.Limpiar_consola()
                     data = corefiles.read_json(DB_CampusLands)
                     print('=== Listar Campers ===')
-                    for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
+                    for section in ["camperCampusLands"]:
                         print(f"\n--- {section} ---")
                         for _, info in data.get(section, {}).items():
-                            print(f"ID: {info['identificacion']} | Nombre: {info['Nombre']} {info['Apellido']} | Estado: {info['Estado']} | Rol: {info['rol']}")
+                            if isinstance(info, dict):  # ✅ solo procesar si es dict
+                                print(f"ID: {info.get('identificacion', 'N/A')} | "
+                                    f"Nombre: {info.get('Nombre', '')} {info.get('Apellido', '')} | "
+                                    f"Estado: {info.get('Estado', 'N/A')} | "
+                                    f"Rol: {info.get('Rol', info.get('rol', 'N/A'))}")
+                            else:
+                                print(f"⚠️ Registro inválido en {section}: {info}")
                     input('Enter Para Continuar...')
                     util.Stop()
                     util.Limpiar_consola()
@@ -820,18 +827,31 @@ def menuTrainer():
 
             match opcion:
                 case 1:
-                    pass
+                    util.Limpiar_consola()
+                    SubInformacionTrainer()
+                    util.Stop()
+                    util.Limpiar_consola()
 
                 case 2:
-                    pass
+                    util.Limpiar_consola()
+                    SubCamperAsignadosTrainer()
+                    util.Stop()
+                    util.Limpiar_consola()
 
                 case 3:
-                    pass
+                    util.Limpiar_consola()
+                    SubRegistrarNotasCamper()
+                    util.Stop()
+                    util.Limpiar_consola()
 
                 case 4:
-                    pass
+                    util.Limpiar_consola()
+                    SubResultadosCampers()
+                    util.Stop()
+                    util.Limpiar_consola()
 
                 case 0:
+                    util.Limpiar_consola()
                     print('Saliendo...')
                     util.Stop()
                     util.Limpiar_consola()
@@ -854,9 +874,11 @@ def menuTrainer():
 """
 Sub Menus del Trainer
 """
-def SubInformacionTrainer():
+def SubInformacionTrainer(trainer_id):
     while True:
         try:
+            util.Limpiar_consola()
+
             print("""
 === Mi Informacion ===
 1. Ver mis datos personales.
@@ -864,6 +886,53 @@ def SubInformacionTrainer():
 3. Ver disponibilidad de horario (slots asignados).
 0. Salir
 """)
+            opcion = int(input("Selecciona una opción: "))
+
+            data = corefiles.read_json(DB_CampusLands)
+            trainer = data.get("trainerCampusLands", {}).get(trainer_id)
+
+            if not trainer:
+                print("❌ Trainer no encontrado.")
+                return
+
+            match opcion:
+                case 1:
+                    util.Limpiar_consola()
+                    print(f"📌 Datos de {trainer['Nombre']} {trainer['Apellido']}")
+                    for k, v in trainer.items():
+                        if k not in ["Rutas", "Horarios"]:
+                            print(f"- {k}: {v}")
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 2:
+                    util.Limpiar_consola()
+                    print("📌 Rutas que puedo dictar:")
+                    for ruta in trainer.get("Rutas", []):
+                        print(f"- {ruta}")
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 3:
+                    util.Limpiar_consola()
+                    print("📌 Disponibilidad de horarios:")
+                    for slot in trainer.get("Horarios", []):
+                        print(f"- {slot}")
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 0:
+                    util.Limpiar_consola()
+                    print('Regresando...')
+                    util.Stop()
+                    util.Limpiar_consola()
+                    break
+
+                case _:
+                    util.Limpiar_consola()
+                    print("⚠️ Ingresa una opción válida")
+                    util.Stop()
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -874,15 +943,61 @@ def SubInformacionTrainer():
             print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú principal.")
             break
 
-def SubCamperAsignadosTrainer():
+def SubCamperAsignadosTrainer(trainer_id):
     while True:
         try:
+            util.Limpiar_consola()
+
             print("""
 === Gestion Campers Asignados ===
 1. Listar campers de mi grupo actual.
 2. Consultar datos de un camper.
 0. Salir
 """)
+            opcion = int(input("Selecciona una opción: "))
+
+            data = corefiles.read_json(DB_CampusLands)
+
+            # Buscar grupos asignados al trainer
+            grupos = [g for g, info in data.get("gruposCampusLands", {}).items() if info.get("Trainer") == trainer_id]
+
+            match opcion:
+                case 1:
+                    util.Limpiar_consola()
+                    for g in grupos:
+                        print(f"\n📌 Grupo {g}")
+                        for camper_id in data["gruposCampusLands"][g].get("Campers", []):
+                            camper = data["camperCampusLands"][camper_id]
+                            print(f"- {camper['Nombre']} {camper['Apellido']} ({camper_id})")
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 2:
+                    util.Limpiar_consola()
+                    cid = input("Ingrese ID del camper: ").strip()
+                    camper = data.get("camperCampusLands", {}).get(cid)
+                    if camper:
+                        print(f"📌 Datos de {camper['Nombre']} {camper['Apellido']}")
+                        for k, v in camper.items():
+                            print(f"- {k}: {v}")
+                    else:
+                        print("❌ Camper no encontrado.")
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 0:
+                    util.Limpiar_consola()
+                    print('Regresando...')
+                    util.Stop()
+                    util.Limpiar_consola()
+                    break
+
+                case _:
+                    util.Limpiar_consola()
+                    print("⚠️ Ingresa una opción válida")
+                    util.Stop()
+                    util.Limpiar_consola()
+
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -894,8 +1009,15 @@ def SubCamperAsignadosTrainer():
             break
 
 def SubRegistrarNotasCamper():
+    data = corefiles.read_json(DB_CampusLands)
+    grupo = None
+    camper_id = None
+    notas = {"teoria": None, "practica": None, "actividades": None, "definitiva": None}
+
     while True:
         try:
+            util.Limpiar_consola()
+
             print("""
 === Gestion De Resgistro Notas ===
 1. Seleccionar módulo actual.
@@ -905,6 +1027,63 @@ def SubRegistrarNotasCamper():
 5. Guardar en el historial del camper (y marcar aprobado/bajo rendimiento).
 0. Salir
 """)
+            opcion = input("👉 Selecciona una opción: ").strip()
+
+            match opcion:
+                case "1":
+                    util.Limpiar_consola()
+                    trainer_id = session.session["user_id"]
+                    grupo = trainer.seleccionar_grupo(trainer_id, data)
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "2":
+                    util.Limpiar_consola()
+                    if not grupo:
+                        print("⚠️ Primero selecciona un grupo (opción 1).")
+                        continue
+                    camper_id = trainer.seleccionar_camper(grupo, data)
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "3":
+                    util.Limpiar_consola()
+                    if not camper_id:
+                        print("⚠️ Primero selecciona un camper (opción 2).")
+                        continue
+                    notas.update(trainer.ingresar_notas())
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "4":
+                    util.Limpiar_consola()
+                    notas["definitiva"] = trainer.calcular_definitiva(notas)
+                    if notas["definitiva"]:
+                        print(f"📊 Nota definitiva: {notas['definitiva']}")
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "5":
+                    util.Limpiar_consola()
+                    if not camper_id or notas["definitiva"] is None:
+                        print("⚠️ Selecciona camper y calcula la nota antes de guardar.")
+                        continue
+                    trainer.guardar_notas(camper_id, notas, data)
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "0":
+                    util.Limpiar_consola()
+                    print("👋 Saliendo del menú de registro de notas...")
+                    util.Stop()
+                    util.Limpiar_consola()
+                    break
+
+                case _:
+                    util.Limpiar_consola()
+                    print("❌ Opción inválida, intenta de nuevo.")
+                    util.Stop()
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -916,23 +1095,45 @@ def SubRegistrarNotasCamper():
             break
 
 def SubResultadosCampers():
+    trainer_id = session.session["user_id"]  # 👈 lo obtenemos de la sesión
+    data = corefiles.read_json(DB_CampusLands)
+
     while True:
         try:
             print("""
-=== Gestion Resultados de mis Campers ===
-1. Ver notas por módulo de mis campers.
-2. Filtrar campers aprobados / con bajo rendimiento.
+=== 📊 Gestión Resultados de mis Campers ===
+1. Ver notas por módulo de mis campers
+2. Filtrar campers aprobados / bajo rendimiento
 3. Exportar Reporte
 0. Salir
 """)
+            opcion = input("👉 Selecciona una opción: ").strip()
+
+            match opcion:
+                case "1":
+                    trainer.ver_notas_modulo(trainer_id, data)
+
+                case "2":
+                    filtro = input("¿Filtrar por (Aprobado / Bajo Rendimiento)? ").strip()
+                    trainer.filtrar_campers(trainer_id, data, filtro)
+
+                case "3":
+                    trainer.exportar_reporte(trainer_id, data)
+
+                case "0":
+                    print("👋 Saliendo del menú de resultados...")
+                    break
+
+                case _:
+                    print("❌ Opción inválida, intenta de nuevo.")
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
         except KeyboardInterrupt:
-            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú principal.")
+            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú...")
             break
         except EOFError:
-            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú principal.")
+            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú...")
             break
 
 #Menu Campers

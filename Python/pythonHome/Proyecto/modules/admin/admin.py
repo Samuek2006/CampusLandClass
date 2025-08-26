@@ -123,27 +123,40 @@ def addAdmin():
     print(f'✅ Admin {name} {apellido} creado correctamente')
 
 def editarAdmin():
-    identificacion = input("Ingrese el Documento del Admin a editar: ").strip()
     data = corefiles.read_json(DB_CampusLands)
+    admins = data.get("adminCampusLands", {})
 
-    if identificacion not in data.get("adminCampusLands", {}):
-        print("❌ Admin no encontrado.")
+    doc = input("Ingrese el documento del Admin que desea editar: ").strip()
+    if doc not in admins:
+        print("⚠️ Admin no encontrado.")
         return
 
-    campo = input("¿Qué campo quieres editar? (Nombre, Apellido, Telefono, Estudios, Experiencia, Estado): ").strip()
-    nuevo_valor = input(f"Ingrese el nuevo valor para {campo}: ").strip()
+    admin = admins[doc]
+    print(f"\n=== Editando Admin: {admin['Nombre']} {admin['Apellido']} ===")
 
-    data["adminCampusLands"][identificacion][campo] = nuevo_valor
-    corefiles.save_json(DB_CampusLands, data)
-    print(f"✅ Admin {identificacion} actualizado correctamente.")
+    for key in admin.keys():
+        if key in ["Rol", "Credenciales"]:  # campos que no se editan aquí
+            continue
+        nuevo_valor = input(f"{key} actual ({admin[key]}). Nuevo valor (Enter para no cambiar): ").strip()
+        if nuevo_valor:
+            admin[key] = nuevo_valor
+
+    data["adminCampusLands"][doc] = admin
+    corefiles.update_json(DB_CampusLands, data, ["adminCampusLands"])
+    print("✅ Admin actualizado correctamente.")
     input('Enter Para Continuar...')
 
 def listarAdminsTotales():
     data = corefiles.read_json(DB_CampusLands)
-    for id, info in data.get("adminCampusLands", {}).items():
-        print(f"- {id}: {info['Nombre']} {info['Apellido']} ({info['Estado']})")
-    input('Enter Para Continuar...')
 
+    print("\n=== Lista de Admins ===")
+    for id, info in data.get("adminCampusLands", {}).items():
+        nombre = info.get("Nombre", "N/A")
+        apellido = info.get("Apellido", "N/A")
+        estado = info.get("Estado", "Desconocido")
+        print(f"- {id}: {nombre} {apellido} ({estado})")
+
+    input('Enter Para Continuar...')
 
 def listarAdminsActivos():
     data = corefiles.read_json(DB_CampusLands)

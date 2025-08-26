@@ -24,7 +24,7 @@ def register():
     # Validar que no exista ya el correo en ninguna sección
     for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
         for _, info in data.get(section, {}).items():
-            if info.get("Credenciales", {}).get("correo") == correo:
+            if isinstance(info, dict) and info.get("Credenciales", {}).get("correo")==correo:
                 print("❌ Este correo ya está registrado, intenta con otro.")
                 return
 
