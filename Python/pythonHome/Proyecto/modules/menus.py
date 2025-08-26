@@ -1174,13 +1174,13 @@ def menuCamper():
 
             match opcion:
                 case 1:
-                    pass
+                    SubInformacionCamper()
 
                 case 2:
-                    pass
+                    SubMatriculaCamper()
 
                 case 3:
-                    pass
+                    SubProgresoAcademicoCamper()
 
                 case 0:
                     util.Limpiar_consola()
@@ -1211,13 +1211,47 @@ SubMenus Campers
 def SubInformacionCamper():
     while True:
         try:
+            util.Limpiar_consola()
             print("""
-=== Gestion mi Informacion ===
+=== 📌 Gestión de mi Información ===
 1. Ver datos personales
 2. Ver estado actual
-3. Ver si está en “riesgo alto” o no.
-0. Salir
+3. Ver si estoy en “riesgo alto” o no
+0. Volver
 """)
+            opcion = input("👉 Selecciona una opción: ").strip()
+
+            match opcion:
+                case "1":
+                    util.Limpiar_consola()
+                    camper.ver_datos_personales()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "2":
+                    util.Limpiar_consola()
+                    camper.ver_estado_actual()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "3":
+                    util.Limpiar_consola()
+                    camper.verificar_riesgo()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "0":
+                    util.Limpiar_consola()
+                    print('Regresando')
+                    util.Stop()
+                    util.Limpiar_consola()
+                    break
+
+                case _:
+                    util.Limpiar_consola()
+                    print("⚠️ Opción inválida.")
+                    util.Stop()
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -1231,14 +1265,54 @@ def SubInformacionCamper():
 def SubMatriculaCamper():
     while True:
         try:
+            util.Limpiar_consola()
             print("""
-=== Gestion de Mi Matricula ===
-1. Ver ruta asignada.
-2. Ver trainer asignado.
-3. Ver fechas de inicio y fin.
-4. Ver salón y franja horaria (slot de 4h).
-0. Salir
+=== 🎓 Gestión de mi Matrícula ===
+1. Ver ruta asignada
+2. Ver trainer asignado
+3. Ver fechas de inicio y fin
+4. Ver salón y franja horaria (4h)
+0. Volver
 """)
+            opcion = input("👉 Selecciona una opción: ").strip()
+
+            match opcion:
+                case "1":
+                    util.Limpiar_consola()
+                    camper.ver_ruta_asignada()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "2":
+                    util.Limpiar_consola()
+                    camper.ver_trainer_asignado()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "3":
+                    util.Limpiar_consola()
+                    camper.ver_fechas_matricula()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "4":
+                    util.Limpiar_consola()
+                    camper.ver_salon_horario()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "0":
+                    util.Limpiar_consola()
+                    print('Regresando')
+                    util.Stop()
+                    util.Limpiar_consola()
+                    break
+
+                case _:
+                    util.Limpiar_consola()
+                    print("⚠️ Opción inválida.")
+                    util.Stop()
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -1252,14 +1326,54 @@ def SubMatriculaCamper():
 def SubProgresoAcademicoCamper():
     while True:
         try:
+            util.Limpiar_consola()
             print("""
-=== Gestion Mi Progreso Academico  ===
-1. Ver historial de módulos cursados.
-2. Mostrar notas finales de cada módulo.
-3. Indicar módulos aprobados o reprobados.
+=== 📊 Gestión de mi Progreso Académico ===
+1. Ver historial de módulos cursados
+2. Mostrar notas finales de cada módulo
+3. Indicar módulos aprobados o reprobados
 4. Mostrar promedio general
-0. Salir
+0. Volver
 """)
+            opcion = input("👉 Selecciona una opción: ").strip()
+
+            match opcion:
+                case "1":
+                    util.Limpiar_consola()
+                    camper.ver_historial_modulos()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "2":
+                    util.Limpiar_consola()
+                    camper.ver_notas_finales()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "3":
+                    util.Limpiar_consola()
+                    camper.ver_aprobados_reprobados()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "4":
+                    util.Limpiar_consola()
+                    camper.ver_promedio_general()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case "0":
+                    util.Limpiar_consola()
+                    print('Regresando')
+                    util.Stop()
+                    util.Limpiar_consola()
+                    break
+
+                case _:
+                    util.Limpiar_consola()
+                    print("⚠️ Opción inválida.")
+                    util.Stop()
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")

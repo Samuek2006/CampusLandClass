@@ -17,7 +17,7 @@
             "idGrupo": 2,
             "nombre": "Grupo 2",
             "ruta": "Java",
-            "trainer": "1",
+            "trainer": "2",
             "campers": [],
             "capacidadMax": 33,
             "estado": "abierto"

@@ -68,8 +68,8 @@ def login():
             cred = info.get("Credenciales", {})
             if cred.get("correo") == correo:
                 if cred.get("password") == password:
-                    # Normalizamos el rol (puede estar como "Rol" o "rol")
-                    rol = info.get("Rol") or info.get("rol")
+                    # Normalizamos el rol (en mayúscula inicial)
+                    rol = (info.get("Rol") or info.get("rol") or "").capitalize()
 
                     if not rol:
                         print("⚠️ El usuario no tiene un rol asignado en la base de datos.")

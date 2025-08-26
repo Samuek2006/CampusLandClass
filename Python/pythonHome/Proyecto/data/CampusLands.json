@@ -10,7 +10,7 @@
             "rol": "Camper",
             "Estado": "Aprobado",
             "riesgoCamper": "Riesgo",
-            "Grupo": "Grupo 1",
+            "Grupo": "Grupo 2",
             "Skill": {
                 "Skill Actual": {
                     "Prueba": 90.0,
@@ -28,7 +28,7 @@
                 }
             },
             "Credenciales": {
-                "correo": "samuelcalderon",
+                "correo": "camper",
                 "password": "1234"
             },
             "Nota Examen Ingreso": 99
