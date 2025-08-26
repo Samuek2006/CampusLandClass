@@ -112,7 +112,8 @@ def addAdmin():
             "Estudios": estudios,
             "Experiencia": exp,
             "Estado": "Activo",
-            "Rol": "Admin"
+            "Rol": "Admin",
+            "Credenciales": {}
         }
     }
 

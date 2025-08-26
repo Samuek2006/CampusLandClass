@@ -29,7 +29,7 @@
             },
             "Credenciales": {
                 "correo": "camper",
-                "password": "1234"
+                "password": "Camper1234"
             },
             "Nota Examen Ingreso": 99
         },
@@ -118,7 +118,7 @@
             ],
             "Credenciales": {
                 "correo": "trainer",
-                "password": "1234"
+                "password": "Trainer1234"
             },
             "GruposAsignados": []
         },
@@ -148,7 +148,11 @@
             "Estudios": "1",
             "Experiencia": "1",
             "Estado": "Activo",
-            "Rol": "Admin"
+            "Rol": "Admin",
+            "Credenciales": {
+                "correo": "admin",
+                "password": "Admin1234"
+            }
         }
     }
 }
