@@ -53,7 +53,6 @@ def register():
     util.Stop()
     util.Limpiar_consola()
 
-
 def login():
     data = core.read_json(DB_CampusLands)
 
@@ -63,10 +62,18 @@ def login():
     # Buscar en campers, trainers, admins
     for section in ["camperCampusLands", "trainerCampusLands", "adminCampusLands"]:
         for user_id, info in data.get(section, {}).items():
+            if not isinstance(info, dict):
+                continue  # seguridad, si se cuela algo que no sea dict
+
             cred = info.get("Credenciales", {})
             if cred.get("correo") == correo:
                 if cred.get("password") == password:
-                    rol = info["rol"]
+                    # Normalizamos el rol (puede estar como "Rol" o "rol")
+                    rol = info.get("Rol") or info.get("rol")
+
+                    if not rol:
+                        print("⚠️ El usuario no tiene un rol asignado en la base de datos.")
+                        return False
 
                     # Guardamos la sesión
                     session.session["is_logged_in"] = True

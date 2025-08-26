@@ -198,7 +198,11 @@ def menuCoordinador():
                     SubGestionCoordinador()
 
                 case 0:
+                    util.Limpiar_consola()
                     print('Saliendo...')
+                    session.cerrar_sesion()
+                    util.Stop()
+                    util.Limpiar_consola()
                     break
 
                 case _:
@@ -811,6 +815,7 @@ def SubReportes():
 
 #Menu Trainer
 def menuTrainer():
+    trainer_id = session.session["user_id"]
     while True:
         try:
             util.Limpiar_consola()
@@ -828,13 +833,13 @@ def menuTrainer():
             match opcion:
                 case 1:
                     util.Limpiar_consola()
-                    SubInformacionTrainer()
+                    SubInformacionTrainer(trainer_id)
                     util.Stop()
                     util.Limpiar_consola()
 
                 case 2:
                     util.Limpiar_consola()
-                    SubCamperAsignadosTrainer()
+                    SubCamperAsignadosTrainer(trainer_id)
                     util.Stop()
                     util.Limpiar_consola()
 
@@ -853,8 +858,10 @@ def menuTrainer():
                 case 0:
                     util.Limpiar_consola()
                     print('Saliendo...')
+                    session.cerrar_sesion()
                     util.Stop()
                     util.Limpiar_consola()
+                    break
 
                 case _:
                     util.Limpiar_consola()
@@ -902,21 +909,23 @@ def SubInformacionTrainer(trainer_id):
                     for k, v in trainer.items():
                         if k not in ["Rutas", "Horarios"]:
                             print(f"- {k}: {v}")
+                    input('Enter Para Continuar...')
                     util.Stop()
                     util.Limpiar_consola()
 
                 case 2:
                     util.Limpiar_consola()
                     print("📌 Rutas que puedo dictar:")
-                    for ruta in trainer.get("Rutas", []):
+                    for ruta in trainer.get("RutasAsignadas", []):
                         print(f"- {ruta}")
+                    input('Enter Para Continuar...')
                     util.Stop()
                     util.Limpiar_consola()
 
                 case 3:
                     util.Limpiar_consola()
                     print("📌 Disponibilidad de horarios:")
-                    for slot in trainer.get("Horarios", []):
+                    for slot in trainer.get("Disponibilidad", []):
                         print(f"- {slot}")
                     util.Stop()
                     util.Limpiar_consola()
@@ -964,13 +973,10 @@ def SubCamperAsignadosTrainer(trainer_id):
             match opcion:
                 case 1:
                     util.Limpiar_consola()
-                    for g in grupos:
-                        print(f"\n📌 Grupo {g}")
-                        for camper_id in data["gruposCampusLands"][g].get("Campers", []):
-                            camper = data["camperCampusLands"][camper_id]
-                            print(f"- {camper['Nombre']} {camper['Apellido']} ({camper_id})")
+                    trainer.SubCamperAsignadosTrainer(trainer_id)
                     util.Stop()
                     util.Limpiar_consola()
+
 
                 case 2:
                     util.Limpiar_consola()
@@ -1033,7 +1039,7 @@ def SubRegistrarNotasCamper():
                 case "1":
                     util.Limpiar_consola()
                     trainer_id = session.session["user_id"]
-                    grupo = trainer.seleccionar_grupo(trainer_id, data)
+                    grupo = trainer.seleccionar_grupo(trainer_id)
                     util.Stop()
                     util.Limpiar_consola()
 
@@ -1042,7 +1048,7 @@ def SubRegistrarNotasCamper():
                     if not grupo:
                         print("⚠️ Primero selecciona un grupo (opción 1).")
                         continue
-                    camper_id = trainer.seleccionar_camper(grupo, data)
+                    camper_id = trainer.seleccionar_camper(grupo)
                     util.Stop()
                     util.Limpiar_consola()
 
@@ -1111,21 +1117,36 @@ def SubResultadosCampers():
 
             match opcion:
                 case "1":
-                    trainer.ver_notas_modulo(trainer_id, data)
+                    util.Limpiar_consola()
+                    trainer.ver_notas_modulo(trainer_id)
+                    util.Stop()
+                    util.Limpiar_consola()
 
                 case "2":
+                    util.Limpiar_consola()
                     filtro = input("¿Filtrar por (Aprobado / Bajo Rendimiento)? ").strip()
-                    trainer.filtrar_campers(trainer_id, data, filtro)
+                    trainer.filtrar_campers(trainer_id, filtro)  # 👈 ya no le pasamos "data"
+                    util.Stop()
+                    util.Limpiar_consola()
 
                 case "3":
-                    trainer.exportar_reporte(trainer_id, data)
+                    util.Limpiar_consola()
+                    trainer.exportar_reporte(trainer_id)
+                    util.Stop()
+                    util.Limpiar_consola()
 
                 case "0":
+                    util.Limpiar_consola()
                     print("👋 Saliendo del menú de resultados...")
+                    util.Stop()
+                    util.Limpiar_consola()
                     break
 
                 case _:
+                    util.Limpiar_consola()
                     print("❌ Opción inválida, intenta de nuevo.")
+                    util.Stop()
+                    util.Limpiar_consola()
 
         except ValueError:
             print("❌ Error: Ingresa un número válido.")
@@ -1162,9 +1183,12 @@ def menuCamper():
                     pass
 
                 case 0:
+                    util.Limpiar_consola()
                     print('Saliendo...')
+                    session.cerrar_sesion()
                     util.Stop()
                     util.Limpiar_consola()
+                    break
 
                 case _:
                     util.Limpiar_consola()
