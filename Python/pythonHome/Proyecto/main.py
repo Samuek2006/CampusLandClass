@@ -5,7 +5,7 @@ import json
 def main():
     while True:
         try:
-            login.login()
+            menus.menuPrincipal()
 
         except ValueError:
             print("❌ Error: Ingresa un valor válido.")

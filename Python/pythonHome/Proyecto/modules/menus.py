@@ -988,6 +988,8 @@ def SubCamperAsignadosTrainer(trainer_id):
                             print(f"- {k}: {v}")
                     else:
                         print("❌ Camper no encontrado.")
+
+                    input('Enter Para Continuar..')
                     util.Stop()
                     util.Limpiar_consola()
 
