@@ -160,6 +160,7 @@ def menuCoordinador():
 6. Matrículas
 7. Reportes
 8. Gestión de Coordinadores
+9. Trainer Asignados A Rutas
 0. Salir
             """)
             opcion = int(input('Ingresa una Opcion: '))
@@ -196,6 +197,10 @@ def menuCoordinador():
                 case 8:
                     util.Limpiar_consola()
                     SubGestionCoordinador()
+                
+                case 9:
+                    util.Limpiar_consola()
+                    MenuTrainerAsignadoRutas()
 
                 case 0:
                     util.Limpiar_consola()
@@ -223,6 +228,49 @@ def menuCoordinador():
 """
 Sub Menus del Coordinador
 """
+def MenuTrainerAsignadoRutas():
+    while True:
+        try:
+            print('''
+=== Menu Visualizacion ===
+1. Visualizar Trainer Asignados Rutas
+2. Listar rutas existentes
+0. Regresar al menu Principal
+''')
+            opcion = int(input('Ingresa una Opcion: '))
+
+            match opcion:
+                case 1:
+                    util.Limpiar_consola()
+                    print('=== Visualizar Trainer Asignados Rutas ===')
+                    trainer.ListarTrainesRutas()
+                    util.Stop()
+                    util.Limpiar_consola()
+
+                case 2:
+                    util.Limpiar_consola()
+                    rutas.rutasExistentes()
+                    input('Enter Para Continuar...')
+                    util.Limpiar_consola()
+
+                case 0:
+                    print('Regresando ...')
+                    break
+
+                case _:
+                    print('Ingresa una opcion valida entre (1 y 3)')
+                    util.Stop()
+                    util.Limpiar_consola()
+
+        except ValueError:
+            print("❌ Error: Ingresa un número válido.")
+        except KeyboardInterrupt:
+            print("\n⛔ Interrupción detectada (Ctrl+C). Cerrando menú principal.")
+            break
+        except EOFError:
+            print("\n⛔ Entrada inesperada (Ctrl+D / Ctrl+Z). Cerrando menú principal.")
+            break
+
 def SubGestionCampers():
     while True:
         try:
@@ -434,7 +482,6 @@ def SubGestionCoordinador():
         except EOFError:
             print("\n⛔ Entrada inesperada. Cerrando menú...")
             break
-
 
 def SubGestionTrainer():
     while True:
@@ -988,8 +1035,6 @@ def SubCamperAsignadosTrainer(trainer_id):
                             print(f"- {k}: {v}")
                     else:
                         print("❌ Camper no encontrado.")
-
-                    input('Enter Para Continuar..')
                     util.Stop()
                     util.Limpiar_consola()
 

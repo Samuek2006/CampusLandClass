@@ -96,71 +96,6 @@
                 "correo": "le",
                 "password": "1234"
             }
-        },
-        "1007726337": {
-            "identificacion": "1007726337",
-            "Nombre": "Sergio",
-            "Apellido": "Serrano",
-            "Direccion": "carrera 1",
-            "acudiente": "camilo",
-            "telefono": 3172999470,
-            "rol": "Camper",
-            "Estado": "Aprobado",
-            "riesgoCamper": "Sin Riesgo",
-            "Grupo": "Grupo 2",
-            "Skill": {
-                "Skill Actual": {
-                    "Prueba": 80.0,
-                    "Trabajos": 100.0,
-                    "Quizes": 70.0,
-                    "Definitiva": 88.0
-                },
-                "Skill Culminadas": {
-                    "Nombre Skill Culminado": {
-                        "Prueba": 0,
-                        "Trabajos": 0,
-                        "Quizes": 0,
-                        "Definitiva": 0
-                    }
-                }
-            },
-            "Credenciales": {
-                "correo": "sergio@correo.com",
-                "password": "1234"
-            }
-        },
-        "123456789": {
-            "identificacion": "123456789",
-            "Nombre": "oswald",
-            "Apellido": "si",
-            "Direccion": "tambien",
-            "acudiente": "no",
-            "telefono": 3025456789,
-            "rol": "Camper",
-            "Estado": "Aprobado",
-            "riesgoCamper": "Sin Riesgo",
-            "Grupo": "Grupo 2",
-            "Skill": {
-                "Skill Actual": {
-                    "Prueba": 100.0,
-                    "Trabajos": 60.0,
-                    "Quizes": 0.0,
-                    "Definitiva": 60.0
-                },
-                "Skill Culminadas": {
-                    "Nombre Skill Culminado": {
-                        "Prueba": 0,
-                        "Trabajos": 0,
-                        "Quizes": 0,
-                        "Definitiva": 0
-                    }
-                }
-            },
-            "Credenciales": {
-                "correo": "aaa",
-                "password": "aaa"
-            },
-            "Nota Examen Ingreso": 16
         }
     },
     "trainerCampusLands": {
@@ -198,6 +133,23 @@
             "StackTecnologico": "3",
             "Disponibilidad": "3",
             "Experiencia": "3",
+            "Rol": "trainer",
+            "Estado": "Activo",
+            "RutasAsignadas": [],
+            "Credenciales": {},
+            "GruposAsignados": []
+        },
+        "9000": {
+            "identificacion": "9000",
+            "Nombre": "sam",
+            "Apellido": "fel",
+            "Telefono": "1234566",
+            "Email": "mjahsd",
+            "Direccion": "dagdsg",
+            "Habilidades": "python",
+            "StackTecnologico": "ds",
+            "Disponibilidad": "f",
+            "Experiencia": "90",
             "Rol": "trainer",
             "Estado": "Activo",
             "RutasAsignadas": [],

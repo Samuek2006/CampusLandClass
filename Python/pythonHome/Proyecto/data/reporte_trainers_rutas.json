@@ -1,0 +1,25 @@
+{
+    "trainerRutas": {
+        "2": {
+            "Identificacion": "2",
+            "Nombre": "2",
+            "Apellido": "2",
+            "Rutas Asignadas": [
+                "NodeJS",
+                "Java"
+            ]
+        },
+        "3": {
+            "Identificacion": "3",
+            "Nombre": "3",
+            "Apellido": "3",
+            "Rutas Asignadas": []
+        },
+        "9000": {
+            "Identificacion": "9000",
+            "Nombre": "sam",
+            "Apellido": "fel",
+            "Rutas Asignadas": []
+        }
+    }
+}

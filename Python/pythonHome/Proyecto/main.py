@@ -1,5 +1,4 @@
 import modules.menus as menus
-import util.login as login
 import json
 
 def main():

@@ -4,6 +4,7 @@ import util.utilidades as util
 
 DB_CampusLands = "data/CampusLands.json"
 DB_Grupos = "data/Grupos.json"
+DB_reporte_trainers_rutas = 'data/reporte_trainers_rutas.json'
 
 def editarTrainer():
     data = corefiles.read_json(DB_CampusLands)
@@ -80,6 +81,27 @@ def asignarDisponibilidadRutas():
     print(f"✅ Trainer {trainer['Nombre']} actualizado correctamente.\n")
 
 #Funciones Vista Trainer
+def ListarTrainesRutas():
+    data = corefiles.read_json(DB_CampusLands)
+    trainers = data.get("trainerCampusLands", {})
+
+    print("\n=== Trainers Activos Y Rutas a las que esta asignado ===\n")
+    for doc, t in trainers.items():
+        if isinstance(t, dict):  # ✅ aseguramos que sea un diccionario
+            if t.get("Estado", "").strip().lower() == "activo":
+                print(f"ID: {doc} | {t.get('Nombre', '')} {t.get('Apellido', '')} | Rutas: {t.get('RutasAsignadas', [])}")
+
+                trainerRutas = {
+                    'Identificacion': doc,
+                    'Nombre': t.get('Nombre', ''),
+                    'Apellido': t.get('Apellido', ''),
+                    'Rutas Asignadas': t.get('RutasAsignadas', [])
+                }
+
+                corefiles.update_json(DB_reporte_trainers_rutas, {doc: trainerRutas}, ['trainerRutas'])
+        else:
+            print(f"⚠️ Trainer con ID {doc} tiene un formato inválido: {t}")
+    input('Enter Para Continuar...')
 
 def listarTrainersActivos():
     data = corefiles.read_json(DB_CampusLands)

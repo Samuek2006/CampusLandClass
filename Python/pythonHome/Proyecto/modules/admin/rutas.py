@@ -21,6 +21,7 @@ def rutasExistentes():
         print(f"\n📚 {nombre}")
         for modulo, contenido in modulos.items():
             print(f"   {modulo}: {contenido}")
+
     return rutas
 
 def addRutasAprendizaje():
