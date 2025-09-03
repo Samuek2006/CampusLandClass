@@ -9,7 +9,7 @@
 
 ## 📌 **Índice**
 
-- [¿Qué encontrarás aquí?](#qué-encontrarás-aquí) 
+- [¿Qué encontrarás aquí?](#qué-encontrarás-aquí)
 - [Objetivo del Repositorio](#objetivo-del-repositorio)
 - [Temas Cubiertos](#temas-cubiertos)
 - [Proyectos Destacados](#proyectos-destacados)
