@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Rompecabezas de tus Sueños</title>
+    <title>Rompecabezas de mis Sueños</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,8 +23,8 @@
 
         #tablero {
             display: grid;
-            grid-template-columns: repeat(2, 150px);
-            grid-template-rows: repeat(2, 150px);
+            grid-template-columns: repeat(2, 160px);
+            grid-template-rows: repeat(2, 160px);
             gap: 10px;
             margin-bottom: 30px;
             background: #ddd;
@@ -33,20 +33,24 @@
         }
 
         .dropzone {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border: 2px dashed #aaa;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: white;
-            color: rgba(0, 0, 0, 0.2);
+            color: rgba(0, 0, 0, 0.4);
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            position: relative;
         }
 
         .pieza {
-            width: 140px;
-            height: 140px;
+            width: 150px;
+            height: 150px;
             border-radius: 10px;
             color: white;
             font-weight: bold;
@@ -56,6 +60,8 @@
             cursor: grab;
             text-align: center;
             padding: 10px;
+            font-size: 14px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         #piezas {
@@ -85,20 +91,28 @@
 </head>
 
 <body>
-    <h1>🧩 El Rompecabezas de tus Sueños</h1>
+    <h1>🧩 El Rompecabezas de mis Sueños como Desarrollador</h1>
 
     <div id="tablero">
-        <div class="dropzone" data-pieza="meta">Meta</div>
-        <div class="dropzone" data-pieza="valor">Valor</div>
-        <div class="dropzone" data-pieza="habilidad">Habilidades</div>
-        <div class="dropzone" data-pieza="plan">Plan</div>
+        <div class="dropzone" data-pieza="meta"><span>Meta profesional</span></div>
+        <div class="dropzone" data-pieza="valor"><span>Valor personal</span></div>
+        <div class="dropzone" data-pieza="habilidad"><span>Habilidades clave</span></div>
+        <div class="dropzone" data-pieza="plan"><span>Plan alternativo</span></div>
     </div>
 
     <div id="piezas">
-        <div class="pieza verde" draggable="true" id="meta">Meta a corto o largo plazo</div>
-        <div class="pieza rojo" draggable="true" id="valor">Un valor que guíe tus decisiones</div>
-        <div class="pieza azul" draggable="true" id="habilidad">Una habilidad que te acerque a tu meta</div>
-        <div class="pieza amarillo" draggable="true" id="plan">Un plan B por si las cosas cambian</div>
+        <div class="pieza verde" draggable="true" id="meta">
+            Ser Desarrollador Full Stack en 2-3 años, capaz de crear aplicaciones completas.
+        </div>
+        <div class="pieza rojo" draggable="true" id="valor">
+            Responsabilidad y disciplina, para mantener constancia en proyectos de software.
+        </div>
+        <div class="pieza azul" draggable="true" id="habilidad">
+            Dominar React, Node.js y bases de datos para desarrollar aplicaciones web modernas.
+        </div>
+        <div class="pieza amarillo" draggable="true" id="plan">
+            Si no se cumple la meta, especializarme en QA, soporte técnico o DevOps.
+        </div>
     </div>
 
     <script>
@@ -121,6 +135,7 @@
                 const pieza = document.getElementById(id);
 
                 if (zona.dataset.pieza === id) {
+                    zona.innerHTML = ""; // elimina el texto de referencia
                     zona.appendChild(pieza);
                     pieza.style.cursor = "default";
                 } else {
