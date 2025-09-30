@@ -1,0 +1,21 @@
+<section class="scroll-area">
+  <div class="sticky">Filtro (sticky en el contenedor)</div>
+  <div class="block">Contenido A</div>
+  <div class="block">Contenido B</div>
+  <div class="block">Contenido C</div>
+</section>
+
+<style>
+  .scroll-area{
+    height: 60vh;               /* contenedor con su propio scroll */
+    overflow: auto;
+    border: 1px solid #ddd; padding: 12px; margin: 16px 0;
+  }
+  .sticky{
+    position: sticky;
+    top: 0;                     /* tope del contenedor */
+    background:#e7f0ff;border:1px solid #bcd3ff;border-radius:8px;
+    padding:10px 12px;font:600 14px/1.2 system-ui; z-index:1;
+  }
+  .block{height:600px;margin:16px 0;background:#fff;border:1px dashed #ccc;display:grid;place-items:center;}
+</style>

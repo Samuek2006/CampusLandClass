@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectores listas</title>
+    <style>
+        /* Selector que seleccion los elementos que contengan un atributo con un 
+        valor determinado */
+    [data-colores~="Yellow"i]{
+    background-color: yellow;
+    }
+    [lang|="es"]{
+        background-color: red;
+    }
+
+    a[href]::after{
+        content: ":" attr(href);
+        display: inline-block;
+        color: #666;
+    }
+
+    a[href^="http://"]::after{
+        content: "(pagina no segura)" attr(href)
+    }
+
+    a[href$="2.com"]::after{
+        content: "(link 2)" attr(href)
+    }
+    </style>
+</head>
+<body>
+    <p data-colores="blue YELLOW green">Parrafo 1</p>
+    <p lang="es-CO en-EN">Parrafo 2</p>
+    <p data-colores="yellow green">DIV 3</p>
+    <p data-colores="blue">Parrafo 4</p>
+    <a href="http://mipagina.com"></a><br>
+    <a href="http://mipagina2.com"></a>
+</body>
+</html>

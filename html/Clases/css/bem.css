@@ -1,0 +1,28 @@
+.input-text{
+    border: 1px solid blue;
+    margin-bottom: 6px;
+    padding: 6px 10px;
+}
+
+.input-text__label{
+    font-weight: bold;
+}
+
+.input-text_field{
+    display: block;
+}
+
+.input-text__field--background{
+    background-color: greenyellow;
+}
+
+.input-text__message{
+    margin-top: 6px;
+    background-color: yellow;
+    color: orange;
+}
+
+.input-text__message--success{
+    background-color: green;
+    color: yellowgreen;
+}

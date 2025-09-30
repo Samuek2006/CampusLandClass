@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectores</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 6px;
+            padding: 4px;
+            border: 1px solid black;
+            display: inline-block;
+        }
+
+        .parrafo{
+            background-color: black;
+            color: white;
+            padding-left: 10px;
+        }
+
+        #bg_color{
+            font-size: 20px;
+            font-family: 'Lucida Sans';
+            background-color: gold;
+        }
+
+        div#bg_color{
+            color: red;
+        }
+
+        [disabled]{
+            border-color: blue;
+        }
+
+        input[type="text"]{
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div>Primer div</div>
+    <div id="bg_color">Segundo div</div>
+    <div>Tercer div</div>
+    <div>Cuarto div</div>
+    <p class="parrafo">Esto es un párrafo</p>
+    <span class="parrafo">Esto es un párrafo</span>
+    <input type="text" name"texto" disabled value="Hola Campers!">
+    <input type="text" name"texto"  value="Hola Mundo!">
+    <input type="button" name"texto" disabled id="boton1" value="Soy un boton!">
+</body>
+</html>

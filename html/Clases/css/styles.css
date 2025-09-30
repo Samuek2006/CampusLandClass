@@ -1,0 +1,53 @@
+.color {
+    border: 1px solid red;
+}
+
+#segundo_div{
+    margin-top: 20px;
+}
+
+.container {
+    color: red !important;
+}
+
+.container {
+    color:green;
+}
+
+.container {
+    color:blue;
+}
+/*
+propiedades Heredables 
+
+    color
+    font
+    font-family
+    font-size
+    font-weight
+    font-variant
+    font-style
+    line-height
+    letter-spacing
+    text-align
+    text-indent
+    text-transform
+    white-space
+    word-spacing
+    list-style
+    list-style-type
+    list-style-position
+    list-style-image
+    border-collapse
+    border-spacing
+
+*/
+
+
+
+
+
+
+
+
+ 

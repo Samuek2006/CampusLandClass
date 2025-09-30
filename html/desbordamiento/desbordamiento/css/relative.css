@@ -1,0 +1,26 @@
+.container {
+    background-color: black;
+    color: white;
+    max-width: 600px;
+    height: 300px;
+    padding: 15px;
+}
+.item {
+    width: 100%;
+    color: rgb(16, 211, 103);
+    background-color: rgb(231, 223, 221);
+    border: solid 3px white;
+    height: 70px;
+}
+.item .item-hijo-azul {
+    position: relative;
+    margin: auto;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    color: aliceblue;
+    padding: 5px;
+    left: 40px;
+    bottom: 30px;
+    background-color: rgb(28, 33, 175);
+}

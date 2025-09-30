@@ -1,0 +1,119 @@
+/* Combinador descendientes*/
+/* div#page .post{
+    background-color: yellowgreen;
+} */
+
+/* Combinador hijos directos*/
+/* #page > div {
+    border: 2px solid red
+} */
+
+/* Combinador....*/
+/* div.post span + span {
+    border: 2px solid red
+} */
+
+/*Combinador hermano adyacente*/ 
+/* strong + span {
+    border: 2px solid red
+} */
+
+/* Combinador hermano generales*/ 
+/* div.post strong ~ strong{
+    border: 2px solid green;
+
+} */
+
+/*Combinador universal*/ 
+
+/* * {
+    border: 1px solid blue;
+} */
+
+/*agrupacion de selectores*/
+
+/* span.warning, span.alert, span.success {
+    font-weight: bold;
+} */
+
+/*combinador psudo clase "IS"*/
+/* span:is(.warning, .alert, .success){
+    font-size: 20px;
+    font-weight: bold;
+} */
+
+/*combinador psudo clase "WHERE"*/
+
+/* span:where(.warning,.success){
+    font-size: 20px;
+    font-weight: bold;
+}  */
+
+/*combinador psudo clase "HAS"*/
+
+/* .banner:has(>img){
+    width: 80px;
+    height: 80px;
+    background-color: gold;
+    border: 1px solid green;
+} */
+
+/*combinador psudo clase "not"*/
+
+/* span:not(.warning){
+    font-size: 20px;
+    font-weight: bold;
+} */
+
+/*psudo clase hover*/
+
+/* img:hover{
+    width: 80px;
+    height: 80px;
+} */
+
+/* #menu > .categories > span:hover{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+} */
+
+/*psudo clase active*/
+/* #menu > .categories > span:active{
+    background-color: green;
+    color: red;
+    font-weight: bold;
+} */
+
+/*psudo clase FOCUS y FOCUS Within*/
+/* input:focus-within{
+    background-color: thistle;
+    color: yellow;
+} */
+
+/* select:focus-within{
+    background-color: thistle;
+    color: yellow;
+} */
+
+/*Psudo clase FOCUS VISIBLE*/
+
+/* input:focus-visible{
+    border: 2px solid red;
+    outline: none;
+} */
+
+/*Psudo clase ANY LINK*/
+:any-link{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-style: oblique;
+}
+
+:link {
+    color: orange;
+}
+
+:visited{
+    color: purple;
+}

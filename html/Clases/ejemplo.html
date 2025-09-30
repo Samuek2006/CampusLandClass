@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo de diseño fluido con dos columnas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ddd;
+        }
+        /* Encabezado */
+        .header {
+            background: #000;
+            color: orange;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Contenedor principal */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            background: #fff;
+            margin: 0 auto;
+        }
+        /* Menú lateral */
+        .sidebar {
+            background: #e6e6e6;
+            flex: 1 1 20%;
+            padding: 15px;
+        }
+        .sidebar a {
+            display: block;
+            margin: 8px 0;
+            color: green;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        /* Contenido principal */
+        .content {
+            flex: 1 1 75%;
+            padding: 15px;
+        }
+        .content h2 {
+            color: blue;
+        }
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px 0;
+        }
+        /* Pie de página */
+        .footer {
+            background: #aaa;
+            text-align: center;
+            padding: 10px;
+        }
+        .footer a {
+            color: green;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <div class="header">
+        Diseño HTML/CSS fluido.
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <a href="#">Enlace 1</a>
+            <a href="#">Enlace 2</a>
+            <a href="#">Enlace 3</a>
+            <a href="#">Enlace 4</a>
+            <a href="#">Enlace 5</a>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="content">
+            <h2>Ejemplo: Diseño fluido con dos columnas</h2>
+            <p>
+                Al cambiar la anchura de la ventana del navegador donde se esté visualizando esta página web, 
+                los tamaños de las diferentes áreas de la página se redimensionan.
+            </p>
+            <img src="img.png" alt="imagen de prueba">
+            <p>
+                Obsérvese que, la imagen también se redimensiona.
+            </p>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <div class="footer">
+        Ejemplo del <a href="#">Tutorial de HTML</a> de Abrirllave.
+    </div>
+</body>
+</html>

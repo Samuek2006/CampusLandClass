@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Unidades CSS</title>
+    <style>
+        /* Estilos base */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 16px; /* Tamaño base para cálculos rem */
+        }
+
+        /* Encabezado con altura fija (unidad absoluta) */
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 20px; /* Unidad absoluta */
+            height: 60px; /* Unidad absoluta */
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem; /* Unidad relativa al tamaño de fuente del root (html) */
+        }
+
+        /* Contenedor principal con ancho relativo */
+        .container {
+            width: 80%; /* Unidad relativa al ancho del contenedor padre */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Caja con dimensiones mixtas */
+        .box {
+            background-color: #ecf0f1;
+            width: 300px; /* Unidad absoluta */
+            height: 15em; /* Unidad relativa al tamaño de fuente del elemento */
+            margin-bottom: 20px;
+            padding: 1em; /* Unidad relativa al tamaño de fuente del elemento */
+            border: 2px solid #34495e;
+        }
+
+        /* Texto con tamaño relativo */
+        .text {
+            font-size: 1.2em; /* Unidad relativa al tamaño de fuente del elemento padre */
+            line-height: 1.5;
+        }
+
+        /* Botón con dimensiones relativas y absolutas */
+        .button {
+            display: inline-block;
+            padding: 10px 20px; /* Unidades absolutas */
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem; /* Unidad relativa al tamaño de fuente del root */
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #27ae60;
+        }
+
+        /* Elemento con ancho basado en el viewport */
+        .viewport-width {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px;
+            width: 50vw; /* Unidad relativa al ancho del viewport */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ejemplo de Unidades CSS</h1>
+    </header>
+    <div class="container">
+        <div class="box">
+            <p class="text">Este es un párrafo dentro de una caja. La caja tiene un ancho fijo en píxeles y una altura en em.</p>
+        </div>
+        <a href="#" class="button">Botón de Ejemplo</a>
+        <div class="viewport-width">Este elemento tiene un ancho del 50% del viewport.</div>
+    </div>
+</body>
+</html>

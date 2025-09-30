@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradicente</title>
+    <style>
+        .general{
+            margin-top: 10px;
+            width: 500px;
+            color: white;
+            padding: 10px;
+            height: 100px;
+        }
+        #gradient1{
+            background-image: linear-gradient(rgb(80,150,65),green,#cc5f68);
+
+        }
+
+        #gradient2{
+            background-image: linear-gradient(to top,yellow,gold,orange);
+        }
+
+        #gradient3{
+            background-image: linear-gradient(to right, black 0%, blue 25%, gold 50%, green 75%, red 100%);
+        }
+
+        #gradient4{
+            background-image: linear-gradient(to right, black 30%, blue 25% 50%, gold 50% 75%, green 75% 100%);
+        }
+
+        .cuadrado{
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            display: inline-block;
+        }
+
+        #radial{
+            background-image: radial-gradient(yellow, blue,green,red);
+
+        }
+
+        #conic{
+            background-image: conic-gradient(yellow 33%, blue 33% 66%,green 66% 100%);
+
+        }
+    </style>
+</head>
+<body>
+    <div id="radial" class="cuadrado"></div>
+    <div id="conic" class="cuadrado"></div>
+
+    <div id="gradient1" class="general">gradient1</div>
+    <div id="gradient2" class="general">gradient2</div>
+    <div id="gradient3" class="general">gradient3</div>
+    <div id="gradient4" class="general">gradient4</div>
+</body>
+</html>
