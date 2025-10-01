@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.grid{
+    display: grid;
+    max-width: 700px;
+    width: 90%;
+    height: 500px;
+    margin: 20px auto;
+    outline: 3px solid #000;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    column-gap: 3px;
+    row-gap: 3px;
+}
+
+.grid-item {
+    font-size: 3rem;
+    text-align: center;
+    background: crimson;
+    color: white;
+}
+
+.grid :nth-child(1){
+    background: crimson;
+    /* Donde se empiezan a generar las columnas */
+    grid-column-start: 2;
+    /* Donde se debe terminar */
+    grid-column-end: 4;
+    /* Donde se empiezan a generar las filas */
+    grid-row-start: 4;
+    /* Donde se debe terminar */
+    grid-row-end: 6;
+
+}
+.grid :nth-child(2){
+    background: purple;
+    /* Forma abreviada */
+    grid-column: span 2 / span 4;
+    grid-row: span 3 / span 4;
+}
+.grid :nth-child(3){
+    background: blue;
+}
+.grid :nth-child(4){
+    background: brown;
+}
+.grid :nth-child(5){
+    background: orangered;
+}
+.grid :nth-child(6){
+    background: black;
+}
