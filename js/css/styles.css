@@ -1,0 +1,13 @@
+#boton-importante {
+    transition: background-color .2s ease, color .2s ease, filter .2s ease;
+}
+
+/* Estado aplicado */
+#boton-importante.aplicado {
+    background-color: #22c55e;
+    /* igual al ejemplo */
+    color: #fff;
+    border: none;
+    cursor: not-allowed;
+    filter: saturate(1.1);
+}

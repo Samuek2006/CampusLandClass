@@ -1,0 +1,58 @@
+/* ======== Estilos básicos ======== */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* ======== Sección principal ======== */
+.section-imc {
+    width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* ======== Títulos ======== */
+.section-imc h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.section-imc h2 {
+    color: #34495e;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.section-imc span {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+/* ======== Imagen ======== */
+.section-imc img {
+    width: 300px;
+    height: auto;
+    margin: 15px 0;
+}
+
+/* ======== Botón ======== */
+.section-imc button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.section-imc button:hover {
+    background-color: #2980b9;
+}
